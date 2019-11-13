@@ -86,14 +86,38 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/buttonsSymbols.js":
+/*!*******************************!*\
+  !*** ./src/buttonsSymbols.js ***!
+  \*******************************/
+/*! exports provided: shuffledArray */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"shuffledArray\", function() { return shuffledArray; });\nconst symbolsStore = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\", \"i\", \"j\", \"k\", \"l\", \"m\", \"n\", \"o\", \"p\", \"q\", \"r\"];\n\nconst symbolsToDispatch = (fieldSize) => ((fieldSize[0] * fieldSize[1]) / 2)\nconst shuffle = (array) => array.sort(() => Math.random() - 0.5);\nconst shuffledArray = shuffle(symbolsStore.slice(0, symbolsToDispatch([4, 4])))\n\n\n\n\n//# sourceURL=webpack:///./src/buttonsSymbols.js?");
+
+/***/ }),
+
+/***/ "./src/createField.js":
+/*!****************************!*\
+  !*** ./src/createField.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\n\nlet container = document.createElement(\"div\");\ncontainer.class = \"container\"\ndocument.body.appendChild(container)\n\nconst createField = (fieldSize, symbolsArray) => {\n    for (let i = 0; i < fieldSize[0]; i++) {\n        let row =  document.createElement(\"div\");\n        row.className = i + \"row\";\n        container.appendChild(row);\n        \n        for(let j = 0; j < fieldSize[1]; j++) {\n            let button = document.createElement(\"button\")\n            row.appendChild(button)\n        }\n    }\n}\n\n\n//# sourceURL=webpack:///./src/createField.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("console.log(\"sss\")\n\n//# sourceURL=webpack:///./src/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _createField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createField */ \"./src/createField.js\");\n/* harmony import */ var _createField__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_createField__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _buttonsSymbols__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./buttonsSymbols */ \"./src/buttonsSymbols.js\");\n\n\n\nconst simpleField = [4, 4];\nconst mediumField = [5, 5];\nconst largeField = [6, 6];\n\nObject(_buttonsSymbols__WEBPACK_IMPORTED_MODULE_1__[\"shuffledArray\"])(mediumField)\nObject(_createField__WEBPACK_IMPORTED_MODULE_0__[\"createField\"])(largeField, _buttonsSymbols__WEBPACK_IMPORTED_MODULE_1__[\"shuffledArray\"]);\nconsole.log(_buttonsSymbols__WEBPACK_IMPORTED_MODULE_1__[\"shuffledArray\"]);\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
