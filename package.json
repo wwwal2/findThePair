@@ -1,0 +1,29 @@
+{
+  "name": "find_the_pair",
+  "version": "1.0.0",
+  "description": "test game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wwwal2/findThePair.git"
+  },
+  "keywords": [
+    "find",
+    "pair"
+  ],
+  "author": "Oleksii Smirnov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wwwal2/findThePair/issues"
+  },
+  "homepage": "https://github.com/wwwal2/findThePair#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
