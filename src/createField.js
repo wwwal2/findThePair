@@ -1,10 +1,8 @@
-
-
 let container = document.createElement("div");
 container.class = "container"
 document.body.appendChild(container)
 
-const createField = (fieldSize, symbolsArray) => {
+const createField = (fieldSize) => {
     for (let i = 0; i < fieldSize[0]; i++) {
         let row =  document.createElement("div");
         row.className = i + "row";
@@ -16,3 +14,5 @@ const createField = (fieldSize, symbolsArray) => {
         }
     }
 }
+
+export { createField }
