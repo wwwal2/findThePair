@@ -1,3 +1,5 @@
-const dispatchIconst = () => {
+const dispatchActions = () => {
 
 }
+
+export default dispatchActions;

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"button {\\n  color: red; }\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/style.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"img {\\n  opacity: 1; }\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/style.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -129,7 +129,7 @@ eval("\n\nvar stylesInDom = {};\n\nvar isOldIE = function isOldIE() {\n  var mem
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar symbolsStore = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r'];\n\nvar arrayLength = function arrayLength(fieldSize) {\n  return fieldSize[0] * fieldSize[1] / 2;\n};\n\nvar duplicate = function duplicate(array) {\n  return array.concat(array);\n};\n\nvar shuffle = function shuffle(array) {\n  return array.sort(function () {\n    return Math.random() - 0.5;\n  });\n};\n\nvar shuffledArray = function shuffledArray(fieldSize) {\n  var array = duplicate(symbolsStore.slice(0, arrayLength(fieldSize)));\n  return shuffle(array);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (shuffledArray);\n\n//# sourceURL=webpack:///./src/buttonsSymbols.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nvar symbolsStore = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];\n\nvar arrayLength = function arrayLength(fieldSize) {\n  return fieldSize[0] * fieldSize[1] / 2;\n};\n\nvar duplicate = function duplicate(array) {\n  return array.concat(array);\n};\n\nvar shuffle = function shuffle(array) {\n  return array.sort(function () {\n    return Math.random() - 0.5;\n  });\n};\n\nvar shuffledArray = function shuffledArray(fieldSize) {\n  var array = duplicate(symbolsStore.slice(0, arrayLength(fieldSize)));\n  return shuffle(array);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (shuffledArray);\n\n//# sourceURL=webpack:///./src/buttonsSymbols.js?");
 
 /***/ }),
 
@@ -141,7 +141,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar symbolsStore = ['a', 'b',
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar container = document.createElement('div');\ncontainer[\"class\"] = 'container';\ndocument.body.appendChild(container);\n\nvar createField = function createField(fieldSize, iconsArray) {\n  for (var i = 0; i < fieldSize[0]; i += 1) {\n    var row = document.createElement('div');\n    row.className = \"\".concat(i, \"row\");\n    container.appendChild(row);\n\n    for (var j = 0; j < fieldSize[1]; j += 1) {\n      var button = document.createElement('button');\n      row.appendChild(button);\n      button.innerText = iconsArray.pop();\n    }\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (createField);\n\n//# sourceURL=webpack:///./src/createField.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nvar container = document.createElement('div');\ncontainer[\"class\"] = 'container';\ndocument.body.appendChild(container);\n\nvar createField = function createField(fieldSize, iconsArray) {\n  for (var i = 0; i < fieldSize[0]; i += 1) {\n    var row = document.createElement('div');\n    row.className = \"\".concat(i, \"row\");\n    container.appendChild(row);\n\n    for (var j = 0; j < fieldSize[1]; j += 1) {\n      var button = document.createElement('button');\n      var image = document.createElement('img');\n      image.src = \"../img/\".concat(iconsArray.pop(), \".png\");\n      image.alt = 'image';\n      row.appendChild(button);\n      button.appendChild(image);\n    }\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (createField);\n\n//# sourceURL=webpack:///./src/createField.js?");
 
 /***/ }),
 
@@ -153,7 +153,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar container = document.crea
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _createField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createField */ \"./src/createField.js\");\n/* harmony import */ var _buttonsSymbols__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buttonsSymbols */ \"./src/buttonsSymbols.js\");\n\n\n\nvar simpleField = [4, 4]; // const mediumField = [5, 5];\n// const largeField = [6, 6];\n\nObject(_createField__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(simpleField, Object(_buttonsSymbols__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(simpleField)); // console.log(shuffledArray(simpleField));\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _createField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createField */ \"./src/createField.js\");\n/* harmony import */ var _buttonsSymbols__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buttonsSymbols */ \"./src/buttonsSymbols.js\");\n\n\n // const simpleField = [4, 4];\n// const mediumField = [5, 5];\n\nvar largeField = [6, 6];\nObject(_createField__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(largeField, Object(_buttonsSymbols__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(largeField)); // console.log(shuffledArray(simpleField));\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 

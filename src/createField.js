@@ -10,8 +10,12 @@ const createField = (fieldSize, iconsArray) => {
 
     for (let j = 0; j < fieldSize[1]; j += 1) {
       const button = document.createElement('button');
+      const image = document.createElement('img');
+      image.src = `../img/${iconsArray.pop()}.png`;
+      image.alt = 'image';
+
       row.appendChild(button);
-      button.innerText = iconsArray.pop();
+      button.appendChild(image);
     }
   }
 };
