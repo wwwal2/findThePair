@@ -1,18 +1,19 @@
-const container = document.createElement('div');
-container.class = 'container';
-document.body.appendChild(container);
+const fieldContainer = document.createElement('div');
+fieldContainer.class = 'fieldContainer';
+document.body.appendChild(fieldContainer);
 
 const createField = (fieldSize, iconsArray) => {
   for (let i = 0; i < fieldSize[0]; i += 1) {
     const row = document.createElement('div');
     row.className = `${i}row`;
-    container.appendChild(row);
+    fieldContainer.appendChild(row);
 
     for (let j = 0; j < fieldSize[1]; j += 1) {
       const button = document.createElement('button');
       const image = document.createElement('img');
       image.src = `../img/${iconsArray.pop()}.png`;
-      image.alt = 'image';
+      const imageAlt = Object.assign(image.src);
+      image.alt = imageAlt.substring(imageAlt.length - 5);
 
       row.appendChild(button);
       button.appendChild(image);
