@@ -5,5 +5,5 @@ const simpleField = [4, 4];
 const mediumField = [5, 5];
 const largeField = [6, 6];
 
-createField(largeField);
-console.log(shuffledArray(largeField));
+createField(simpleField, shuffledArray(simpleField));
+console.log(shuffledArray(simpleField));
