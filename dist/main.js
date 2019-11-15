@@ -121,15 +121,15 @@ eval("\n\nvar stylesInDom = {};\n\nvar isOldIE = function isOldIE() {\n  var mem
 
 /***/ }),
 
-/***/ "./src/buttonsSymbols.js":
-/*!*******************************!*\
-  !*** ./src/buttonsSymbols.js ***!
-  \*******************************/
-/*! exports provided: default */
+/***/ "./src/btnGenerator.js":
+/*!*****************************!*\
+  !*** ./src/btnGenerator.js ***!
+  \*****************************/
+/*! exports provided: btnGenerator, btnArray */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar symbolsStore = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];\n\nvar arrayLength = function arrayLength(fieldSize) {\n  return Math.ceil(fieldSize[0] * fieldSize[1] / 2);\n};\n\nvar duplicate = function duplicate(array) {\n  return array.concat(array);\n};\n\nvar shuffle = function shuffle(array) {\n  return array.sort(function () {\n    return Math.random() - 0.5;\n  });\n};\n\nvar shuffledArray = function shuffledArray(fieldSize) {\n  var array = duplicate(symbolsStore.slice(0, arrayLength(fieldSize)));\n  return shuffle(array);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (shuffledArray);\n\n//# sourceURL=webpack:///./src/buttonsSymbols.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"btnGenerator\", function() { return btnGenerator; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"btnArray\", function() { return btnArray; });\nvar difficultyContainer = document.createElement('div');\ndifficultyContainer[\"class\"] = 'difficultyContainer';\nvar btnArray = [{\n  tag: 'button',\n  className: 'difficultyBtns',\n  textContent: 'Easy'\n}, {\n  tag: 'button',\n  className: 'difficultyBtns',\n  textContent: 'Medium'\n}, {\n  tag: 'button',\n  className: 'difficultyBtns',\n  textContent: 'Hard' // onclick: myFunc\n\n}];\n\nvar btnGenerator = function btnGenerator(array, stickTo) {\n  var btnTemplate = function btnTemplate(tag, className, textContent) {\n    var btn = document.createElement(tag);\n    btn.className = className;\n    btn.textContent = textContent;\n    return btn;\n  };\n\n  array.forEach(function (btn) {\n    difficultyContainer.appendChild(btnTemplate(btn.tag, btn.className, btn.textContent));\n  });\n  stickTo.appendChild(difficultyContainer);\n};\n\n\n\n//# sourceURL=webpack:///./src/btnGenerator.js?");
 
 /***/ }),
 
@@ -141,7 +141,19 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar symbolsStore = ['1', '2',
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar fieldContainer = document.createElement('div');\nfieldContainer[\"class\"] = 'fieldContainer';\ndocument.body.appendChild(fieldContainer);\n\nvar createField = function createField(fieldSize, iconsArray) {\n  for (var i = 0; i < fieldSize[0]; i += 1) {\n    var row = document.createElement('div');\n    row.className = \"\".concat(i, \"row\");\n    fieldContainer.appendChild(row);\n\n    for (var j = 0; j < fieldSize[1]; j += 1) {\n      var button = document.createElement('button');\n      var image = document.createElement('img');\n      image.src = \"../img/\".concat(iconsArray.pop(), \".png\");\n      var imageAlt = Object.assign(image.src);\n      image.alt = imageAlt.substring(imageAlt.length - 5);\n      row.appendChild(button);\n      button.appendChild(image);\n    }\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (createField);\n\n//# sourceURL=webpack:///./src/createField.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nvar fieldContainer = document.createElement('div');\nfieldContainer[\"class\"] = 'fieldContainer';\n\nvar createField = function createField(fieldSize, iconsArray, stickTo) {\n  for (var i = 0; i < fieldSize[0]; i += 1) {\n    var row = document.createElement('div');\n    row.className = \"\".concat(i, \"row\");\n    fieldContainer.appendChild(row);\n\n    for (var j = 0; j < fieldSize[1]; j += 1) {\n      var button = document.createElement('button');\n      var image = document.createElement('img');\n      image.src = \"../img/\".concat(iconsArray.pop(), \".png\");\n      var imageAlt = Object.assign(image.src);\n      image.alt = imageAlt.substring(imageAlt.length - 5);\n      row.appendChild(button);\n      button.appendChild(image);\n    }\n  }\n\n  stickTo.appendChild(fieldContainer);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (createField);\n\n//# sourceURL=webpack:///./src/createField.js?");
+
+/***/ }),
+
+/***/ "./src/gamePictures.js":
+/*!*****************************!*\
+  !*** ./src/gamePictures.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nvar arrayLength = function arrayLength(fieldSize) {\n  return Math.ceil(fieldSize[0] * fieldSize[1] / 2);\n};\n\nvar duplicate = function duplicate(array) {\n  return array.concat(array);\n};\n\nvar shuffle = function shuffle(array) {\n  return array.sort(function () {\n    return Math.random() - 0.5;\n  });\n};\n\nvar shuffledArray = function shuffledArray(fieldSize) {\n  var array = [];\n\n  for (var i = arrayLength(fieldSize); i > 0; i -= 1) {\n    array.push(i);\n  }\n\n  return shuffle(duplicate(array));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (shuffledArray);\n\n//# sourceURL=webpack:///./src/gamePictures.js?");
 
 /***/ }),
 
@@ -153,7 +165,19 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar fieldContainer = document
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _createField__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createField */ \"./src/createField.js\");\n/* harmony import */ var _buttonsSymbols__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buttonsSymbols */ \"./src/buttonsSymbols.js\");\n\n\n // const simpleField = [4, 4];\n\nvar mediumField = [5, 5]; // const largeField = [6, 6];\n\nObject(_createField__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(mediumField, Object(_buttonsSymbols__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(mediumField)); // console.log(shuffledArray(simpleField));\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _mainContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainContainer */ \"./src/mainContainer.js\");\n/* harmony import */ var _createField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./createField */ \"./src/createField.js\");\n/* harmony import */ var _gamePictures__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gamePictures */ \"./src/gamePictures.js\");\n/* harmony import */ var _btnGenerator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./btnGenerator */ \"./src/btnGenerator.js\");\n\n\n\n\n // const simpleField = [4, 4];\n\nvar mediumField = [5, 5]; // const largeField = [6, 6];\n\nObject(_btnGenerator__WEBPACK_IMPORTED_MODULE_4__[\"btnGenerator\"])(_btnGenerator__WEBPACK_IMPORTED_MODULE_4__[\"btnArray\"], _mainContainer__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\nObject(_createField__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(mediumField, Object(_gamePictures__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(mediumField), _mainContainer__WEBPACK_IMPORTED_MODULE_1__[\"default\"]); // console.log(shuffledArray(simpleField));\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/mainContainer.js":
+/*!******************************!*\
+  !*** ./src/mainContainer.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nvar mainContainer = document.createElement('div');\nmainContainer.className = 'mainContainer';\ndocument.body.appendChild(mainContainer);\n/* harmony default export */ __webpack_exports__[\"default\"] = (mainContainer);\n\n//# sourceURL=webpack:///./src/mainContainer.js?");
 
 /***/ }),
 

@@ -1,8 +1,7 @@
 const fieldContainer = document.createElement('div');
 fieldContainer.class = 'fieldContainer';
-document.body.appendChild(fieldContainer);
 
-const createField = (fieldSize, iconsArray) => {
+const createField = (fieldSize, iconsArray, stickTo) => {
   for (let i = 0; i < fieldSize[0]; i += 1) {
     const row = document.createElement('div');
     row.className = `${i}row`;
@@ -19,6 +18,7 @@ const createField = (fieldSize, iconsArray) => {
       button.appendChild(image);
     }
   }
+  stickTo.appendChild(fieldContainer);
 };
 
 export default createField;
