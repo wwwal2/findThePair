@@ -1,14 +1,8 @@
 import './style.scss';
 import mainContainer from './mainContainer';
-import createField from './createField';
-import shuffledArray from './gamePictures';
-import { btnGenerator, btnArray } from './btnGenerator';
+import btnGenerator from './btnGenerator';
+import getBtnArray from './getBtnArray';
+import difficulty from './difficultyBtns';
 
-// const simpleField = [4, 4];
-const mediumField = [5, 5];
-// const largeField = [6, 6];
+const btnArray = getBtnArray(difficulty);
 btnGenerator(btnArray, mainContainer);
-createField(mediumField, shuffledArray(mediumField), mainContainer);
-
-
-// console.log(shuffledArray(simpleField));

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"img {\\n  opacity: 1; }\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/style.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".visible {\\n  opacity: 1; }\\n\\n.invisible {\\n  opacity: 0; }\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/style.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -121,15 +121,27 @@ eval("\n\nvar stylesInDom = {};\n\nvar isOldIE = function isOldIE() {\n  var mem
 
 /***/ }),
 
+/***/ "./src/actionBtn.js":
+/*!**************************!*\
+  !*** ./src/actionBtn.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nvar pickArray = [];\n\nvar bingoCheck = function bingoCheck(arr) {\n  console.log(arr[0].currentTarget.dataset.name);\n\n  if (arr[0].currentTarget.dataset.name === arr[1].currentTarget.dataset.name && arr[0].target.x + arr[0].target.y !== arr[1].target.x + arr[1].target.y) {\n    arr.forEach(function (pic) {\n      console.log(pic);\n      pic.target.className = 'invisible';\n    });\n    pickArray.splice(0, 2);\n  }\n\n  pickArray.splice(0, 2);\n};\n\nvar action = function action(event) {\n  pickArray.push(event);\n\n  if (pickArray.length === 2) {\n    bingoCheck(pickArray);\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (action);\n\n//# sourceURL=webpack:///./src/actionBtn.js?");
+
+/***/ }),
+
 /***/ "./src/btnGenerator.js":
 /*!*****************************!*\
   !*** ./src/btnGenerator.js ***!
   \*****************************/
-/*! exports provided: btnGenerator, btnArray */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"btnGenerator\", function() { return btnGenerator; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"btnArray\", function() { return btnArray; });\nvar difficultyContainer = document.createElement('div');\ndifficultyContainer[\"class\"] = 'difficultyContainer';\nvar btnArray = [{\n  tag: 'button',\n  className: 'difficultyBtns',\n  textContent: 'Easy'\n}, {\n  tag: 'button',\n  className: 'difficultyBtns',\n  textContent: 'Medium'\n}, {\n  tag: 'button',\n  className: 'difficultyBtns',\n  textContent: 'Hard' // onclick: myFunc\n\n}];\n\nvar btnGenerator = function btnGenerator(array, stickTo) {\n  var btnTemplate = function btnTemplate(tag, className, textContent) {\n    var btn = document.createElement(tag);\n    btn.className = className;\n    btn.textContent = textContent;\n    return btn;\n  };\n\n  array.forEach(function (btn) {\n    difficultyContainer.appendChild(btnTemplate(btn.tag, btn.className, btn.textContent));\n  });\n  stickTo.appendChild(difficultyContainer);\n};\n\n\n\n//# sourceURL=webpack:///./src/btnGenerator.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nvar btnContainer = document.createElement('div');\nbtnContainer.className = 'btnContainer';\n\nvar btnGenerator = function btnGenerator(array, stickTo) {\n  var btnTemplate = function btnTemplate(tag, className, textContent, onclick) {\n    var btn = document.createElement(tag);\n    btn.className = className;\n    btn.textContent = textContent;\n    btn.onclick = onclick;\n    return btn;\n  };\n\n  array.forEach(function (btn) {\n    btnContainer.appendChild(btnTemplate(btn.tag, btn.className, btn.textContent, btn.onclick));\n  });\n  stickTo.appendChild(btnContainer);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (btnGenerator);\n\n//# sourceURL=webpack:///./src/btnGenerator.js?");
 
 /***/ }),
 
@@ -141,7 +153,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar fieldContainer = document.createElement('div');\nfieldContainer[\"class\"] = 'fieldContainer';\n\nvar createField = function createField(fieldSize, iconsArray, stickTo) {\n  for (var i = 0; i < fieldSize[0]; i += 1) {\n    var row = document.createElement('div');\n    row.className = \"\".concat(i, \"row\");\n    fieldContainer.appendChild(row);\n\n    for (var j = 0; j < fieldSize[1]; j += 1) {\n      var button = document.createElement('button');\n      var image = document.createElement('img');\n      image.src = \"../img/\".concat(iconsArray.pop(), \".png\");\n      var imageAlt = Object.assign(image.src);\n      image.alt = imageAlt.substring(imageAlt.length - 5);\n      row.appendChild(button);\n      button.appendChild(image);\n    }\n  }\n\n  stickTo.appendChild(fieldContainer);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (createField);\n\n//# sourceURL=webpack:///./src/createField.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actionBtn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actionBtn */ \"./src/actionBtn.js\");\n\nvar fieldContainer = document.createElement('div');\nfieldContainer.className = 'fieldContainer';\n\nvar createField = function createField(fieldSize, iconsArray, stickTo) {\n  for (var i = 0; i < fieldSize[0]; i += 1) {\n    var row = document.createElement('div');\n    row.className = \"\".concat(i, \"row\");\n    fieldContainer.appendChild(row);\n\n    for (var j = 0; j < fieldSize[1]; j += 1) {\n      var image = document.createElement('img');\n      image.src = \"../img/\".concat(iconsArray.pop(), \".png\");\n      var imageAlt = Object.assign(image.src);\n      image.alt = imageAlt.substring(imageAlt.length - 5);\n      var button = document.createElement('button');\n      button.onclick = _actionBtn__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\n      button.dataset.name = image.alt;\n      row.appendChild(button);\n      button.appendChild(image);\n    }\n  }\n\n  stickTo.appendChild(fieldContainer);\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (createField);\n\n//# sourceURL=webpack:///./src/createField.js?");
+
+/***/ }),
+
+/***/ "./src/difficultyBtns.js":
+/*!*******************************!*\
+  !*** ./src/difficultyBtns.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _createField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createField */ \"./src/createField.js\");\n/* harmony import */ var _gamePictures__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gamePictures */ \"./src/gamePictures.js\");\n/* harmony import */ var _mainContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mainContainer */ \"./src/mainContainer.js\");\n\n\n\nvar easyField = [4, 4];\nvar mediumField = [5, 5];\nvar hardField = [6, 6];\n\nvar fade = function fade() {\n  setTimeout(function () {\n    var images = document.body.getElementsByTagName('img');\n    Array.from(images).forEach(function (pic) {\n      pic.className = 'visible';\n    });\n  }, 3000);\n};\n\nvar difficulty = function difficulty(event) {\n  switch (event.target.textContent) {\n    case 'Easy':\n      Object(_createField__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(easyField, Object(_gamePictures__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(easyField), _mainContainer__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\n      fade();\n      break;\n\n    case 'Medium':\n      Object(_createField__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(mediumField, Object(_gamePictures__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(mediumField), _mainContainer__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\n      fade();\n      break;\n\n    case 'Hard':\n      Object(_createField__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(hardField, Object(_gamePictures__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(hardField), _mainContainer__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\n      fade();\n      break;\n\n    case 'Play again':\n      window.location.reload();\n      break;\n\n    default:\n      break;\n  }\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (difficulty);\n\n//# sourceURL=webpack:///./src/difficultyBtns.js?");
 
 /***/ }),
 
@@ -153,7 +177,19 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar fieldContainer = document
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nvar arrayLength = function arrayLength(fieldSize) {\n  return Math.ceil(fieldSize[0] * fieldSize[1] / 2);\n};\n\nvar duplicate = function duplicate(array) {\n  return array.concat(array);\n};\n\nvar shuffle = function shuffle(array) {\n  return array.sort(function () {\n    return Math.random() - 0.5;\n  });\n};\n\nvar shuffledArray = function shuffledArray(fieldSize) {\n  var array = [];\n\n  for (var i = arrayLength(fieldSize); i > 0; i -= 1) {\n    array.push(i);\n  }\n\n  return shuffle(duplicate(array));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (shuffledArray);\n\n//# sourceURL=webpack:///./src/gamePictures.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nvar arrayLength = function arrayLength(fieldSize) {\n  return Math.ceil(fieldSize[0] * fieldSize[1] / 2);\n};\n\nvar duplicate = function duplicate(array) {\n  return array.concat(array);\n};\n\nvar shuffle = function shuffle(array) {\n  return array.sort(function () {\n    return Math.random() - 0.5;\n  });\n};\n\nvar shuffledPictures = function shuffledPictures(fieldSize) {\n  var array = [];\n\n  for (var i = arrayLength(fieldSize); i > 0; i -= 1) {\n    array.push(i);\n  }\n\n  return shuffle(duplicate(array));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (shuffledPictures);\n\n//# sourceURL=webpack:///./src/gamePictures.js?");
+
+/***/ }),
+
+/***/ "./src/getBtnArray.js":
+/*!****************************!*\
+  !*** ./src/getBtnArray.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (difficulty) {\n  return [{\n    tag: 'button',\n    className: 'difficultyBtns',\n    textContent: 'Easy',\n    onclick: difficulty\n  }, {\n    tag: 'button',\n    className: 'difficultyBtns',\n    textContent: 'Medium',\n    onclick: difficulty\n  }, {\n    tag: 'button',\n    className: 'difficultyBtns',\n    textContent: 'Hard',\n    onclick: difficulty\n  }, {\n    tag: 'button',\n    className: 'refreshBtn',\n    textContent: 'Play again',\n    onclick: difficulty\n  }];\n});\n\n//# sourceURL=webpack:///./src/getBtnArray.js?");
 
 /***/ }),
 
@@ -165,7 +201,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar arrayLength = function ar
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _mainContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainContainer */ \"./src/mainContainer.js\");\n/* harmony import */ var _createField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./createField */ \"./src/createField.js\");\n/* harmony import */ var _gamePictures__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./gamePictures */ \"./src/gamePictures.js\");\n/* harmony import */ var _btnGenerator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./btnGenerator */ \"./src/btnGenerator.js\");\n\n\n\n\n // const simpleField = [4, 4];\n\nvar mediumField = [5, 5]; // const largeField = [6, 6];\n\nObject(_btnGenerator__WEBPACK_IMPORTED_MODULE_4__[\"btnGenerator\"])(_btnGenerator__WEBPACK_IMPORTED_MODULE_4__[\"btnArray\"], _mainContainer__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\nObject(_createField__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(mediumField, Object(_gamePictures__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(mediumField), _mainContainer__WEBPACK_IMPORTED_MODULE_1__[\"default\"]); // console.log(shuffledArray(simpleField));\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _mainContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainContainer */ \"./src/mainContainer.js\");\n/* harmony import */ var _btnGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./btnGenerator */ \"./src/btnGenerator.js\");\n/* harmony import */ var _getBtnArray__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getBtnArray */ \"./src/getBtnArray.js\");\n/* harmony import */ var _difficultyBtns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./difficultyBtns */ \"./src/difficultyBtns.js\");\n\n\n\n\n\nvar btnArray = Object(_getBtnArray__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(_difficultyBtns__WEBPACK_IMPORTED_MODULE_4__[\"default\"]);\nObject(_btnGenerator__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(btnArray, _mainContainer__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 

@@ -1,38 +1,19 @@
-const difficultyContainer = document.createElement('div');
-difficultyContainer.class = 'difficultyContainer';
-
-const btnArray = [
-  {
-    tag: 'button',
-    className: 'difficultyBtns',
-    textContent: 'Easy',
-  },
-  {
-    tag: 'button',
-    className: 'difficultyBtns',
-    textContent: 'Medium',
-  },
-  {
-    tag: 'button',
-    className: 'difficultyBtns',
-    textContent: 'Hard',
-    // onclick: myFunc
-  },
-];
+const btnContainer = document.createElement('div');
+btnContainer.className = 'btnContainer';
 
 const btnGenerator = (array, stickTo) => {
-  const btnTemplate = (tag, className, textContent) => {
+  const btnTemplate = (tag, className, textContent, onclick) => {
     const btn = document.createElement(tag);
     btn.className = className;
     btn.textContent = textContent;
+    btn.onclick = onclick;
     return btn;
   };
 
   array.forEach((btn) => {
-    difficultyContainer.appendChild(btnTemplate(btn.tag, btn.className, btn.textContent));
+    btnContainer.appendChild(btnTemplate(btn.tag, btn.className, btn.textContent, btn.onclick));
   });
-
-  stickTo.appendChild(difficultyContainer);
+  stickTo.appendChild(btnContainer);
 };
 
-export { btnGenerator, btnArray };
+export default btnGenerator;
