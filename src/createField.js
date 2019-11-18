@@ -3,9 +3,9 @@ import action from './actionBtn';
 const fieldContainer = document.createElement('div');
 fieldContainer.className = 'fieldContainer';
 
-const rowTemplate = (iteration) => {
+const rowTemplate = () => {
   const row = document.createElement('div');
-  row.className = `${iteration}row`;
+  row.className = 'rows';
   fieldContainer.appendChild(row);
   return row;
 };
@@ -30,7 +30,7 @@ const imgTemplate = (icons, uniqueI, uniqJ) => {
 
 const createField = (fieldSize, iconsArray, stickTo) => {
   for (let i = 0; i < fieldSize[0]; i += 1) {
-    const row = rowTemplate(i);
+    const row = rowTemplate();
 
     for (let j = 0; j < fieldSize[1]; j += 1) {
       const button = btnTemplate();

@@ -1,3 +1,18 @@
+.mainContainer {
+    display: block;
+}
+.btnContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.fieldContainer {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-basis: auto;
+}
+
 .visible {
     opacity: 1;
 }
