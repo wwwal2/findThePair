@@ -7,10 +7,10 @@ const mediumField = [5, 5];
 const hardField = [6, 6];
 
 const fade = () => {
+  const AllImages = Array.from(document.body.getElementsByTagName('img'));
   setTimeout(() => {
-    const images = document.body.getElementsByTagName('img');
-    Array.from(images).forEach((pic) => {
-      pic.className = 'visible';
+    AllImages.forEach((pic) => {
+      pic.className = 'hidden';
     });
   }, 3000);
 };

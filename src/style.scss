@@ -1,6 +1,14 @@
 .visible {
     opacity: 1;
 }
-.invisible {
+.hidden {
     opacity: 0;
+    pointer-events: all;
 }
+
+.gameBtns {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
