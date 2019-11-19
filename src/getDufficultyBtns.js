@@ -1,27 +1,27 @@
-const getDifficultyBtns = (difficulty) => [
+const getDifficultyBtns = (startGame) => [
   {
     tag: 'button',
     className: 'difficultyBtns',
     textContent: 'Easy',
-    onclick: difficulty,
+    onclick: startGame,
   },
   {
     tag: 'button',
     className: 'difficultyBtns',
     textContent: 'Medium',
-    onclick: difficulty,
+    onclick: startGame,
   },
   {
     tag: 'button',
     className: 'difficultyBtns',
     textContent: 'Hard',
-    onclick: difficulty,
+    onclick: startGame,
   },
   {
     tag: 'button',
     className: 'refreshBtn',
     textContent: 'Play again',
-    onclick: difficulty,
+    onclick: startGame,
   },
 ];
 

@@ -1,1 +1,14 @@
 node_modules
+
+.DS_store
+*.txt
+.env
+.sass-cache
+
+.idea/
+.vscode/
+*.sw*
+
+/dist
+/public
+/out
