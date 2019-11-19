@@ -1,29 +1,20 @@
-# findThePair
-test task
-ЗАДАНИЕ
-Создать игру “Найди пару” (тренажер памяти)
+# Find the Pair Game
 
-ПРАВИЛА ИГРЫ
-У нас имеется игровое поле, разбитое на квадраты. Размер игрового поля зависит от уровня сложности, которого вы хотите достичь. Например, это будет поле 4×4 (16 квадратов). Под каждым квадратом скрывается картинка. Все картинки в начале игры появляются на определенное время, после чего закрываются. Пользователь должен щелкнуть на квадрате, чтобы открыть картинку. Точно такая же картинка имеется где-то в другом квадрате. Выберите “наугад” любой из квадратов и щелкните на нем. Если там окажется другая картинка, то открытая пара квадратов закрывается. И можно пробовать еще раз угадать пару одинаковых картинок. Если картинки совпадают, то пара квадратов очищается (или остается открытой, по вашему желанию). Когда вы найдете все пары картинок, то игра заканчивается. Ваша задача — за меньшее число щелчков как можно быстрее найти все парные картинки, полагаясь на свою память.
+# Getting Started
+Download this app on your computer.
+Casual way: click the green button from right side "Clone or download", and pick "Download ZIP". Unpack the zip file on your computer.
+Developer's way: create a new folder, navigate there through a console and run: 
+###### git -clone https://github.com/wwwal2/findThePair.git 
+### Prerequisites
+To run this game in a developer's mode you'll need [NodeJS](https://nodejs.org/en/download/) and [Npm](https://docs.npmjs.com/cli/install) preInstalled on your computer. Use the links to prepare your computer.
+### Installing
+After installing NodeJs and NPM, open a console, and using it - enter/navigate to the cloned\unpacked folder. For example in UBUNTU console type: cd.. /YourPath/findThePair
+Having your console opened in "findThePair" folder, type a console command: 
+###### npm install 
+Wait untill npm install all developer's dependencies
+### Run
+Having your console opened in "findThePair" folder run the console command: 
+###### npm run dev
+The application will generate new folder inside FfindThePair named "Dist". Execute \ open "index.html" file from the "Dist" folder with your browser. Now you can see the App. Your console is watching after all changes, made in the app's code. Just refresh the browser's page to see them
 
 
-ДОПОЛНИТЕЛЬНЫЕ ТРЕБОВАНИЯ К ИГРЕ
-Тематика игры (картинок) определяется разработчиком игры.
-Стартовое время появления всех картинок для запоминания определяется настройками.
-Время прохождения игры определяется настройками.
-При инициализации игры изображения на игровом поле должны размещаться в случайном порядке.
-
-
-ТРЕБОВАНИЯ К РАЗРАБОТКЕ
-Верстка адаптивная. Контрольные точки (media queries):
-desktop: от 1000px и более
-tablet: от 600px до 1000px
-mobile: менее 600px
-Кроссбраузерная поддержка: Microsoft Edge, браузеры Safari, Chrome, Firefox последних версий.
-JavaScript (ES6) + Babel + Webpack.
-Валидность кода: W3C (HTML/CSS), JSLint (JavaScript).
-Запрет использования вспомогательных библиотек/фреймворков, таких как jQuery, Bootstrap, ReactJS/Angular и т.д.
-
-КРИТЕРИЙ ОЦЕНИВАНИЯ
-Верстка (HTML / CSS / SCSS / SASS)
-JavaScript

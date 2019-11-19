@@ -1,8 +1,8 @@
 import './style.scss';
 import mainContainer from './mainContainer';
 import btnGenerator from './btnGenerator';
-import getBtnArray from './getBtnArray';
-import difficulty from './difficultyBtns';
+import getDifficultyBtns from './getDufficultyBtns';
+import startGame from './startGame';
 
-const btnArray = getBtnArray(difficulty);
-btnGenerator(btnArray, mainContainer);
+const generateGame = getDifficultyBtns(startGame);
+btnGenerator(generateGame, mainContainer);
