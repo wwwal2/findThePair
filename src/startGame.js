@@ -11,12 +11,12 @@ const difficultyFunc = (event) => {
   switch (event.target.textContent) {
     case 'Easy':
       createField(easyField, shuffledPictures(easyField), mainContainer);
-      fadePic(5000);
+      fadePic(3000);
       disableStartBtns();
       break;
     case 'Medium':
       createField(mediumField, shuffledPictures(mediumField), mainContainer);
-      fadePic(4000);
+      fadePic(3000);
       disableStartBtns();
       break;
     case 'Hard':

@@ -1,4 +1,3 @@
-
 const pickArray = [];
 
 const eraseArray = (array) => array.splice(0, 2);
