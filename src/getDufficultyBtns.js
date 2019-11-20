@@ -2,7 +2,7 @@ const getDifficultyBtns = (startGame) => [
   {
     tag: 'button',
     className: 'difficultyBtns',
-    textContent: 'Easy',
+    textContent: 'Little',
     onclick: startGame,
   },
   {
@@ -14,13 +14,7 @@ const getDifficultyBtns = (startGame) => [
   {
     tag: 'button',
     className: 'difficultyBtns',
-    textContent: 'Hard',
-    onclick: startGame,
-  },
-  {
-    tag: 'button',
-    className: 'refreshBtn',
-    textContent: 'Play again',
+    textContent: 'Big',
     onclick: startGame,
   },
 ];

@@ -1,16 +1,16 @@
 # Find the Pair Game
 
 # Getting Started
-Download this app on your computer.
+Download this app to your computer.
 
 Casual way: click the green button from right side "Clone or download", and pick "Download ZIP". Unpack the zip file on your computer.
 
 Developer's way: create a new folder, navigate there through a console and run: 
 ###### git clone https://github.com/wwwal2/findThePair.git 
 ### Prerequisites
-To run this game in a developer's mode, you'll need [NodeJS](https://nodejs.org/en/download/) and [Npm](https://docs.npmjs.com/cli/install) preInstalled on your computer. Use the links to prepare your computer.
+To run this game in a developer's mode, you'll need [NodeJS](https://nodejs.org/en/download/) and [Npm](https://docs.npmjs.com/cli/install) pre-installed on your computer. Use the links to make installation
 ### Installing
-After installing NodeJs and NPM, open a console, and using it - enter / navigate to the cloned / unpacked folder. For example in UBUNTU console type: cd.. /"YourPath"/findThePair
+After installing NodeJs and NPM, open a console, and using it - enter / navigate to the cloned / unpacked folder. For example in UBUNTU console - type: cd.. /"YourPath"/findThePair
 
 Having your console opened in "findThePair" folder, type a console command: 
 ###### npm install 
