@@ -8,7 +8,7 @@ import {
   gameEnd,
 } from './gameOptions';
 
-const gameConstruction = (difficulty, fadeTime = 3000, totalTime = 5000) => {
+const gameConstruction = (difficulty, fadeTime, totalTime) => {
   createField(fieldSize[difficulty], gamePictures(fieldSize[difficulty]), mainContainer);
   preview(fadeTime);
   disableStartBtns();
