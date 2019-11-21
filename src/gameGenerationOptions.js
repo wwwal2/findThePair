@@ -7,17 +7,26 @@ const preview = (time) => {
   }, time);
 };
 
+const timeUp = () => {
+  const myMessage = document.createElement('div');
+  myMessage.className = 'timeUp';
+  myMessage.innerText = 'The time is up!';
+  const startBlock = document.body.getElementsByClassName('btnContainer');
+  startBlock.item(0).appendChild(myMessage);
+};
+
 const gameEnd = (time) => {
   const allBtns = Array.from(document.body.getElementsByTagName('button'));
   setTimeout(() => {
     allBtns.forEach((btn) => {
       btn.disabled = 'true';
     });
+    timeUp();
   }, time);
 };
 
 const disableStartBtns = () => {
-  const btns = Array.from(document.body.getElementsByClassName('difficultyBtns'));
+  const btns = Array.from(document.body.getElementsByClassName('start'));
   btns.forEach((btn) => {
     btn.disabled = 'true';
   });

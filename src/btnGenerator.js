@@ -1,6 +1,6 @@
 const containerTemplate = (containerClass) => {
   const container = document.createElement('div');
-  container.className = 'btnContainer';
+  container.className = containerClass;
   return container;
 };
 

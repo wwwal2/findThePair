@@ -1,6 +1,6 @@
 import createField from './createField';
 import gamePictures from './gamePictures';
-import mainContainer from './gameContainers';
+import { mainContainer } from './gameContainers';
 import {
   preview,
   disableStartBtns,

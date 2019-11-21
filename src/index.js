@@ -1,5 +1,5 @@
 import './style.scss';
-import mainContainer from './gameContainers';
+import { btnContainer } from './gameContainers';
 import btnGenerator from './btnGenerator';
 import getDifficultyBtns from './getDufficultyBtns';
 import gameConstruction from './gameConstruction';
@@ -31,10 +31,10 @@ const startGame = () => {
 
 // constructing the app
 const selectable = selectBtns(timeSet);
-selectGenerator(selectable, mainContainer);
+selectGenerator(selectable, btnContainer);
 
 const difficultyBtns = getDifficultyBtns(difficultySet, 'difficultyBtns');
-btnGenerator(difficultyBtns, mainContainer, 'difficultyBtns');
+btnGenerator(difficultyBtns, btnContainer, 'difficultyBtns');
 
 const startbtn = getDifficultyBtns(startGame, 'start');
-btnGenerator(startbtn, mainContainer, 'startContainer');
+btnGenerator(startbtn, btnContainer, 'startContainer');

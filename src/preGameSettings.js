@@ -1,7 +1,14 @@
 const preGameSettings = {
-  preview: 3000,
-  time: 60000,
+  preview: 1000,
+  time: 3000,
   difficulty: 'medium',
+};
+
+const clearPick = () => {
+  const elements = Array.from(document.getElementsByClassName('prePicked'));
+  elements.forEach((btn) => {
+    btn.className = 'notPicked';
+  });
 };
 
 const setTimers = (event) => {
@@ -13,7 +20,9 @@ const setTimers = (event) => {
 };
 
 const setDifficulty = (event) => {
-  preGameSettings.difficulty = event.target.textContent.toLowerCase()
+  preGameSettings.difficulty = event.target.textContent.toLowerCase();
+  clearPick();
+  event.target.className = 'prePicked';
 };
 
 export {
