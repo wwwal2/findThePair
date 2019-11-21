@@ -1,40 +1,52 @@
 import './style.scss';
-import { btnContainer } from './gameContainers';
-import btnGenerator from './btnGenerator';
-import getDifficultyBtns from './getDufficultyBtns';
-import gameConstruction from './gameConstruction';
+import createContainer from './getMainContainer';
+import btnGenerator from './generators/btnGenerator';
+import getMenuBtns from './objectsData/menuBtns';
+import gameConstruction from './coreFunctions/gameConstruction';
+import getSelectBtns from './objectsData/selectBtns';
+import selectGenerator from './generators/selectGenerator';
 import {
-  setTimers,
-  preGameSettings,
+  setPreview,
+  setGameTime,
   setDifficulty,
 } from './preGameSettings';
 
-import selectBtns from './timeBtns/selectBtns';
-import selectGenerator from './timeBtns/selectGenerator';
+// create the game space
+const { mainContainer, menuContainer } = createContainer(document.body);
 
-// main game events
-const timeSet = (event) => {
-  setTimers(event);
+// default presettings
+const preGameSettings = {
+  preview: 3000,
+  time: 60000,
+  difficulty: 'medium',
 };
 
+// main game prefferences
+const previewTime = (event) => {
+  preGameSettings.preview = setPreview(event);
+};
+const gameTime = (event) => {
+  preGameSettings.time = setGameTime(event);
+};
 const difficultySet = (event) => {
-  setDifficulty(event);
+  preGameSettings.difficulty = setDifficulty(event);
 };
-
 const startGame = () => {
   gameConstruction(
     preGameSettings.difficulty,
     preGameSettings.preview,
     preGameSettings.time,
+    mainContainer,
   );
 };
 
-// constructing the app
-const selectable = selectBtns(timeSet);
-selectGenerator(selectable, btnContainer);
+// constructing menu
+const selectOne = getSelectBtns(previewTime, 'preview');
+const selectTwo = getSelectBtns(gameTime, 'gameTime');
+selectGenerator(selectOne.concat(selectTwo), menuContainer);
 
-const difficultyBtns = getDifficultyBtns(difficultySet, 'difficultyBtns');
-btnGenerator(difficultyBtns, btnContainer, 'difficultyBtns');
+const difficultyBtns = getMenuBtns(difficultySet, 'difficultyBtns');
+btnGenerator(difficultyBtns, menuContainer, 'difficultyBtns');
 
-const startbtn = getDifficultyBtns(startGame, 'start');
-btnGenerator(startbtn, btnContainer, 'startContainer');
+const startbtn = getMenuBtns(startGame, 'start');
+btnGenerator(startbtn, menuContainer, 'startContainer');

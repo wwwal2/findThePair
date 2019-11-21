@@ -11,7 +11,7 @@ const timeUp = () => {
   const myMessage = document.createElement('div');
   myMessage.className = 'timeUp';
   myMessage.innerText = 'The time is up!';
-  const startBlock = document.body.getElementsByClassName('btnContainer');
+  const startBlock = document.body.getElementsByClassName('menuContainer');
   startBlock.item(0).appendChild(myMessage);
 };
 

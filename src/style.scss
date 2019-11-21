@@ -12,11 +12,11 @@ img {
 }
 
 .prePicked {
-    background-color: rgb(71, 106, 182);
+    color: rgb(71, 106, 182);
 }
 
 .notPicked {
-    background-color: none;
+    color: black;
 }
 
 // blocks maintainance
@@ -24,7 +24,7 @@ img {
     display: block;
 }
 
-.btnContainer {
+.menuContainer {
     display: block;
     text-align: center;
 }
@@ -67,7 +67,7 @@ img {
         width: 230px;
     }
     .gameBtns {
-        flex-basis: 80px;
+        flex-basis: 40px;
     }
 }
 

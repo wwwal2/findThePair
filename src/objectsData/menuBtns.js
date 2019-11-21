@@ -1,4 +1,4 @@
-const getDifficultyBtns = (pickFunction, pickClass) => [
+const getMenuBtns = (pickFunction, pickClass) => [
   {
     tag: 'button',
     className: 'difficultyBtns',
@@ -31,4 +31,4 @@ const getDifficultyBtns = (pickFunction, pickClass) => [
   },
 ].filter((btn) => btn.className === pickClass);
 
-export default getDifficultyBtns;
+export default getMenuBtns;

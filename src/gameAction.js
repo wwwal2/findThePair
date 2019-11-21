@@ -8,6 +8,13 @@ const makeHidden = (elements) => {
   });
 };
 
+const youWin = () => {
+  const checkHidden = document.getElementsByClassName('hidden');
+  if (checkHidden.length === 0) {
+    console.log('you win');
+  }
+};
+
 const isEven = (arr) => {
   if (arr[0].target.dataset.name === arr[1].target.dataset.name
     && arr[0].target.dataset.uniqueId !== arr[1].target.dataset.uniqueId) {
@@ -27,6 +34,7 @@ const action = (event) => {
   if (pickArray.length >= 2) {
     isEven(pickArray);
   }
+  youWin();
 };
 
 export default action;

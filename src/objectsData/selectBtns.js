@@ -1,4 +1,4 @@
-const selectBtns = (timeSet) => [
+const getSelectBtns = (func, pickId) => [
   {
     className: 'selectBtn',
     id: 'previewTime',
@@ -11,7 +11,8 @@ const selectBtns = (timeSet) => [
       '7 sec',
     ],
     description: 'Set a preview time',
-    onchange: timeSet,
+    onchange: func,
+    pickId: 'preview',
   },
   {
     className: 'selectBtn',
@@ -30,8 +31,9 @@ const selectBtns = (timeSet) => [
       'Ten minutes!',
     ],
     description: 'Set a total game timer',
-    onchange: timeSet,
+    onchange: func,
+    pickId: 'gameTime',
   },
-];
+].filter((item) => item.pickId === pickId)
 
-export default selectBtns;
+export default getSelectBtns;
