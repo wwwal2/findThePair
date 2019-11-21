@@ -1,4 +1,3 @@
-
 const preview = (time) => {
   const AllImages = Array.from(document.body.getElementsByTagName('img'));
   setTimeout(() => {
@@ -7,7 +6,6 @@ const preview = (time) => {
     });
   }, time);
 };
-
 
 const gameEnd = (time) => {
   const allBtns = Array.from(document.body.getElementsByTagName('button'));

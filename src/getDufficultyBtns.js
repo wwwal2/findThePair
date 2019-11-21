@@ -1,22 +1,34 @@
-const getDifficultyBtns = (startGame) => [
+const getDifficultyBtns = (pickFunction, pickClass) => [
   {
     tag: 'button',
     className: 'difficultyBtns',
     textContent: 'Little',
-    onclick: startGame,
+    onclick: pickFunction,
   },
   {
     tag: 'button',
     className: 'difficultyBtns',
     textContent: 'Medium',
-    onclick: startGame,
+    onclick: pickFunction,
   },
   {
     tag: 'button',
     className: 'difficultyBtns',
     textContent: 'Big',
-    onclick: startGame,
+    onclick: pickFunction,
   },
-];
+  {
+    tag: 'button',
+    className: 'start',
+    textContent: 'START',
+    onclick: pickFunction,
+  },
+  {
+    tag: 'button',
+    className: 'playAgain',
+    textContent: 'Play again',
+    onclick: pickFunction,
+  },
+].filter((btn) => btn.className === pickClass);
 
 export default getDifficultyBtns;

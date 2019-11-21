@@ -1,9 +1,13 @@
 import './style.scss';
-import mainContainer from './mainContainer';
+import mainContainer from './gameContainers';
 import btnGenerator from './btnGenerator';
 import getDifficultyBtns from './getDufficultyBtns';
 import gameConstruction from './gameConstruction';
-import { setTimers, timeSettings } from './timeSettings';
+import {
+  setTimers,
+  preGameSettings,
+  setDifficulty,
+} from './preGameSettings';
 
 import selectBtns from './timeBtns/selectBtns';
 import selectGenerator from './timeBtns/selectGenerator';
@@ -13,11 +17,15 @@ const timeSet = (event) => {
   setTimers(event);
 };
 
-const startGame = (event) => {
+const difficultySet = (event) => {
+  setDifficulty(event);
+};
+
+const startGame = () => {
   gameConstruction(
-    event.target.textContent.toLowerCase(),
-    timeSettings.preview,
-    timeSettings.time,
+    preGameSettings.difficulty,
+    preGameSettings.preview,
+    preGameSettings.time,
   );
 };
 
@@ -25,5 +33,8 @@ const startGame = (event) => {
 const selectable = selectBtns(timeSet);
 selectGenerator(selectable, mainContainer);
 
-const difficultyBtns = getDifficultyBtns(startGame);
-btnGenerator(difficultyBtns, mainContainer);
+const difficultyBtns = getDifficultyBtns(difficultySet, 'difficultyBtns');
+btnGenerator(difficultyBtns, mainContainer, 'difficultyBtns');
+
+const startbtn = getDifficultyBtns(startGame, 'start');
+btnGenerator(startbtn, mainContainer, 'startContainer');

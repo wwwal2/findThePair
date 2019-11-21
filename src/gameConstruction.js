@@ -1,12 +1,12 @@
 import createField from './createField';
 import gamePictures from './gamePictures';
-import mainContainer from './mainContainer';
+import mainContainer from './gameContainers';
 import {
   preview,
   disableStartBtns,
   fieldSize,
   gameEnd,
-} from './gameOptions';
+} from './gameGenerationOptions';
 
 const gameConstruction = (difficulty, fadeTime, totalTime) => {
   createField(fieldSize[difficulty], gamePictures(fieldSize[difficulty]), mainContainer);
