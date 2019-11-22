@@ -1,4 +1,4 @@
-const preview = (time) => {
+const show = (time) => {
   const AllImages = Array.from(document.body.getElementsByTagName('img'));
   setTimeout(() => {
     AllImages.forEach((pic) => {
@@ -7,21 +7,14 @@ const preview = (time) => {
   }, time);
 };
 
-const timeUp = () => {
-  const myMessage = document.createElement('div');
-  myMessage.className = 'timeUp';
-  myMessage.innerText = 'The time is up!';
-  const startBlock = document.body.getElementsByClassName('menuContainer');
-  startBlock.item(0).appendChild(myMessage);
-};
-
 const gameEnd = (time) => {
   const allBtns = Array.from(document.body.getElementsByTagName('button'));
   setTimeout(() => {
     allBtns.forEach((btn) => {
       btn.disabled = 'true';
     });
-    timeUp();
+    const timeUp = document.body.getElementsByClassName('remove');
+    timeUp.item(0).className = 'display';
   }, time);
 };
 
@@ -32,6 +25,13 @@ const disableStartBtns = () => {
   });
 };
 
+const clearPick = () => {
+  const elements = Array.from(document.getElementsByClassName('prePicked'));
+  elements.forEach((btn) => {
+    btn.className = 'notPicked';
+  });
+};
+
 const fieldSize = {
   little: [4, 4],
   medium: [5, 5],
@@ -39,8 +39,9 @@ const fieldSize = {
 };
 
 export {
-  preview,
+  show,
+  gameEnd,
   disableStartBtns,
   fieldSize,
-  gameEnd,
+  clearPick,
 };

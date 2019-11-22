@@ -1,9 +1,8 @@
-import action from '../gameAction';
-import createElement from '../createElement';
+import createElement from './createElement';
 
 const fieldContainer = createElement('div', 'fieldContainer', null);
 
-const btnTemplate = () => {
+const btnTemplate = (action) => {
   const btn = createElement('button', 'gameBtns', null);
   btn.addEventListener('click', action, true);
   return btn;
@@ -19,12 +18,12 @@ const imgTemplate = (icons, uniqueI, uniqJ) => {
   return image;
 };
 
-const createField = (fieldSize, iconsArray, stickTo) => {
+const createField = (fieldSize, iconsArray, stickTo, action) => {
   for (let i = 0; i < fieldSize[0]; i += 1) {
     const row = createElement('div', 'rows', fieldContainer);
 
     for (let j = 0; j < fieldSize[1]; j += 1) {
-      const button = btnTemplate();
+      const button = btnTemplate(action);
       const image = imgTemplate(iconsArray, i, j);
       row.appendChild(button);
       button.appendChild(image);

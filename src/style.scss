@@ -3,6 +3,14 @@ img {
     height: 100%;
 }
 
+.display {
+    display: inline;
+}
+
+.remove {
+    display: none;
+}
+
 .visible {
     opacity: 1;
 }

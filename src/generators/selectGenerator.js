@@ -1,26 +1,28 @@
-import createElement from '../createElement';
+import createElement from '../coreFunctions/createElement';
 
 const selectContainer = createElement('div', 'selectContainer', null);
 
-const selectTemplate = (optionsNum, className, options, onchange) => {
+const createSelect = (className, id, options, onchange) => {
   const select = createElement('select', className, null);
+  select.id = id;
   select.onchange = onchange;
 
-  for (let i = 0; i < optionsNum; i += 1) {
+  options.forEach((item) => {
     const option = document.createElement('option');
     select.appendChild(option);
-    option.value = i;
-    option.textContent = options[i];
-  }
+    option.value = item.value;
+    option.textContent = item.label;
+  });
+
   return select;
 };
 
 const selectGenerator = (array, stickTo) => {
   array.forEach((obj) => {
-    selectContainer.appendChild(selectTemplate(
-      obj.options,
+    selectContainer.appendChild(createSelect(
       obj.className,
-      obj.optionsValues,
+      obj.id,
+      obj.options,
       obj.onchange,
     ));
   });

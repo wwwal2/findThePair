@@ -1,4 +1,4 @@
-import createElement from '../createElement';
+import createElement from '../coreFunctions/createElement';
 
 const btnTemplate = (tag, className, textContent, onclick) => {
   const btn = createElement(tag, className, null);
