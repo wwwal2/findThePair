@@ -1,14 +1,12 @@
 import createElement from './createElement';
 
-const fieldContainer = createElement('div', 'fieldContainer', null);
-
-const btnTemplate = (action) => {
-  const btn = createElement('button', 'gameBtns', null);
+const createBtn = (action) => {
+  const btn = createElement('button', 'field-btns', null);
   btn.addEventListener('click', action, true);
   return btn;
 };
 
-const imgTemplate = (icons, uniqueI, uniqJ) => {
+const createImg = (icons, uniqueI, uniqJ) => {
   const image = createElement('img', 'images', null);
   image.src = `../img/${icons.pop()}.png`;
   const imageAlt = Object.assign(image.src);
@@ -20,16 +18,15 @@ const imgTemplate = (icons, uniqueI, uniqJ) => {
 
 const createField = (fieldSize, iconsArray, stickTo, action) => {
   for (let i = 0; i < fieldSize[0]; i += 1) {
-    const row = createElement('div', 'rows', fieldContainer);
+    const row = createElement('div', 'rows', stickTo);
 
     for (let j = 0; j < fieldSize[1]; j += 1) {
-      const button = btnTemplate(action);
-      const image = imgTemplate(iconsArray, i, j);
+      const button = createBtn(action);
+      const image = createImg(iconsArray, i, j);
       row.appendChild(button);
       button.appendChild(image);
     }
   }
-  stickTo.appendChild(fieldContainer);
 };
 
 export default createField;

@@ -1,7 +1,37 @@
-const getSelectBtns = (func, id) => [
+const getElements = (func, pickClass) => [
   {
-    className: 'selectBtn',
-    id: 'preview',
+    tag: 'button',
+    className: 'difficulty-btns',
+    textContent: 'Little',
+    onclick: func,
+  },
+  {
+    tag: 'button',
+    className: 'difficulty-btns',
+    textContent: 'Medium',
+    onclick: func,
+  },
+  {
+    tag: 'button',
+    className: 'difficulty-btns',
+    textContent: 'Big',
+    onclick: func,
+  },
+  {
+    tag: 'button',
+    className: 'start',
+    textContent: 'START',
+    onclick: func,
+  },
+  {
+    tag: 'button',
+    className: 'play-again',
+    textContent: 'Play again',
+    onclick: func,
+  },
+  {
+    tag: 'select',
+    className: 'select-btn',
     options: [
       {
         value: 3000,
@@ -27,8 +57,8 @@ const getSelectBtns = (func, id) => [
     onchange: func,
   },
   {
-    className: 'selectBtn',
-    id: 'gameTime',
+    tag: 'select',
+    className: 'select-btn',
     options: [
       {
         value: 60000,
@@ -73,6 +103,12 @@ const getSelectBtns = (func, id) => [
     ],
     onchange: func,
   },
-].filter((item) => item.id === id);
+  {
+    tag: 'div',
+    className: 'remove',
+    textContent: 'The time is up!',
+    onclick: func,
+  },
+].filter((btn) => btn.className === pickClass);
 
-export default getSelectBtns;
+export default getElements;

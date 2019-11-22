@@ -1,4 +1,4 @@
-const show = (time) => {
+const hideTimeOut = (time) => {
   const AllImages = Array.from(document.body.getElementsByTagName('img'));
   setTimeout(() => {
     AllImages.forEach((pic) => {
@@ -7,11 +7,11 @@ const show = (time) => {
   }, time);
 };
 
-const gameEnd = (time) => {
+const gameOverTimeOut = (time) => {
   const allBtns = Array.from(document.body.getElementsByTagName('button'));
   setTimeout(() => {
     allBtns.forEach((btn) => {
-      btn.disabled = 'true';
+      btn.disabled = true;
     });
     const timeUp = document.body.getElementsByClassName('remove');
     timeUp.item(0).className = 'display';
@@ -21,14 +21,14 @@ const gameEnd = (time) => {
 const disableStartBtns = () => {
   const btns = Array.from(document.body.getElementsByClassName('start'));
   btns.forEach((btn) => {
-    btn.disabled = 'true';
+    btn.disabled = true;
   });
 };
 
 const clearPick = () => {
-  const elements = Array.from(document.getElementsByClassName('prePicked'));
+  const elements = Array.from(document.getElementsByClassName('pre-picked'));
   elements.forEach((btn) => {
-    btn.className = 'notPicked';
+    btn.className = 'not-picked';
   });
 };
 
@@ -39,8 +39,8 @@ const fieldSize = {
 };
 
 export {
-  show,
-  gameEnd,
+  hideTimeOut,
+  gameOverTimeOut,
   disableStartBtns,
   fieldSize,
   clearPick,

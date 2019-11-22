@@ -1,6 +1,7 @@
 img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
 }
 
 .display {
@@ -16,28 +17,29 @@ img {
 }
 
 .hidden {
-    opacity: 0;
+    opacity: 0.4;
 }
 
-.prePicked {
+.pre-picked {
     color: rgb(71, 106, 182);
 }
 
-.notPicked {
+.not-picked {
     color: black;
 }
 
 // blocks maintainance
-.mainContainer {
+
+.main-container {
     display: block;
 }
 
-.menuContainer {
+.menu-container {
     display: block;
     text-align: center;
 }
 
-.fieldContainer {
+.field-container {
     display: flex;
     justify-content: center; 
     width: 1000px;   
@@ -50,32 +52,32 @@ img {
     flex-shrink: 1;
 }
 
-.gameBtns {
+.field-btns {
     flex-basis: 140px;
     flex-grow: 1;
     border: 0;
     margin: 0;
     padding: 0;
 }
-.gameBtns:hover {
+.field-btns:hover {
     background-color: white;
 }
 
 @media all and (min-width: 600px) and (max-width: 1000px) {
-    .fieldContainer {
+    .field-container {
         width: 600px;
     }
-    .gameBtns {
+    .field-btns {
         flex-basis: 125px;
     }
 }
 
 @media all and (max-width: 599px) {
-    .fieldContainer {
+    .field-container {
         width: 230px;
     }
-    .gameBtns {
-        flex-basis: 40px;
+    .field-btns {
+        flex-basis: 80px;
     }
 }
 

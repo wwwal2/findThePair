@@ -1,66 +1,69 @@
 import './style.scss';
-import createContainer from './coreFunctions/getMainContainer';
-import btnGenerator from './generators/btnGenerator';
-import selectGenerator from './generators/selectGenerator';
+import createGameSpace from './coreFunctions/createGameSpace';
 
-import getMenuBtns from './objectsData/menuBtns';
-import getSelectBtns from './objectsData/selectBtns';
-import getOtherElements from './objectsData/otherElements';
+import btnGenerator from './blockCreators/simpleBlockCreator';
+import advancetBlockCreator from './blockCreators/advancedBlockCreator';
+
+import getElements from './elementsData';
 
 import createField from './coreFunctions/createField';
 import gamePictures from './coreFunctions/gamePictures';
 import {
-  show,
+  hideTimeOut,
   disableStartBtns,
   fieldSize,
-  gameEnd,
+  gameOverTimeOut,
 } from './autoActions';
 
-import action from './coreFunctions/gameAction';
+import openImgHandler from './coreFunctions/openImgHandler';
 
-function initGame(defaultSettings) {
+function initGame(defaultSettings, placeForApp) {
   // create the game space
-  const { mainContainer, menuContainer } = createContainer(document.body);
+  const { menuContainer, fieldContainer } = createGameSpace(placeForApp);
 
   // default presettings
-  const preGameSettings = defaultSettings;
+  const settings = defaultSettings;
 
-  // main game prefferences
-  const previewTime = (event) => {
-    preGameSettings.preview = event.target.value;
+  // main game handlers
+  const timeHandler = (event) => {
+    if (event.target.value < 60000) {
+      settings.preview = event.target.value;
+    } else {
+      settings.gameOver = event.target.value;
+    }
   };
-  const gameTime = (event) => {
-    preGameSettings.time = event.target.textContent.toLowerCase();
-  };
-  const difficultySet = (event) => {
-    preGameSettings.difficulty = event.target.innerText.toLowerCase();
+
+  const difficultyHandler = (event) => {
+    settings.difficulty = event.target.innerText.toLowerCase();
   };
 
   const startGame = () => {
-    const pictures = gamePictures(fieldSize[preGameSettings.difficulty]);
+    const getPicturesNames = gamePictures(fieldSize[settings.difficulty]);
+    const getFieldSize = fieldSize[settings.difficulty];
+
     createField(
-      fieldSize[preGameSettings.difficulty],
-      pictures,
-      mainContainer,
-      action,
+      getFieldSize,
+      getPicturesNames,
+      fieldContainer,
+      openImgHandler,
     );
-    show(preGameSettings.preview);
-    gameEnd(preGameSettings.time);
+
+    hideTimeOut(settings.preview);
+    gameOverTimeOut(settings.gameOver);
     disableStartBtns();
   };
 
-  // constructing menu
-  const selectOne = getSelectBtns(previewTime, 'preview');
-  const selectTwo = getSelectBtns(gameTime, 'gameTime');
-  selectGenerator(selectOne.concat(selectTwo), menuContainer);
+  // constructing the app
+  const selectBtns = getElements(timeHandler, 'select-btn');
+  advancetBlockCreator(selectBtns, menuContainer);
 
-  const difficultyBtns = getMenuBtns(difficultySet, 'difficultyBtns');
-  btnGenerator(difficultyBtns, menuContainer, 'difficultyBtns');
+  const difficultyBtns = getElements(difficultyHandler, 'difficulty-btns');
+  btnGenerator(difficultyBtns, menuContainer, 'difficulty-btns');
 
-  const startbtn = getMenuBtns(startGame, 'start');
-  btnGenerator(startbtn, menuContainer, 'startContainer');
+  const startBtn = getElements(startGame, 'start');
+  btnGenerator(startBtn, menuContainer, 'start-container');
 
-  const timeUp = getOtherElements(null, 'remove');
+  const timeUp = getElements(null, 'remove');
   btnGenerator(timeUp, menuContainer, 'timeUp');
 
 }

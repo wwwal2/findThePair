@@ -9,8 +9,9 @@ const makeHidden = (elements) => {
 };
 
 const youWin = () => {
-  const checkHidden = document.getElementsByClassName('hidden');
-  if (checkHidden.length === 0) {
+  const getHidden = document.getElementsByClassName('hidden');
+  const start = document.getElementsByClassName('start');
+  if (getHidden.length === 0 && start.item(0).disabled) {
     console.log('you win');
   }
 };
@@ -27,7 +28,7 @@ const isEven = (arr) => {
   }
 };
 
-const action = (event) => {
+const openImgHandler = (event) => {
   event.target.className = 'visible';
   pickArray.push(event);
 
@@ -37,4 +38,4 @@ const action = (event) => {
   youWin();
 };
 
-export default action;
+export default openImgHandler;
