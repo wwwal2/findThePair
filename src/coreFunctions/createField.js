@@ -18,12 +18,12 @@ const createImg = (icons, uniqueI, uniqJ) => {
 
 const createField = (fieldSize, iconsArray, stickTo, action) => {
   for (let i = 0; i < fieldSize[0]; i += 1) {
-    const row = createElement('div', 'rows', stickTo);
+    // const row = createElement('div', 'rows', stickTo);
 
     for (let j = 0; j < fieldSize[1]; j += 1) {
       const button = createBtn(action);
       const image = createImg(iconsArray, i, j);
-      row.appendChild(button);
+      stickTo.appendChild(button);
       button.appendChild(image);
     }
   }

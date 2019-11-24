@@ -1,4 +1,4 @@
-const getElements = (func, pickClass) => [
+const getElements = (pickClass, func) => [
   {
     tag: 'button',
     className: 'difficulty-btns',

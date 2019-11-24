@@ -19,7 +19,7 @@ import openImgHandler from './coreFunctions/openImgHandler';
 
 function initGame(defaultSettings, placeForApp) {
   // create the game space
-  const { menuContainer, fieldContainer } = createGameSpace(placeForApp);
+  const { mainContainer, menuContainer, fieldContainer } = createGameSpace(placeForApp);
 
   // default presettings
   const settings = defaultSettings;
@@ -37,9 +37,9 @@ function initGame(defaultSettings, placeForApp) {
     settings.difficulty = event.target.innerText.toLowerCase();
   };
 
-  const startGame = () => {
-    const getPicturesNames = gamePictures(fieldSize[settings.difficulty]);
+  const startGameHandler = () => {
     const getFieldSize = fieldSize[settings.difficulty];
+    const getPicturesNames = gamePictures(getFieldSize);
 
     createField(
       getFieldSize,
@@ -53,17 +53,22 @@ function initGame(defaultSettings, placeForApp) {
     disableStartBtns();
   };
 
+  const playAagainHandler = () => {
+    mainContainer.remove();
+    initGame(defaultSettings, placeForApp);
+  }
   // constructing the app
-  const selectBtns = getElements(timeHandler, 'select-btn');
-  advancetBlockCreator(selectBtns, menuContainer);
+  const selectBtns = getElements('select-btn', timeHandler);
+  advancetBlockCreator(selectBtns, menuContainer, 'select-container');
 
-  const difficultyBtns = getElements(difficultyHandler, 'difficulty-btns');
+  const difficultyBtns = getElements('difficulty-btns', difficultyHandler);
   btnGenerator(difficultyBtns, menuContainer, 'difficulty-btns');
 
-  const startBtn = getElements(startGame, 'start');
-  btnGenerator(startBtn, menuContainer, 'start-container');
+  const startBtn = getElements('start', startGameHandler);
+  const playAgainBtn = getElements('play-again', playAagainHandler);
+  btnGenerator(startBtn.concat(playAgainBtn), menuContainer, 'start-container');
 
-  const timeUp = getElements(null, 'remove');
+  const timeUp = getElements('remove', null);
   btnGenerator(timeUp, menuContainer, 'timeUp');
 
 }
