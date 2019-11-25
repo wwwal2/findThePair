@@ -1,7 +1,7 @@
 import initGame from './game';
 
 const defaultSettings = {
-  preview: 3000,
+  preview: 1000,
   gameOver: 60000,
   difficulty: 'big',
 };

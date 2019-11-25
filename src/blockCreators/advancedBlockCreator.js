@@ -1,4 +1,4 @@
-import createElement from '../coreFunctions/createElement';
+import createElement from '../utility/createElement';
 
 const createSelect = (className, options, onchange) => {
   const select = createElement('select', className, null);

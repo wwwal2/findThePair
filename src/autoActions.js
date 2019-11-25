@@ -1,35 +1,27 @@
+import selectElements from './utility/selectElements';
+import switchProperty from './utility/switchProperty';
+
 const hideTimeOut = (time) => {
-  const AllImages = Array.from(document.body.getElementsByTagName('img'));
   setTimeout(() => {
-    AllImages.forEach((pic) => {
-      pic.className = 'hidden';
-    });
+    switchProperty('disabled', false, 'field-btns');
+    switchProperty('className', 'hidden', 'images');
   }, time);
 };
 
-const gameOverTimeOut = (time) => {
-  const allBtns = Array.from(document.body.getElementsByTagName('button'));
-  setTimeout(() => {
-    allBtns.forEach((btn) => {
-      btn.disabled = true;
-    });
-    const timeUp = document.body.getElementsByClassName('remove');
-    timeUp.item(0).className = 'display';
-  }, time);
+const gameOverTimeOut = (time) => setTimeout(() => {
+  switchProperty('disabled', true, 'field-btns');
+  const timeUp = selectElements('remove');
+  timeUp[2].className = 'display';
+}, time);
+
+const transformMenu = () => {
+  switchProperty('className', 'remove', 'difficulty-container', 'select-container');
+  const start = selectElements('start');
+  start[0].disabled = true;
 };
 
-const disableStartBtns = () => {
-  const btns = Array.from(document.body.getElementsByClassName('start'));
-  btns.forEach((btn) => {
-    btn.disabled = true;
-  });
-};
-
-const clearPick = () => {
-  const elements = Array.from(document.getElementsByClassName('pre-picked'));
-  elements.forEach((btn) => {
-    btn.className = 'not-picked';
-  });
+const clearHighlight = () => {
+  switchProperty('className', 'difficulty-btns', 'highlight');
 };
 
 const fieldSize = {
@@ -41,7 +33,7 @@ const fieldSize = {
 export {
   hideTimeOut,
   gameOverTimeOut,
-  disableStartBtns,
+  transformMenu,
   fieldSize,
-  clearPick,
+  clearHighlight,
 };

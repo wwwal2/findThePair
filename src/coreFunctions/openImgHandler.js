@@ -1,6 +1,9 @@
+import selectElements from '../utility/selectElements';
+import createElement from '../utility/createElement';
+
 const pickArray = [];
 
-const eraseArray = (array) => array.splice(0, 2);
+const eraseArray = (array) => array.splice(0, array.length);
 
 const makeHidden = (elements) => {
   elements.forEach((item) => {
@@ -9,10 +12,17 @@ const makeHidden = (elements) => {
 };
 
 const youWin = () => {
-  const getHidden = document.getElementsByClassName('hidden');
-  const start = document.getElementsByClassName('start');
-  if (getHidden.length === 0 && start.item(0).disabled) {
-    console.log('you win');
+  const getHidden = selectElements('hidden');
+  if (getHidden.length === 0) {
+    const containers = selectElements('field-container', 'main-container');
+    containers.forEach((obj) => {
+      if (obj.className === 'field-container') {
+        obj.remove();
+      } else {
+        const congrat = createElement('div', 'congratulations', obj);
+        congrat.innerText = 'Congratulations!';
+      }
+    });
   }
 };
 

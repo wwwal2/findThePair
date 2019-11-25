@@ -19,16 +19,11 @@ img {
     opacity: 0.4;
 }
 
-.pre-picked {
+.highlight {
     color: rgb(71, 106, 182);
 }
 
-.not-picked {
-    color: black;
-}
-
 // blocks maintainance
-
 .main-container {
     display: block;
 }
@@ -42,18 +37,21 @@ img {
     display: flex;
     flex-wrap: wrap;
     justify-content: center; 
-    width: 800px;   
+    width: 900px;   
     margin: auto;
 }
-
-.rows {
+.congratulations {
     display: flex;
-    flex-direction: column;
-    flex-shrink: 1;
+    margin: auto;
 }
+// .rows {
+//     display: flex;
+//     flex-direction: column;
+//     flex-shrink: 1;
+// }
 
 .field-btns {
-    flex-basis: 140px;
+    height: 140px;
     border: 0;
     margin: 0;
     padding: 0;
@@ -61,32 +59,21 @@ img {
 .field-btns:hover {
     background-color: white;
 }
-// img {
-//     height: 140px;
-// }
 
 @media all and (min-width: 600px) and (max-width: 1000px) {
     .field-container {
-        width: 500px;
+        width: 600px;
     }
-    .field-btns {
-        flex-basis: 100px;
-    }
-    // img {
-    //   height: 100px;
-    // }
-}
+ }
 
 @media all and (max-width: 599px) {
     .field-container {
         width: 300px;
     }
     .field-btns {
-        flex-basis: 50px;
+        height: 50px;
+        width: 50px;
     }
-    // img {
-    //   height: 50px;
-    // }
 }
 
 

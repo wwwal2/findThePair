@@ -1,4 +1,4 @@
-import createElement from './createElement';
+import createElement from '../utility/createElement';
 
 function createGameSpace(stickTo) {
   const mainContainer = createElement('div', 'main-container', stickTo);

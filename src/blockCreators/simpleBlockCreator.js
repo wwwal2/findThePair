@@ -1,4 +1,4 @@
-import createElement from '../coreFunctions/createElement';
+import createElement from '../utility/createElement';
 
 const createObj = (tag, className, textContent, onclick) => {
   const obj = createElement(tag, className, null);

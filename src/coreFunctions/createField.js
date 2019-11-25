@@ -1,4 +1,4 @@
-import createElement from './createElement';
+import createElement from '../utility/createElement';
 
 const createBtn = (action) => {
   const btn = createElement('button', 'field-btns', null);
@@ -22,6 +22,7 @@ const createField = (fieldSize, iconsArray, stickTo, action) => {
 
     for (let j = 0; j < fieldSize[1]; j += 1) {
       const button = createBtn(action);
+      button.disabled = true;
       const image = createImg(iconsArray, i, j);
       stickTo.appendChild(button);
       button.appendChild(image);
