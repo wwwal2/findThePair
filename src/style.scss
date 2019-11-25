@@ -18,9 +18,60 @@ img {
 .hidden {
     opacity: 0.4;
 }
-
+  
 .highlight {
-    color: rgb(71, 106, 182);
+	background-color:#1abc9c;
+	border-radius:10px;
+	border:1px solid #1abc9c;
+	color:#ffffff;
+	font-size:19px;
+	padding:12px 37px;
+}
+
+select {
+    background-color: #1abc9c;
+    color: #fff;
+    font-size: inherit;
+    padding: .5em;
+    padding-right: 2.5em; 
+    border-radius: 3px;
+    -webkit-appearance: button; /* hide default arrow in chrome OSX */
+  }
+  
+.difficulty-btns {
+	background-color:#7892c2;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	color:#ffffff;
+	font-size:19px;
+	padding:12px 37px;
+}
+
+.play-again {
+    background-color:#1abc9c;
+    border-radius:8px;
+    color:#ffffff;
+    font-size:20px;
+    font-weight:bold;
+    padding:13px 32px;
+    text-shadow:0px 1px 0px #3d768a;
+}
+.play-again:hover {
+    background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+    background-color:#408c99;
+}
+.start {
+	background-color:#fe1a00;
+	border-radius:6px;
+	border:1px solid #d83526;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:15px 24px;
+}
+.start:hover {
+	background-color:#1abc9c;
 }
 
 // blocks maintainance
@@ -40,10 +91,14 @@ img {
     width: 900px;   
     margin: auto;
 }
-.congratulations {
+
+.congrat-container {
     display: flex;
+    width: 600px;
     margin: auto;
+    justify-content: center; 
 }
+
 // .rows {
 //     display: flex;
 //     flex-direction: column;
@@ -64,11 +119,17 @@ img {
     .field-container {
         width: 600px;
     }
+    .congrat-container {
+        width: 400px;
+    }
  }
 
 @media all and (max-width: 599px) {
     .field-container {
         width: 300px;
+    }
+    .congrat-container {
+        width: 200px;
     }
     .field-btns {
         height: 50px;

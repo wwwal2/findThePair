@@ -15,7 +15,7 @@ const gameOverTimeOut = (time) => setTimeout(() => {
 }, time);
 
 const transformMenu = () => {
-  switchProperty('className', 'remove', 'difficulty-container', 'select-container');
+  switchProperty('className', 'remove', 'difficulty-container', 'select-container', 'start');
   const start = selectElements('start');
   start[0].disabled = true;
 };

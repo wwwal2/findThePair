@@ -19,8 +19,9 @@ const youWin = () => {
       if (obj.className === 'field-container') {
         obj.remove();
       } else {
-        const congrat = createElement('div', 'congratulations', obj);
-        congrat.innerText = 'Congratulations!';
+        const congratContainer = createElement('div', 'congrat-container', obj);
+        const image = createElement('img', 'congrat-image', congratContainer);
+        image.src = '../img/Congratulation.png';
       }
     });
   }
