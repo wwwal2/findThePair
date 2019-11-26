@@ -1,15 +1,10 @@
 import selectElements from '../utility/selectElements';
 import createElement from '../utility/createElement';
+import switchProperty from '../utility/switchProperty';
 
 const pickArray = [];
 
 const eraseArray = (array) => array.splice(0, array.length);
-
-const makeHidden = (elements) => {
-  elements.forEach((item) => {
-    item.target.className = 'hidden';
-  });
-};
 
 const youWin = () => {
   const getHidden = selectElements('hidden');
@@ -33,7 +28,7 @@ const isEven = (arr) => {
     eraseArray(arr);
   } else {
     setTimeout(() => {
-      makeHidden(arr);
+      switchProperty('className', 'hidden', [arr[0].target, arr[1].target]);
       eraseArray(arr);
     }, 500);
   }

@@ -22,7 +22,6 @@ img {
 .highlight {
 	background-color:#1abc9c;
 	border-radius:10px;
-	border:1px solid #1abc9c;
 	color:#ffffff;
 	font-size:19px;
 	padding:12px 37px;
@@ -35,13 +34,12 @@ select {
     padding: .5em;
     padding-right: 2.5em; 
     border-radius: 3px;
-    -webkit-appearance: button; /* hide default arrow in chrome OSX */
+    -webkit-appearance: button; 
   }
   
 .difficulty-btns {
-	background-color:#7892c2;
+	background-color:#929697;
 	border-radius:10px;
-	border:1px solid #4e6096;
 	color:#ffffff;
 	font-size:19px;
 	padding:12px 37px;
@@ -63,12 +61,11 @@ select {
 .start {
 	background-color:#fe1a00;
 	border-radius:6px;
-	border:1px solid #d83526;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:15px;
+	font-size:20px;
 	font-weight:bold;
-	padding:15px 24px;
+	padding:13px 24px;
 }
 .start:hover {
 	background-color:#1abc9c;
@@ -99,11 +96,11 @@ select {
     justify-content: center; 
 }
 
-// .rows {
-//     display: flex;
-//     flex-direction: column;
-//     flex-shrink: 1;
-// }
+.rows {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+}
 
 .field-btns {
     height: 140px;

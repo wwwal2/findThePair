@@ -1,9 +1,6 @@
 import './style.scss';
 import createGameSpace from './coreFunctions/createGameSpace';
 
-import btnGenerator from './blockCreators/simpleBlockCreator';
-import advancetBlockCreator from './blockCreators/advancedBlockCreator';
-
 import getElements from './elementsData';
 
 import createField from './coreFunctions/createField';
@@ -18,6 +15,8 @@ import {
 
 import openImgHandler from './coreFunctions/openImgHandler';
 
+import assemble from './utility/assemble';
+
 function initGame(defaultSettings, placeForApp) {
   // create the game space
   const { mainContainer, menuContainer, fieldContainer } = createGameSpace(placeForApp);
@@ -28,7 +27,7 @@ function initGame(defaultSettings, placeForApp) {
   let gameOverTimer;
 
   // main game handlers
-  const timeHandler = (event) => {
+  const timeSelectHandler = (event) => {
     if (event.target.value < 60000) {
       settings.preview = event.target.value;
     } else {
@@ -54,7 +53,7 @@ function initGame(defaultSettings, placeForApp) {
     );
 
     previewTimer = hideTimeOut(settings.preview);
-    gameOverTimer = gameOverTimeOut(settings.gameOver);
+    gameOverTimer = gameOverTimeOut(settings.gameOver, menuContainer);
     transformMenu();
   };
 
@@ -64,19 +63,16 @@ function initGame(defaultSettings, placeForApp) {
     mainContainer.remove();
     initGame(defaultSettings, placeForApp);
   };
-  // constructing the app
-  const selectBtns = getElements('select-btn', timeHandler);
-  advancetBlockCreator(selectBtns, menuContainer, 'select-container');
-
+  // constructing menu
+  const selectBtns = getElements('select-btn', timeSelectHandler);
   const difficultyBtns = getElements('difficulty-btns', difficultyHandler);
-  btnGenerator(difficultyBtns, menuContainer, 'difficulty-container');
+  const timeUp = getElements('remove', null);
 
   const playAgainBtn = getElements('play-again', playAagainHandler);
   const startBtn = getElements('start', startGameHandler);
-  btnGenerator(playAgainBtn.concat(startBtn), menuContainer, 'start-container');
 
-  const timeUp = getElements('remove', null);
-  btnGenerator(timeUp, menuContainer, 'timeUp');
+
+  assemble(menuContainer, selectBtns, difficultyBtns, playAgainBtn.concat(startBtn), timeUp);
 }
 
 export default initGame;

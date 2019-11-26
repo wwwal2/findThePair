@@ -1,27 +1,27 @@
 import selectElements from './utility/selectElements';
 import switchProperty from './utility/switchProperty';
+import createElement from './utility/createElement';
 
 const hideTimeOut = (time) => {
   setTimeout(() => {
-    switchProperty('disabled', false, 'field-btns');
-    switchProperty('className', 'hidden', 'images');
+    switchProperty('disabled', false, selectElements('field-btns'));
+    switchProperty('className', 'hidden', selectElements('images'));
   }, time);
 };
 
-const gameOverTimeOut = (time) => setTimeout(() => {
-  switchProperty('disabled', true, 'field-btns');
-  const timeUp = selectElements('remove');
-  timeUp[2].className = 'display';
+const gameOverTimeOut = (time, stickTo) => setTimeout(() => {
+  switchProperty('disabled', true, selectElements('field-btns'));
+  const timeUpMessage = createElement('div', 'congrat-container', stickTo);
+  const image = createElement('img', 'congrat-image', timeUpMessage);
+  image.src = '../img/timeUp.png';
 }, time);
 
 const transformMenu = () => {
-  switchProperty('className', 'remove', 'difficulty-container', 'select-container', 'start');
-  const start = selectElements('start');
-  start[0].disabled = true;
+  switchProperty('className', 'remove', selectElements('difficulty-btns-container', 'select-btn-container', 'start'));
 };
 
 const clearHighlight = () => {
-  switchProperty('className', 'difficulty-btns', 'highlight');
+  switchProperty('className', 'difficulty-btns', selectElements('highlight'));
 };
 
 const fieldSize = {
