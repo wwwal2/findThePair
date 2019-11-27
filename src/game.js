@@ -13,7 +13,7 @@ import {
   clearHighlight,
 } from './autoActions';
 
-import openImgHandler from './coreFunctions/openImgHandler';
+import { openImgHandler, passTimestamp } from './coreFunctions/openImgHandler';
 
 import assemble from './utility/assemble';
 
@@ -54,6 +54,7 @@ function initGame(defaultSettings, placeForApp) {
 
     previewTimer = hideTimeOut(settings.preview);
     gameOverTimer = gameOverTimeOut(settings.gameOver, menuContainer);
+    passTimestamp(gameOverTimer);
     transformMenu();
   };
 
@@ -66,13 +67,10 @@ function initGame(defaultSettings, placeForApp) {
   // constructing menu
   const selectBtns = getElements('select-btn', timeSelectHandler);
   const difficultyBtns = getElements('difficulty-btns', difficultyHandler);
-  const timeUp = getElements('remove', null);
-
   const playAgainBtn = getElements('play-again', playAagainHandler);
   const startBtn = getElements('start', startGameHandler);
 
-
-  assemble(menuContainer, selectBtns, difficultyBtns, playAgainBtn.concat(startBtn), timeUp);
+  assemble(menuContainer, selectBtns, difficultyBtns, playAgainBtn.concat(startBtn));
 }
 
 export default initGame;

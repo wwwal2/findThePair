@@ -96,6 +96,13 @@ select {
     justify-content: center; 
 }
 
+.time-up-container {
+    display: flex;
+    width: 700px;
+    margin: auto;
+    justify-content: center; 
+}
+
 .rows {
     display: flex;
     flex-direction: column;
@@ -114,10 +121,17 @@ select {
 
 @media all and (min-width: 600px) and (max-width: 1000px) {
     .field-container {
-        width: 600px;
+        width: 800px;
+    }
+    .field-btns {
+        width: 100px;
+        height: 100px;
     }
     .congrat-container {
         width: 400px;
+    }
+    .time-up-container {
+        width: 600px;
     }
  }
 
@@ -127,6 +141,9 @@ select {
     }
     .congrat-container {
         width: 200px;
+    }
+    .time-up-container {
+        width: 300px;
     }
     .field-btns {
         height: 50px;

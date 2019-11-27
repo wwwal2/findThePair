@@ -11,8 +11,8 @@ const hideTimeOut = (time) => {
 
 const gameOverTimeOut = (time, stickTo) => setTimeout(() => {
   switchProperty('disabled', true, selectElements('field-btns'));
-  const timeUpMessage = createElement('div', 'congrat-container', stickTo);
-  const image = createElement('img', 'congrat-image', timeUpMessage);
+  const timeUpMessage = createElement('div', 'time-up-container', stickTo);
+  const image = createElement('img', 'time-up-image', timeUpMessage);
   image.src = '../img/timeUp.png';
 }, time);
 
