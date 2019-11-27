@@ -7,15 +7,13 @@ const assemble = (stickTo, ...blocksGroup) => {
       const element = createElement(obj.tag, obj.className, container);
 
       if (obj.options) {
+        element.onchange = obj.onchange;
         obj.options.forEach((option) => {
-          element.onchange = obj.onchange;
           const myOption = createElement('option', 'options', element);
-          myOption.value = option.value;
-          myOption.textContent = option.textContent;
+          Object.assign(myOption, option);
         });
       } else {
-        element.textContent = obj.textContent;
-        element.onclick = obj.onclick;
+        Object.assign(element, obj);
       }
     });
   });
