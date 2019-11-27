@@ -15,7 +15,7 @@ import {
 
 import { openImgHandler, passTimestamp } from './coreFunctions/openImgHandler';
 
-import assemble from './utility/assemble';
+import assemble from './assemble';
 
 function initGame(defaultSettings, placeForApp) {
   // create the game space

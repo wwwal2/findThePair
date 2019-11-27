@@ -7,7 +7,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'main.js',
+    filename: 'main.[contenthash].js',
+    hashDigestLength: 5,
   },
   module: {
     rules: [
@@ -22,24 +23,19 @@ module.exports = {
         loader: 'eslint-loader',
       },
       {
-        test: /\.s[ac]ss$/i,
-        // test: /\.(sa|sc|c)ss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+              reloadAll: true,
+            },
+          },
           'css-loader',
+          // 'postcss-loader',
           'sass-loader',
         ],
-        // use: [
-        //   {
-        //     loader: MiniCssExtractPlugin.loader,
-        //     options: {
-        //       hmr: process.env.NODE_ENV === 'development',
-        //     },
-        //   },
-        //   'css-loader',
-        //   'postcss-loader',
-        //   'sass-loader',
-        // ],
       },
       {
         test: /\.m?js$/,
@@ -55,7 +51,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      filename: 'index.html',
       template: './src/index.html',
+      templateParameters: {
+        minify: true,
+        hash: true,
+      },
     }),
     new UglifyJsPlugin({
       test: /\.js(\?.*)?$/i,
@@ -69,10 +70,9 @@ module.exports = {
       },
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles.css',
+      filename: 'styles.[contenthash].css',
       ignoreOrder: false,
     }),
-
   ],
   watch: true,
 };

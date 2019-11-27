@@ -35,23 +35,23 @@ const getElements = (pickClass, func) => [
     options: [
       {
         value: 3000,
-        label: '3 sec',
+        textContent: '3 sec',
       },
       {
         value: 4000,
-        label: '4 sec',
+        textContent: '4 sec',
       },
       {
         value: 5000,
-        label: '5 sec',
+        textContent: '5 sec',
       },
       {
         value: 6000,
-        label: '6 sec',
+        textContent: '6 sec',
       },
       {
         value: 7000,
-        label: '7 sec',
+        textContent: '7 sec',
       },
     ],
     onchange: func,
@@ -62,51 +62,57 @@ const getElements = (pickClass, func) => [
     options: [
       {
         value: 60000,
-        label: '1 minute',
+        textContent: '1 minute',
       },
       {
         value: 120000,
-        label: '2 minutes',
+        textContent: '2 minutes',
       },
       {
         value: 180000,
-        label: '3 minutes',
+        textContent: '3 minutes',
       },
       {
         value: 240000,
-        label: '4 minutes',
+        textContent: '4 minutes',
       },
       {
         value: 300000,
-        label: '5 minutes',
+        textContent: '5 minutes',
       },
       {
         value: 360000,
-        label: '6 minutes',
+        textContent: '6 minutes',
       },
       {
         value: 420000,
-        label: '7 minutes',
+        textContent: '7 minutes',
       },
       {
         value: 480000,
-        label: '8 minutes',
+        textContent: '8 minutes',
       },
       {
         value: 540000,
-        label: '9 minutes',
+        textContent: '9 minutes',
       },
       {
         value: 600000,
-        label: 'Ten minutes!',
+        textContent: 'Ten minutes!',
       },
     ],
     onchange: func,
   },
   {
     tag: 'div',
-    className: 'remove',
-    textContent: 'The time is up!',
+    className: 'select-textContent',
+    textContent: 'Set a preview time',
+    onclick: func,
+  },
+  {
+    tag: 'div',
+    className: 'select-textContent',
+    textContent: 'Set a totall game time',
     onclick: func,
   },
 ].filter((btn) => btn.className === pickClass);
