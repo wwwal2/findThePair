@@ -24,16 +24,9 @@ const clearHighlight = () => {
   switchProperty('className', 'difficulty-btns', selectElements('highlight'));
 };
 
-const fieldSize = {
-  little: [4, 4],
-  medium: [5, 5],
-  big: [6, 6],
-};
-
 export {
   hideTimeOut,
   gameOverTimeOut,
   transformMenu,
-  fieldSize,
   clearHighlight,
 };

@@ -1,3 +1,6 @@
+import { refresh } from './counter';
+import switchProperty from '../utility/switchProperty';
+
 let picked = 0;
 
 const getNum = (obj) => {
@@ -16,8 +19,10 @@ const compare = (object) => {
     setTimeout(() => {
       object.children.item(0).remove();
       picked.children.item(0).remove();
+      switchProperty('disabled', false, [object, picked]);
       picked = 0;
-    }, 500);
+      refresh();
+    }, 1000);
   }
 };
 

@@ -1,24 +1,15 @@
 import './style.scss';
 import createGameSpace from './createGameSpace';
-
 import getElements from './elementsData';
-
-import createField from './coreFunctions/createField';
-import gamePictures from './coreFunctions/gamePictures';
 import {
   hideTimeOut,
   transformMenu,
-  fieldSize,
   gameOverTimeOut,
   clearHighlight,
 } from './autoActions';
-
-import { openImgHandler, passTimestamp } from './coreFunctions/openImgHandler';
-
+import { passTimestamp } from './coreFunctions/openImgHandler';
 import blockGenerator from './blockGenerator';
-
 import initGame from './game/game';
-import getRandomValues from './game/getRandomValues';
 
 function initMenu(defaultSettings, placeForApp) {
   // create the game space
@@ -46,18 +37,7 @@ function initMenu(defaultSettings, placeForApp) {
   };
 
   const startGameHandler = () => {
-    // const getFieldSize = fieldSize[settings.difficulty];
-    // const getPicturesNames = gamePictures(getFieldSize);
-
-    // createField(
-    //   getFieldSize,
-    //   getPicturesNames,
-    //   fieldContainer,
-    //   openImgHandler,
-    // );
-
     initGame(fieldContainer, settings);
-
     timeStamps.preview = hideTimeOut(settings.preview);
     timeStamps.gameOver = gameOverTimeOut(settings.gameOver, menuContainer);
     passTimestamp(timeStamps.gameOver);
@@ -68,7 +48,7 @@ function initMenu(defaultSettings, placeForApp) {
     clearTimeout(timeStamps.preview);
     clearTimeout(timeStamps.gameOver);
     mainContainer.remove();
-    initGame(defaultSettings, placeForApp);
+    initMenu(defaultSettings, placeForApp);
   };
   // constructing menu
   const selectBtns = getElements('select-btn', timeSelectHandler);
