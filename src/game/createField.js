@@ -1,6 +1,7 @@
 import createElement from '../utility/createElement';
+import createImage from './createImage';
 
-const createField = (stickTo, field, gameAction) => {
+const createField = (stickTo, field, gameAction, tableOfMatches) => {
   for (let i = 0; i < field[0]; i += 1) {
     const row = createElement('div', 'rows', stickTo);
 
@@ -9,6 +10,8 @@ const createField = (stickTo, field, gameAction) => {
       button.dataset.x = i;
       button.dataset.y = j;
       button.onclick = gameAction;
+      button.disabled = true;
+      createImage(button, tableOfMatches, i, j);
     }
   }
 };

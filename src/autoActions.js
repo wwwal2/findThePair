@@ -2,13 +2,6 @@ import selectElements from './utility/selectElements';
 import switchProperty from './utility/switchProperty';
 import createElement from './utility/createElement';
 
-const hideTimeOut = (time) => {
-  setTimeout(() => {
-    switchProperty('disabled', false, selectElements('field-btns'));
-    switchProperty('className', 'hidden', selectElements('images'));
-  }, time);
-};
-
 const gameOverTimeOut = (time, stickTo) => setTimeout(() => {
   switchProperty('disabled', true, selectElements('field-btns'));
   const timeUpMessage = createElement('div', 'time-up-container', stickTo);
@@ -25,7 +18,6 @@ const clearHighlight = () => {
 };
 
 export {
-  hideTimeOut,
   gameOverTimeOut,
   transformMenu,
   clearHighlight,

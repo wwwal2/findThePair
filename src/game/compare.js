@@ -15,6 +15,7 @@ const compare = (object) => {
   }
   if (getNum(picked) === getNum(object)) {
     picked = 0;
+    refresh();
   } else {
     setTimeout(() => {
       object.children.item(0).remove();
@@ -22,7 +23,7 @@ const compare = (object) => {
       switchProperty('disabled', false, [object, picked]);
       picked = 0;
       refresh();
-    }, 1000);
+    }, 800);
   }
 };
 

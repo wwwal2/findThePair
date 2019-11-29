@@ -2,12 +2,10 @@ import './style.scss';
 import createGameSpace from './createGameSpace';
 import getElements from './elementsData';
 import {
-  hideTimeOut,
   transformMenu,
   gameOverTimeOut,
   clearHighlight,
 } from './autoActions';
-import { passTimestamp } from './coreFunctions/openImgHandler';
 import blockGenerator from './blockGenerator';
 import initGame from './game/game';
 
@@ -17,10 +15,7 @@ function initMenu(defaultSettings, placeForApp) {
 
   // default presettings
   const settings = defaultSettings;
-  const timeStamps = {
-    preview: 0,
-    gameOver: 0,
-  };
+  let timeStamp;
   // main game handlers
   const timeSelectHandler = (event) => {
     if (event.target.value < 60000) {
@@ -37,18 +32,15 @@ function initMenu(defaultSettings, placeForApp) {
   };
 
   const startGameHandler = () => {
-    initGame(fieldContainer, settings);
-    timeStamps.preview = hideTimeOut(settings.preview);
-    timeStamps.gameOver = gameOverTimeOut(settings.gameOver, menuContainer);
-    passTimestamp(timeStamps.gameOver);
+    timeStamp = gameOverTimeOut(settings.gameOver, menuContainer);
+    initGame(fieldContainer, settings, timeStamp);
     transformMenu();
   };
 
   const playAagainHandler = () => {
-    clearTimeout(timeStamps.preview);
-    clearTimeout(timeStamps.gameOver);
     mainContainer.remove();
     initMenu(defaultSettings, placeForApp);
+    clearTimeout(timeStamp);
   };
   // constructing menu
   const selectBtns = getElements('select-btn', timeSelectHandler);

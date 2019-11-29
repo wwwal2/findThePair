@@ -6,8 +6,10 @@ import generateTableOfMatches from './generateToM';
 import createImage from './createImage';
 import compare from './compare';
 import { increase } from './counter';
+import youWin from './youWin';
+import hidePictures from './hidePictures';
 
-const initGame = (stickTo, settings) => {
+const initGame = (stickTo, settings, gameOverTimeStamp) => {
   const field = fieldSizes[settings.difficulty];
   const randomValues = getRandomValues(field);
   const tableOfMatches = generateTableOfMatches(field, randomValues);
@@ -27,9 +29,12 @@ const initGame = (stickTo, settings) => {
       }, 500);
       switchProperty('disabled', false, [event.target]);
     }
+
+    youWin(gameOverTimeStamp);
   };
 
-  createField(stickTo, field, gameAction);
+  createField(stickTo, field, gameAction, tableOfMatches);
+  hidePictures(settings.preview);
 };
 
 export default initGame;
