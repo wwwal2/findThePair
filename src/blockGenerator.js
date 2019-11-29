@@ -1,6 +1,6 @@
 import createElement from './utility/createElement';
 
-const assemble = (stickTo, ...blocksGroup) => {
+const blockGenerator = (stickTo, ...blocksGroup) => {
   blocksGroup.forEach((block) => {
     const container = createElement('div', `${block[0].className}-container`, stickTo);
     block.forEach((obj) => {
@@ -19,4 +19,4 @@ const assemble = (stickTo, ...blocksGroup) => {
   });
 };
 
-export default assemble;
+export default blockGenerator;

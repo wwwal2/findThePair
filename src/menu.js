@@ -1,5 +1,5 @@
 import './style.scss';
-import createGameSpace from './coreFunctions/createGameSpace';
+import createGameSpace from './createGameSpace';
 
 import getElements from './elementsData';
 
@@ -15,17 +15,21 @@ import {
 
 import { openImgHandler, passTimestamp } from './coreFunctions/openImgHandler';
 
-import assemble from './assemble';
+import blockGenerator from './blockGenerator';
 
-function initGame(defaultSettings, placeForApp) {
+import initGame from './game/game';
+import getRandomValues from './game/getRandomValues';
+
+function initMenu(defaultSettings, placeForApp) {
   // create the game space
   const { mainContainer, menuContainer, fieldContainer } = createGameSpace(placeForApp);
 
   // default presettings
   const settings = defaultSettings;
-  let previewTimer;
-  let gameOverTimer;
-
+  const timeStamps = {
+    preview: 0,
+    gameOver: 0,
+  };
   // main game handlers
   const timeSelectHandler = (event) => {
     if (event.target.value < 60000) {
@@ -42,25 +46,27 @@ function initGame(defaultSettings, placeForApp) {
   };
 
   const startGameHandler = () => {
-    const getFieldSize = fieldSize[settings.difficulty];
-    const getPicturesNames = gamePictures(getFieldSize);
+    // const getFieldSize = fieldSize[settings.difficulty];
+    // const getPicturesNames = gamePictures(getFieldSize);
 
-    createField(
-      getFieldSize,
-      getPicturesNames,
-      fieldContainer,
-      openImgHandler,
-    );
+    // createField(
+    //   getFieldSize,
+    //   getPicturesNames,
+    //   fieldContainer,
+    //   openImgHandler,
+    // );
 
-    previewTimer = hideTimeOut(settings.preview);
-    gameOverTimer = gameOverTimeOut(settings.gameOver, menuContainer);
-    passTimestamp(gameOverTimer);
+    initGame(fieldContainer, settings);
+
+    timeStamps.preview = hideTimeOut(settings.preview);
+    timeStamps.gameOver = gameOverTimeOut(settings.gameOver, menuContainer);
+    passTimestamp(timeStamps.gameOver);
     transformMenu();
   };
 
   const playAagainHandler = () => {
-    clearTimeout(previewTimer);
-    clearTimeout(gameOverTimer);
+    clearTimeout(timeStamps.preview);
+    clearTimeout(timeStamps.gameOver);
     mainContainer.remove();
     initGame(defaultSettings, placeForApp);
   };
@@ -70,7 +76,7 @@ function initGame(defaultSettings, placeForApp) {
   const playAgainBtn = getElements('play-again', playAagainHandler);
   const startBtn = getElements('start', startGameHandler);
 
-  assemble(menuContainer, selectBtns, difficultyBtns, playAgainBtn.concat(startBtn));
+  blockGenerator(menuContainer, selectBtns, difficultyBtns, playAgainBtn.concat(startBtn));
 }
 
-export default initGame;
+export default initMenu;

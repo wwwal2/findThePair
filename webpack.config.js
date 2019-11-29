@@ -6,9 +6,15 @@ const path = require('path');
 module.exports = {
   entry: './src/index.js',
   output: {
+    publicPath: '/',
     path: path.join(__dirname, '/dist'),
     filename: 'main.[contenthash].js',
     hashDigestLength: 5,
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000,
   },
   module: {
     rules: [

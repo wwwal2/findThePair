@@ -1,9 +1,9 @@
-import initGame from './game';
+import initMenu from './menu';
 
 const defaultSettings = {
   preview: 3000,
-  gameOver: 60000,
+  gameOver: 600000,
   difficulty: 'medium',
 };
 
-initGame(defaultSettings, document.body);
+initMenu(defaultSettings, document.body);
