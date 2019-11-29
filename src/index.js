@@ -1,7 +1,7 @@
 import initMenu from './menu';
 
 const defaultSettings = {
-  preview: 3000,
+  preview: 60000,
   gameOver: 60000,
   difficulty: 'medium',
 };

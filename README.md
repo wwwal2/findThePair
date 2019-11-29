@@ -1,23 +1,24 @@
 # Find the Pair Game
 
-# Getting Started
-Download this app to your computer.
+# Description
+The game generates and hides a field of images. The player opens images by clicking them, if he finds 'twins' - the twin images will stay opened. When the whole field is opened - a player wins. 
+![](https://github.com/wwwal2/findThePair/blob/master/img/gamePreview.png)
 
-Casual way: click the green button from right side "Clone or download", and pick "Download ZIP". Unpack the zip file on your computer.
+# Installation
+* A production version of the game located in the __/dist__ folder. Download __/dist__, open index.html in your browser and the game starts. 
 
-Developer's way: create a new folder, navigate there through a console and run: 
-###### git clone https://github.com/wwwal2/findThePair.git 
-### Prerequisites
-To run this game in a developer's mode, you'll need [NodeJS](https://nodejs.org/en/download/) and [Npm](https://docs.npmjs.com/cli/install) pre-installed on your computer. Use the links to make installation
-### Installing
-After installing NodeJs and NPM, open a console, and using it - navigate to the cloned or unpacked folder. For example in UBUNTU console - type: cd.. /"YourPath"/findThePair
+* To launch the game in a developer's mode, you'll need [NodeJS](https://nodejs.org/en/download/) and [Npm](https://docs.npmjs.com/cli/install) pre-installed on your computer. Use the links to make installation.
+Download the game and navigate your console inside the game folder(__/findThePair__ by default). Input in console  
+`npm install`
+Wain untill installation is finished and then 
+`npm run dev-server`
+The game starts at:
+`<link>`http://localhost:9000/
 
-Having your console opened in "findThePair" folder, type a console command: 
-###### npm install 
-Wait untill npm installs all developer's dependencies
-### Run
-Having your console opened in "findThePair" folder, run the console command: 
-###### npm run dev
-The application will generate new folder inside "findThePair" named "dist". Open "index.html" file from the "dist" folder in your browser. Now you can see the App. Your console is watching after all changes, made in the app's code. If you make any - just refresh the browser's page
+## Usage
+Set the time options in the menu, pick the difficulty (depends on a field size) and press __start__. Press __play again__ to restart
+
+## Contributing 
+Alex Smirnov
 
 
