@@ -7,7 +7,7 @@ import createImage from './createImage';
 import compare from './compare';
 import { increase } from './counter';
 import youWin from './youWin';
-import hidePictures from './hidePictures';
+import removePictures from './removePictures';
 
 const initGame = (stickTo, settings, gameOverTimeStamp) => {
   const field = fieldSizes[settings.difficulty];
@@ -17,8 +17,8 @@ const initGame = (stickTo, settings, gameOverTimeStamp) => {
   const gameAction = (event) => {
     const eData = event.target.dataset;
     switchProperty('disabled', true, [event.target]);
-    const count = increase();
 
+    const count = increase();
     if (count < 3) {
       createImage(event.target, tableOfMatches, eData.x, eData.y);
       compare(event.target);
@@ -34,7 +34,7 @@ const initGame = (stickTo, settings, gameOverTimeStamp) => {
   };
 
   createField(stickTo, field, gameAction, tableOfMatches);
-  hidePictures(settings.preview);
+  removePictures(settings.preview);
 };
 
 export default initGame;

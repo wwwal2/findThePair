@@ -28,11 +28,11 @@ function initMenu(defaultSettings, placeForApp) {
   const difficultyHandler = (event) => {
     settings.difficulty = event.target.innerText.toLowerCase();
     clearHighlight();
-    event.target.className = 'highlight';
+    event.target.classList.add('highlight');
   };
 
   const startGameHandler = () => {
-    timeStamp = gameOverTimeOut(settings.gameOver, menuContainer);
+    timeStamp = gameOverTimeOut(settings.gameOver, fieldContainer);
     initGame(fieldContainer, settings, timeStamp);
     transformMenu();
   };
@@ -43,12 +43,19 @@ function initMenu(defaultSettings, placeForApp) {
     clearTimeout(timeStamp);
   };
   // constructing menu
+  const selectInfo = getElements('select-info', null);
   const selectBtns = getElements('select-btn', timeSelectHandler);
+  const difficultyInfo = getElements('difficulty-info', null);
   const difficultyBtns = getElements('difficulty-btns', difficultyHandler);
   const playAgainBtn = getElements('play-again', playAagainHandler);
   const startBtn = getElements('start', startGameHandler);
 
-  blockGenerator(menuContainer, selectBtns, difficultyBtns, playAgainBtn.concat(startBtn));
+  blockGenerator(
+    menuContainer,
+    selectBtns.concat(selectInfo),
+    difficultyBtns.concat(difficultyInfo),
+    playAgainBtn.concat(startBtn),
+  );
 }
 
 export default initMenu;

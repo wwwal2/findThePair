@@ -1,13 +1,13 @@
 import selectElements from '../utility/selectElements';
 
-const hidePictures = (timer) => {
+const removePictures = (timer) => {
   const buttons = selectElements('field-btns');
   setTimeout(() => {
     buttons.forEach((btn) => {
-      btn.removeChild(btn.firstChild);
+      btn.children.item(0).remove();
       btn.disabled = false;
     });
   }, timer);
 };
 
-export default hidePictures;
+export default removePictures;

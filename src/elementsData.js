@@ -105,14 +105,20 @@ const getElements = (pickClass, func) => [
   },
   {
     tag: 'div',
-    className: 'select-textContent',
-    textContent: 'Set a preview time',
+    className: 'select-info',
+    textContent: 'SET A PEEK TIME',
     onclick: func,
   },
   {
     tag: 'div',
-    className: 'select-textContent',
-    textContent: 'Set a totall game time',
+    className: 'select-info',
+    textContent: 'SET A TOTALL GAME TIME',
+    onclick: func,
+  },
+  {
+    tag: 'div',
+    className: 'difficulty-info',
+    textContent: 'CHOOSE A FIELD SIZE',
     onclick: func,
   },
 ].filter((btn) => btn.className === pickClass);

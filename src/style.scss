@@ -1,3 +1,13 @@
+%flex-container {
+    display: flex;
+    justify-content: center; 
+    height: 100%;
+}
+%text-field {
+    flex-grow: 2;
+    flex-direction: column;
+}
+
 img {
     width: 100%;
     height: 100%;
@@ -9,58 +19,6 @@ img {
 
 .remove {
     display: none;
-}
-
-.highlight {
-	background-color:#1abc9c;
-	border-radius:10px;
-	color:#ffffff;
-	font-size:19px;
-	padding:12px 37px;
-}
-
-select {
-    background-color: #1abc9c;
-    color: #fff;
-    font-size: inherit;
-    padding: .5em;
-    padding-right: 2.5em; 
-    border-radius: 3px;
-    -webkit-appearance: button; 
-}
- 
-.difficulty-btns {
-	background-color:#929697;
-	border-radius:10px;
-	color:#ffffff;
-	font-size:19px;
-	padding:12px 37px;
-}
-
-.play-again {
-    background-color:#1abc9c;
-    border-radius:8px;
-    color:#ffffff;
-    font-size:20px;
-    font-weight:bold;
-    padding:13px 32px;
-    text-shadow:0px 1px 0px #3d768a;
-}
-.play-again:hover {
-    background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-    background-color:#408c99;
-}
-.start {
-	background-color:#fe1a00;
-	border-radius:6px;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:20px;
-	font-weight:bold;
-	padding:13px 24px;
-}
-.start:hover {
-	background-color:#1abc9c;
 }
 
 .apply-shake {
@@ -76,82 +34,160 @@ select {
 // blocks maintainance
 .main-container {
     display: block;
-}
-
-.menu-container {
-    display: block;
-    text-align: center;
-}
-
-.field-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; 
-    width: 900px;   
+    width: 900px;
     margin: auto;
-}
 
-.congrat-container {
-    display: flex;
-    width: 600px;
-    margin: auto;
-    justify-content: center; 
-}
+    .menu-container {
+        height: 50px;
+        display: block;
+        text-align: center;
+        .select-btn-container {
+            @extend %flex-container;
+            :nth-child(3) { order: 1;}
+            :nth-child(4) { order: 4;}
+            justify-content: space-between; 
+            .select-btn {
+                flex-grow: 1;
+                background-color: #1abc9c;
+                color: #fff;
+                -webkit-appearance: button; 
+                order: 2;
+            }
+            .select-info {
+                @extend %flex-container;
+                @extend %text-field;
+                // flex-grow: 2;
+                // flex-direction: column;
+            }
+        }
+        .difficulty-btns-container {
+            @extend %flex-container;
+            :nth-child(4) { order: 1;}
+            .difficulty-btns {
+                order: 2;
+                flex-grow: 1;
+                background-color:#929697;
+                border-radius:10px;
+                color:#ffffff;
+            }
+            .highlight {
+                background-color:#1abc9c;
+            }
+            .difficulty-info {
+                @extend %flex-container;
+                @extend %text-field;
+            }
+        }      
+        .play-again-container {
+            @extend %flex-container;
+            .play-again {
+                flex-grow: 1;
+                background-color:#1abc9c;
+                border-radius:8px;
+                color:#ffffff;
+            }
+            .play-again:hover {
+                background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+                background-color:#408c99;
+            }
+            .start {
+                flex-grow: 1;
+                background-color:#fe1a00;
+                border-radius:6px;
+                color:#ffffff;
+            }
+            .start:hover {
+                background-color:#1abc9c;
+            }
+        }
+    }
 
-.time-up-container {
-    display: flex;
-    width: 700px;
-    margin: auto;
-    justify-content: center; 
-}
-
-.rows {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 1;
-}
-
-.field-btns {
-    height: 140px;
-    width: 140px;
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-.field-btns:hover {
-    background-color: white;
+    .field-container {
+        display: block;
+        width: 100%;
+        .rows {
+            display: flex;
+            justify-content: center;
+            .field-btns {
+                height: 140px;
+                width: 140px;
+                border: 0;
+                margin: 0;
+                padding: 0;
+            }
+            .field-btns:hover {
+                background-color: white;
+            }
+        }
+    }
+    
+    .time-up-container {
+        @extend %flex-container;
+        height: 150px;
+    }
+    .congrat-container {
+        @extend %flex-container;
+    }
 }
 
 @media all and (min-width: 600px) and (max-width: 1000px) {
-    .field-container {
-        width: 800px;
-    }
-    .field-btns {
-        width: 100px;
-        height: 100px;
-    }
-    .congrat-container {
-        width: 400px;
-    }
-    .time-up-container {
+    .main-container {
         width: 600px;
+        .menu-container {
+            height: 30px;
+        }
+        .field-container {
+            .rows {
+                .field-btns {
+                    width: 100px;
+                    height: 100px;
+                }
+            }    
+        }
+        .time-up-container {
+            height: 100px;
+        }
     }
  }
-
+    
 @media all and (max-width: 599px) {
-    .field-container {
+    .main-container {
         width: 300px;
+        .menu-container {
+            height: 25px;
+            .select-btn-container {
+                .select-btn {
+                   flex-shrink: 0;
+                }
+                .select-info {
+                    font-size: 10px;
+                    flex-shrink: 1;
+                }
+            }
+            .difficulty-btns-container {
+                .difficulty-info {
+                    font-size: 10px;
+                }
+            }
+        }
+        .field-container {
+            .rows {
+                .field-btns {
+                    height: 50px;
+                    width: 50px;
+                }   
+            } 
+        }
+        .time-up-container {
+            height: 70px;
+        }
     }
-    .congrat-container {
-        width: 200px;
-    }
-    .time-up-container {
-        width: 300px;
-    }
-    .field-btns {
-        height: 50px;
-        width: 50px;
-    }
+    
 }
+
+
+
+
+
 
 
