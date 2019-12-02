@@ -1,7 +1,7 @@
 # Find the Pair Game
 
 ## Description
-The game generates and hides a field of images. The player opens images by clicking them, if he finds 'twins' - the twin images will stay opened. When the whole field is opened - a player wins
+The game generates and hides a field of images. A player opens images by clicking them, if he finds 'twins' - the twin images will stay opened. When the whole field is opened, a player wins
 ![](https://github.com/wwwal2/findThePair/blob/master/img/gamePreview.png)
 
 ## Installation
@@ -15,7 +15,7 @@ Wain untill installation is finished and then: <br/>
 The game starts at:<br/>
 [http://localhost:9000/](http://localhost:9000/)
 
-* To build a new version of an app, after changes were made in the game code, run in a console:
+* To build a new version of an app, after changes were made in the game code, run in a console:<br/>
 `npm run dev`<br/>
 The app will generate a new __/dist__ folder with a changes done.
 

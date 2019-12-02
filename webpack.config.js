@@ -6,7 +6,7 @@ const path = require('path');
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, 'dist'),
     filename: 'main.[contenthash].js',
     hashDigestLength: 5,
   },
@@ -21,6 +21,13 @@ module.exports = {
         test: /\.txt$/,
         use: 'raw-loader',
       },
+      // {
+      //   test: /\.(png|jpe?g|gif)$/i,
+      //   loader: 'file-loader',
+      //   options: {
+      //     name: '/img[name].[ext]',
+      //   },
+      // },
       {
         enforce: 'pre',
         test: /\.js$/,

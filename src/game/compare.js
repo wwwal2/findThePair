@@ -5,7 +5,7 @@ let picked = 0;
 
 const getNum = (obj) => {
   const shortcut = obj.children.item(0).src;
-  return shortcut.replace(/\D/g, '').substring(4, shortcut.length);
+  return shortcut.replace(/\D/g, '');
 };
 
 const compare = (object) => {
