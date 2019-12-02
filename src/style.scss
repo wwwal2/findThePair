@@ -46,12 +46,19 @@ img {
             :nth-child(3) { order: 1;}
             :nth-child(4) { order: 4;}
             justify-content: space-between; 
+            .select-info {
+                color: white;
+                background-color: teal;
+                border: 2px solid white;
+            }
             .select-btn {
                 flex-grow: 1;
                 background-color: #1abc9c;
                 color: #fff;
                 -webkit-appearance: button; 
                 order: 2;
+                border: 0;
+                border: 2px solid white;
             }
             .select-info {
                 @extend %flex-container;
@@ -63,11 +70,16 @@ img {
         .difficulty-btns-container {
             @extend %flex-container;
             :nth-child(4) { order: 1;}
+            .difficulty-info {
+                color: white;
+                background-color: teal;
+                border: 2px solid white;
+            }
             .difficulty-btns {
                 order: 2;
                 flex-grow: 1;
                 background-color:#929697;
-                border-radius:10px;
+                // border-radius:10px;
                 color:#ffffff;
             }
             .highlight {
@@ -160,7 +172,7 @@ img {
                    flex-shrink: 0;
                 }
                 .select-info {
-                    font-size: 10px;
+                    font-size: 9px;
                     flex-shrink: 1;
                 }
             }

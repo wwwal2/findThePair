@@ -1,6 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -21,13 +24,6 @@ module.exports = {
         test: /\.txt$/,
         use: 'raw-loader',
       },
-      // {
-      //   test: /\.(png|jpe?g|gif)$/i,
-      //   loader: 'file-loader',
-      //   options: {
-      //     name: '/img[name].[ext]',
-      //   },
-      // },
       {
         enforce: 'pre',
         test: /\.js$/,
@@ -44,8 +40,8 @@ module.exports = {
               reloadAll: true,
             },
           },
-          'css-loader',
           // 'postcss-loader',
+          'css-loader',
           'sass-loader',
         ],
       },
@@ -62,17 +58,26 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([
+      { from: 'src/img', to: 'img' },
+    ]),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html',
+      minify: {
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+        removeComments: true,
+      },
       templateParameters: {
-        minify: true,
         hash: true,
       },
     }),
     new UglifyJsPlugin({
       test: /\.js(\?.*)?$/i,
       exclude: /node_modules/,
+      sourceMap: true,
       cache: true,
       parallel: true,
       uglifyOptions: {
@@ -83,7 +88,15 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'styles.[contenthash].css',
+      sourceMap: true,
       ignoreOrder: false,
+    }),
+    new OptimizeCssAssetsPlugin({
+      cssProcessorOptions: {
+        map: {
+          inline: true,
+        },
+      },
     }),
   ],
   watch: true,

@@ -16,7 +16,7 @@ The game starts at:<br/>
 [http://localhost:9000/](http://localhost:9000/)
 
 * To build a new version of an app, after changes were made in the game code, run in a console:<br/>
-`npm run dev`<br/>
+`npm run build`<br/>
 The app will generate a new __/dist__ folder with a changes done.
 
 * To change the pictures - just replace those are in __/img__ folder. Keep the name numeration of the images from __1__ __to__ __18__, otherwise the game crashes.

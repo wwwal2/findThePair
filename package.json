@@ -4,9 +4,9 @@
   "description": "test game",
   "main": "index.js",
   "scripts": {
-    "dev": "cp -r img dist/img && webpack --mode development",
-    "build": "webpack --mode production",
-    "dev-server": "webpack-dev-server"
+    "dev": "webpack --mode development",
+    "dev-server": "webpack-dev-server --open",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -28,15 +28,17 @@
     "@babel/preset-env": "^7.7.1",
     "babel-loader": "^8.0.6",
     "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-import": "^2.18.2",
-    "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
