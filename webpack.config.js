@@ -13,6 +13,7 @@ module.exports = {
     filename: 'main.[contenthash].js',
     hashDigestLength: 5,
   },
+  devtool: 'source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
@@ -20,10 +21,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.txt$/,
-        use: 'raw-loader',
-      },
       {
         enforce: 'pre',
         test: /\.js$/,
@@ -40,7 +37,6 @@ module.exports = {
               reloadAll: true,
             },
           },
-          // 'postcss-loader',
           'css-loader',
           'sass-loader',
         ],
@@ -77,8 +73,8 @@ module.exports = {
     new UglifyJsPlugin({
       test: /\.js(\?.*)?$/i,
       exclude: /node_modules/,
-      sourceMap: true,
       cache: true,
+      sourceMap: true,
       parallel: true,
       uglifyOptions: {
         output: {
@@ -94,7 +90,8 @@ module.exports = {
     new OptimizeCssAssetsPlugin({
       cssProcessorOptions: {
         map: {
-          inline: true,
+          inline: false,
+          annotation: true,
         },
       },
     }),
