@@ -38,12 +38,6 @@ function initMenu(defaultSettings, placeForApp) {
     initGame(fieldContainer, settings, timeStamp);
     transformMenu();
   };
-  // const startGameHandler = () => {
-  //   timeStamp = gameOverTimeOut(settings.gameOver, fieldContainer);
-  //   const gameField = new Field(fieldContainer, settings, timeStamp);
-  //   console.log(gameField.fieldSizes.little);
-  //   transformMenu();
-  // };
 
   const playAgainHandler = () => {
     mainContainer.remove();
