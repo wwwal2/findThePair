@@ -24,8 +24,8 @@ The app will generate a new __/dist__ folder with a changes done.
 ## Usage
 Set the time options in the menu, pick the difficulty (depends on a field size) and press __start__.<br/>
 Press __play again__ to restart
-
-## Contributing 
+### DEMO
+[Demo version of the game](https://wwwal2.github.io/findThePair/dist/)
 Alex Smirnov
 
 

@@ -9,6 +9,8 @@ import {
 import blockGenerator from './blockGenerator';
 import initGame from './game/game';
 
+// import Field from './alternativeGame/Field';
+
 function initMenu(defaultSettings, placeForApp) {
   // create the game space
   const { mainContainer, menuContainer, fieldContainer } = createGameSpace(placeForApp);
@@ -36,6 +38,12 @@ function initMenu(defaultSettings, placeForApp) {
     initGame(fieldContainer, settings, timeStamp);
     transformMenu();
   };
+  // const startGameHandler = () => {
+  //   timeStamp = gameOverTimeOut(settings.gameOver, fieldContainer);
+  //   const gameField = new Field(fieldContainer, settings, timeStamp);
+  //   console.log(gameField.fieldSizes.little);
+  //   transformMenu();
+  // };
 
   const playAagainHandler = () => {
     mainContainer.remove();

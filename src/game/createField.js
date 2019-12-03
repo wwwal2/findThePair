@@ -10,6 +10,11 @@ const createField = (stickTo, field, gameAction, tableOfMatches) => {
       button.dataset.x = i;
       button.dataset.y = j;
       button.onclick = gameAction;
+      // button.onclick = (function(i,j) {
+      //   return function () {
+      //     gameAction(i,j);
+      //   };
+      // })(i,j);
       button.disabled = true;
       createImage(button, tableOfMatches, i, j);
     }
