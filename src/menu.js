@@ -45,7 +45,7 @@ function initMenu(defaultSettings, placeForApp) {
   //   transformMenu();
   // };
 
-  const playAagainHandler = () => {
+  const playAgainHandler = () => {
     mainContainer.remove();
     initMenu(defaultSettings, placeForApp);
     clearTimeout(timeStamp);
@@ -54,7 +54,7 @@ function initMenu(defaultSettings, placeForApp) {
   const selectBtns = getElements('select-btn', timeSelectHandler);
   const difficultyInfo = getElements('difficulty-info', null);
   const difficultyBtns = getElements('difficulty-btns', difficultyHandler);
-  const playAgainBtn = getElements('play-again', playAagainHandler);
+  const playAgainBtn = getElements('play-again', playAgainHandler);
   const startBtn = getElements('start', startGameHandler);
 
   blockGenerator(
