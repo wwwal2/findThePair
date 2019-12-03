@@ -10,12 +10,12 @@ The game generates and hides a field of images. A player opens images by clickin
 * To launch the game in a developer's mode, you'll need [NodeJS](https://nodejs.org/en/download/) and [Npm](https://docs.npmjs.com/cli/install) pre-installed on your computer. Use the links to make installation.
 Download the game and navigate your console inside the game folder (__/findThePair__ by default). Input in console:<br/>
 `npm install`<br/>
-Wain untill installation finished and then: <br/>
+Wait untill installation finished and then: <br/>
 `npm run dev-server`<br/>
 The game starts at:<br/>
 [http://localhost:9000/](http://localhost:9000/)
 
-* To build a new version of an app, after changes were made in the game code, run in a console:<br/>
+* To build a new version of an app, after changes in the game code, run in a console:<br/>
 `npm run build`<br/>
 The app will generate a new __/dist__ folder with a changes done.
 
