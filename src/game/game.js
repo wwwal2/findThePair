@@ -29,7 +29,6 @@ const initGame = (stickTo, settings, gameOverTimeStamp) => {
       }, 500);
       switchProperty('disabled', false, [event.target]);
     }
-
     youWin(gameOverTimeStamp);
   };
 

@@ -26,6 +26,8 @@ Set the time options in the menu, pick the difficulty (depends on a field size) 
 Press __play again__ to restart
 ### DEMO
 [Demo version of the game](https://wwwal2.github.io/findThePair/dist/)
+## Contributing
 Alex Smirnov
+
 
 
