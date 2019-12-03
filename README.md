@@ -2,7 +2,7 @@
 
 ## Description
 The game generates and hides a field of images. A player opens images by clicking them, if he finds 'twins' - the twin images will stay opened. When the whole field is opened, a player wins
-![](https://github.com/wwwal2/findThePair/blob/master/img/gamePreview.png)
+![](https://github.com/wwwal2/findThePair/blob/master/src/img/gamePreview.png)
 
 ## Installation
 * A production version of the game located inside the __/dist__ folder. Download __/dist__, open index.html in your browser and the game starts
@@ -10,7 +10,7 @@ The game generates and hides a field of images. A player opens images by clickin
 * To launch the game in a developer's mode, you'll need [NodeJS](https://nodejs.org/en/download/) and [Npm](https://docs.npmjs.com/cli/install) pre-installed on your computer. Use the links to make installation.
 Download the game and navigate your console inside the game folder (__/findThePair__ by default). Input in console:<br/>
 `npm install`<br/>
-Wain untill installation is finished and then: <br/>
+Wain untill installation finished and then: <br/>
 `npm run dev-server`<br/>
 The game starts at:<br/>
 [http://localhost:9000/](http://localhost:9000/)
