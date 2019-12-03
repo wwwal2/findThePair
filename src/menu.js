@@ -43,7 +43,6 @@ function initMenu(defaultSettings, placeForApp) {
     clearTimeout(timeStamp);
   };
   // constructing menu
-  const selectInfo = getElements('select-info', null);
   const selectBtns = getElements('select-btn', timeSelectHandler);
   const difficultyInfo = getElements('difficulty-info', null);
   const difficultyBtns = getElements('difficulty-btns', difficultyHandler);
@@ -52,7 +51,7 @@ function initMenu(defaultSettings, placeForApp) {
 
   blockGenerator(
     menuContainer,
-    selectBtns.concat(selectInfo),
+    selectBtns,
     difficultyBtns.concat(difficultyInfo),
     playAgainBtn.concat(startBtn),
   );

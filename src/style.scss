@@ -46,11 +46,6 @@ img {
             :nth-child(3) { order: 1;}
             :nth-child(4) { order: 4;}
             justify-content: space-between; 
-            .select-info {
-                color: white;
-                background-color: teal;
-                border: 2px solid white;
-            }
             .select-btn {
                 flex-grow: 1;
                 background-color: #1abc9c;
@@ -59,12 +54,7 @@ img {
                 order: 2;
                 border: 0;
                 border: 2px solid white;
-            }
-            .select-info {
-                @extend %flex-container;
-                @extend %text-field;
-                // flex-grow: 2;
-                // flex-direction: column;
+                font-size: x-large;
             }
         }
         .difficulty-btns-container {
@@ -79,7 +69,7 @@ img {
                 order: 2;
                 flex-grow: 1;
                 background-color:#929697;
-                // border-radius:10px;
+                font-size: x-large;
                 color:#ffffff;
             }
             .highlight {
@@ -97,6 +87,7 @@ img {
                 background-color:#1abc9c;
                 border-radius:8px;
                 color:#ffffff;
+                font-size: x-large;
             }
             .play-again:hover {
                 background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
@@ -107,6 +98,7 @@ img {
                 background-color:#fe1a00;
                 border-radius:6px;
                 color:#ffffff;
+                font-size: x-large;
             }
             .start:hover {
                 background-color:#1abc9c;
@@ -147,6 +139,27 @@ img {
         width: 600px;
         .menu-container {
             height: 30px;
+
+            .select-btn-container {
+                .select-btn {
+                    font-size: large;
+                }
+            }
+
+            .difficulty-btns-container {
+                .difficulty-btns {
+                    font-size: large;
+                }
+            }
+
+            .play-again-container {
+                .play-again {
+                    font-size: large;
+                }
+                .start {
+                    font-size: large;
+                }
+            }
         }
         .field-container {
             .rows {
@@ -169,16 +182,23 @@ img {
             height: 25px;
             .select-btn-container {
                 .select-btn {
-                   flex-shrink: 0;
-                }
-                .select-info {
-                    font-size: 9px;
-                    flex-shrink: 1;
+                    font-size: small;
                 }
             }
             .difficulty-btns-container {
                 .difficulty-info {
                     font-size: 10px;
+                }
+                .difficulty-btns {
+                    font-size: medium;
+                }
+            }
+            .play-again-container {
+                .play-again {
+                    font-size: medium;
+                }
+                .start {
+                    font-size: medium;
                 }
             }
         }

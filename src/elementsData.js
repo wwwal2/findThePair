@@ -34,6 +34,11 @@ const getElements = (pickClass, func) => [
     className: 'select-btn',
     options: [
       {
+        value: null,
+        textContent: 'SET A PEEK TIME',
+        hidden: true,
+      },
+      {
         value: 3000,
         textContent: '3 sec',
       },
@@ -60,6 +65,11 @@ const getElements = (pickClass, func) => [
     tag: 'select',
     className: 'select-btn',
     options: [
+      {
+        value: null,
+        textContent: 'SET TOTALL GAME TIME',
+        hidden: true,
+      },
       {
         value: 60000,
         textContent: '1 minute',
