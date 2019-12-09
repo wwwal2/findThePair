@@ -1,13 +1,11 @@
 import Utility from './Utility';
-import showPic from './showPic';
 
 class Button {
-  static Create(x, y) {
-    const btn = Utility.createElement('button', 'cell');
+  static Create(className, x, y) {
+    const btn = Utility.createElement('button', className);
     btn.disabled = false;
     btn.dataset.x = x;
     btn.dataset.y = y;
-    btn.onclick = showPic;
     return btn;
   }
 }

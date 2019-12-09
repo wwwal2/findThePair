@@ -26,6 +26,15 @@ class Utility {
     }
     return randomValues.concat(randomValues).sort(() => Math.random() - 0.5);
   }
+
+  static addEvent(event, target) {
+    Utility
+      .selectElements(target)
+      .forEach((elem) => {
+        elem.onclick = event;
+      });
+  }
 }
+
 
 export default Utility;

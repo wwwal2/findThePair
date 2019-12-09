@@ -4,13 +4,14 @@ import Utility from './Utility';
 class Structure {
   constructor() {
     this.table = [];
+    this.gameElements = [];
+    this.image = {};
   }
 
   Build(settings) {
     const btnNum = settings.height * settings.width;
     const odd = btnNum % 2;
-    const randomValues = Utility.generateRandomValues(btnNum);
-    console.log(randomValues);
+    const randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
 
     const structure = Utility.selectElements('field-container')[0];
 
@@ -21,9 +22,9 @@ class Structure {
         if (odd && i === Number(settings.height) && j === Number(settings.width)) {
           break;
         }
-        const button = new Button.Create(i, j);
+        const button = new Button.Create('cells', i, j);
         row.appendChild(button);
-        this.table[i - 1].push(1);
+        this.table[i - 1].push(randomValues.pop());
       }
       structure.appendChild(row);
     }

@@ -1,7 +1,10 @@
+import Utility from './Utility';
+
 class Controller {
   constructor(target, settings) {
-    this.target = Array.from(target[0].children);
-    [this.label, this.increase, this.value, this.reduce] = this.target;
+    this.target = Utility.selectElements(target);
+    this.innerElements = Array.from(this.target[0].children);
+    [this.label, this.increase, this.value, this.reduce] = this.innerElements;
 
     this.value.innerText = settings.default;
 

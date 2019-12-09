@@ -1,1 +1,0 @@
-{"version":3,"sources":["css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/style.scss"],"names":[],"mappings":"AAAA,gBAAgB,YAAA,CAAa,sBAAA","file":"styles.91d92.css","sourcesContent":[".menu-container{display:flex;justify-content:center}\n"]}
