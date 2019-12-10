@@ -1,9 +1,18 @@
 import Utility from './Utility';
 
 class Controller {
-  constructor(target, settings) {
-    this.target = Utility.selectElements(target);
-    this.innerElements = Array.from(this.target[0].children);
+  constructor() {
+    this.domTarget = [];
+    this.innerElements = [];
+    this.label = {};
+    this.value = {};
+    this.increase = {};
+    this.reduce = {};
+  }
+
+  create(target, settings) {
+    this.domTarget = Utility.selectElements(target);
+    this.innerElements = Array.from(this.domTarget[0].children);
     [this.label, this.increase, this.value, this.reduce] = this.innerElements;
 
     this.value.innerText = settings.default;
@@ -18,6 +27,7 @@ class Controller {
         this.value.innerText = Number(this.value.innerText) - 1;
       }
     };
+    return this.value.innerText;
   }
 }
 

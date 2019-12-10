@@ -31,7 +31,6 @@ class Compare {
       this.insertImage(event.target, num);
       this.counter = 0;
       event.target.disabled = true;
-
     } else {
       this.insertImage(event.target, num);
       event.target.disabled = true;

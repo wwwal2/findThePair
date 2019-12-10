@@ -12,12 +12,13 @@ const initGame = (settings) => {
 
   const structure = new Structure();
   const compare = new Compare();
+  const controller = new Controller();
 
   const controllers = [
-    new Controller('height-controller', { default: gameStatus.settings.height, max: 6, min: 3 }),
-    new Controller('width-controller', { default: gameStatus.settings.width, max: 6, min: 3 }),
-    new Controller('preview-controller', { default: gameStatus.settings.preview, max: 7, min: 1 }),
-    new Controller('gameOver-controller', { default: gameStatus.settings.gameOver, max: 10, min: 1 }),
+    controller.create('height-controller', { default: gameStatus.settings.height, max: 6, min: 3 }),
+    controller.create('width-controller', { default: gameStatus.settings.width, max: 6, min: 3 }),
+    controller.create('preview-controller', { default: gameStatus.settings.preview, max: 7, min: 1 }),
+    controller.create('gameOver-controller', { default: gameStatus.settings.gameOver, max: 10, min: 1 }),
   ];
 
   const clickImage = (event) => {
@@ -27,10 +28,10 @@ const initGame = (settings) => {
 
   const start = () => {
     const playerSettings = {
-      height: controllers[0].value.innerText,
-      width: controllers[1].value.innerText,
-      preview: controllers[2].value.innerText,
-      gameOver: controllers[3].value.innerText,
+      height: controllers[0],
+      width: controllers[1],
+      preview: controllers[2],
+      gameOver: controllers[3],
     };
 
     structure.Build(playerSettings);
