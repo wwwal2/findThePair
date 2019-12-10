@@ -3,43 +3,50 @@ import Utility from './Utility';
 class Compare {
   constructor() {
     this.counter = 0;
-    this.comparable = 0;
+    this.bufferElement = 0;
   }
 
-  open(target, num) {
-    target.disabled = true;
-    this.comparable = target;
-    this.comparable.num = num;
-  }
-
-  insertImage(domElement, num) {
+  insertImage(event, num) {
+    event.target.disabled = true;
     this.image = Utility.createElement('img', 'image');
     this.image.src = `./img/${num}.png`;
-    domElement.appendChild(this.image);
+    event.target.appendChild(this.image);
+  }
+
+  removeImage(target) {
+    target.disabled = false;
+    target.children.item(0).remove();
   }
 
   match(event, num) {
-    if (this.comparable === 0) {
-      this.comparable = 0;
-      this.insertImage(event.target, num);
+    if (!this.bufferElement) {
+      this.insertImage(event, num);
+      this.bufferElement = event.target;
+      this.bufferElement.num = num;
       this.counter += 1;
-      event.target.disabled = true;
       return;
     }
-    if (this.comparable.num === num) {
-      this.comparable = 0;
-      this.insertImage(event.target, num);
-      this.counter = 0;
-      event.target.disabled = true;
-    } else {
-      this.insertImage(event.target, num);
-      event.target.disabled = true;
-      setTimeout(() => {
-        event.target.children.item(0).remove();
-        this.comparable.children.item(0).remove();
-        this.comparable = 0;
-      }, 1000);
 
+    if (this.bufferElement.num === num && this.counter < 2) {
+      this.insertImage(event, num);
+      this.bufferElement = 0;
+      this.counter = 0;
+    }
+
+    if (this.counter < 2) {
+      this.insertImage(event, num);
+      this.counter += 1;
+      setTimeout(() => {
+        this.removeImage(this.bufferElement);
+        this.removeImage(event.target);
+        this.counter = 0;
+        this.bufferElement = 0;
+      }, 2000);
+    } else {
+      event.target.classList.add('apply-shake');
+      setTimeout(() => {
+        event.target.classList.remove('apply-shake');
+      }, 500);
     }
   }
 }
