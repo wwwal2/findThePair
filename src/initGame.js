@@ -2,6 +2,7 @@ import ControllerFactory from './game/ControllerFactory';
 import Structure from './game/Structure';
 import Utility from './game/Utility';
 import Compare from './game/Compare';
+import Timer from './game/Timer';
 
 const initGame = (settings) => {
   const gameStatus = {
@@ -13,6 +14,7 @@ const initGame = (settings) => {
   const structure = new Structure();
   const compare = new Compare();
   const factory = new ControllerFactory();
+  const timer = new Timer();
 
   const controllers = {
     height: factory.create('height-controller', { default: gameStatus.settings.height, max: 6, min: 3 }),
@@ -33,7 +35,8 @@ const initGame = (settings) => {
       preview: controllers.preview.value.innerText,
       gameOver: controllers.gameOver.value.innerText,
     };
-
+    timer.clear();
+    timer.start(controllers.gameOver.value.innerText);
     structure.Build(playerSettings);
     Utility.addEvent(clickImage, 'cells');
     gameStatus.tableOfmatches = structure.table;
