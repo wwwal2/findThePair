@@ -8,18 +8,18 @@ class Structure {
     this.randomValues = [];
   }
 
-  Build(settings) {
+  Build({ height, width }) {
     this.tableOfmatches = [];
-    const btnNum = settings.height * settings.width;
+    const btnNum = height * width;
     const odd = btnNum % 2;
     this.randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
 
     [this.location] = Utility.selectElements('field-container');
-    for (let i = 1; i <= settings.height; i += 1) {
+    for (let i = 1; i <= height; i += 1) {
       const row = Utility.createElement('div', 'row');
       this.tableOfmatches.push([]);
-      for (let j = 1; j <= settings.width; j += 1) {
-        if (odd && i === Number(settings.height) && j === Number(settings.width)) {
+      for (let j = 1; j <= width; j += 1) {
+        if (odd && i === Number(height) && j === Number(width)) {
           break;
         }
         const button = new Button.Create('cells', i, j);
