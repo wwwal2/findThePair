@@ -30,7 +30,7 @@ const initGame = (settings) => {
 
   const start = () => {
     timer.clear();
-    structure.Remove();
+    structure.remove();
 
     const playerSettings = {
       height: controllers.height.value.innerText,
@@ -39,7 +39,8 @@ const initGame = (settings) => {
       gameOver: controllers.gameOver.value.innerText,
     };
     timer.start(controllers.gameOver.value.innerText);
-    structure.Build(playerSettings);
+    structure.build(playerSettings);
+    structure.preview(gameStatus.settings.preview);
     gameStatus.tableOfmatches = structure.tableOfmatches;
     Utility.addEvent(clickImage, 'cells');
   };

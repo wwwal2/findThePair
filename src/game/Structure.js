@@ -8,7 +8,8 @@ class Structure {
     this.randomValues = [];
   }
 
-  Build({ height, width }) {
+  build(settings) {
+    const { width, height } = settings;
     this.tableOfmatches = [];
     const btnNum = height * width;
     const odd = btnNum % 2;
@@ -30,7 +31,24 @@ class Structure {
     }
   }
 
-  Remove() {
+  preview(duration) {
+    [this.cover] = Utility.selectElements('cover');
+    this.allCells = Utility.selectElements('cells');
+    this.allCells.forEach((cell, index) => {
+      cell.disabled = true;
+      const image = Utility.createElement('img', 'image');
+      image.src = `./img/${this.randomValues[index]}.png`;
+      cell.appendChild(image);
+    });
+    this.previewTimeout = setTimeout(() => {
+      this.allCells.forEach((cell) => {
+        cell.disabled = false;
+        cell.childNodes.item(0).remove();
+      });
+    }, duration * 1000);
+  }
+
+  remove() {
     if (this.location.childNodes) {
       this.location.innerHTML = '';
     }
