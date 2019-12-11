@@ -1,6 +1,6 @@
 import Utility from './Utility';
 
-class Button {
+export default class Button {
   static Create(className, x, y) {
     const btn = Utility.createElement('button', className);
     btn.disabled = false;
@@ -9,5 +9,3 @@ class Button {
     return btn;
   }
 }
-
-export default Button;

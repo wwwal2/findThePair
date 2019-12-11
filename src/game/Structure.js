@@ -1,33 +1,56 @@
 import Button from './Buttion';
 import Utility from './Utility';
 
-class Structure {
+export default class Structure {
   constructor() {
-    this.table = [];
-    this.gameElements = [];
-    this.image = {};
+    this.tableOfmatches = [];
+    this.location = {};
+    this.randomValues = [];
   }
 
-  Build(settings) {
-    const btnNum = settings.height * settings.width;
+  build(settings) {
+    const { width, height } = settings;
+    this.tableOfmatches = [];
+    const btnNum = height * width;
     const odd = btnNum % 2;
-    const randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
+    this.randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
 
-    const structure = Utility.selectElements('field-container')[0];
-
-    for (let i = 1; i <= settings.height; i += 1) {
+    [this.location] = Utility.selectElements('field-container');
+    for (let i = 1; i <= height; i += 1) {
       const row = Utility.createElement('div', 'row');
-      this.table.push([]);
-      for (let j = 1; j <= settings.width; j += 1) {
-        if (odd && i === Number(settings.height) && j === Number(settings.width)) {
+      this.tableOfmatches.push([]);
+      for (let j = 1; j <= width; j += 1) {
+        if (odd && i === Number(height) && j === Number(width)) {
           break;
         }
         const button = new Button.Create('cells', i, j);
         row.appendChild(button);
-        this.table[i - 1].push(randomValues.pop());
+        this.tableOfmatches[i - 1].push(this.randomValues.pop());
       }
-      structure.appendChild(row);
+      this.location.appendChild(row);
+    }
+  }
+
+  preview(duration) {
+    [this.cover] = Utility.selectElements('cover');
+    this.allCells = Utility.selectElements('cells');
+    this.allCells.forEach((cell, index) => {
+      cell.disabled = true;
+      const image = Utility.createElement('img', 'image');
+      image.src = `./img/${this.randomValues[index]}.png`;
+      cell.appendChild(image);
+    });
+    this.previewTimeout = setTimeout(() => {
+      this.allCells.forEach((cell) => {
+        cell.disabled = false;
+        cell.childNodes.item(0).remove();
+      });
+    }, duration * 1000);
+  }
+
+  remove() {
+    if (this.location.childNodes) {
+      this.location.innerHTML = '';
     }
   }
 }
-export default Structure;

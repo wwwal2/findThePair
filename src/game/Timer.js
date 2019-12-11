@@ -1,6 +1,6 @@
 import Utility from './Utility';
 
-class Timer {
+export default class Timer {
   constructor() {
     this.timerId = 0;
     this.totallTime = 0;
@@ -28,5 +28,3 @@ class Timer {
     clearTimeout(this.timerId);
   }
 }
-
-export default Timer;

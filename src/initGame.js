@@ -29,19 +29,21 @@ const initGame = (settings) => {
   };
 
   const start = () => {
+    timer.clear();
+    structure.remove();
+
     const playerSettings = {
       height: controllers.height.value.innerText,
       width: controllers.width.value.innerText,
       preview: controllers.preview.value.innerText,
       gameOver: controllers.gameOver.value.innerText,
     };
-    timer.clear();
     timer.start(controllers.gameOver.value.innerText);
-    structure.Build(playerSettings);
+    structure.build(playerSettings);
+    structure.preview(gameStatus.settings.preview);
+    gameStatus.tableOfmatches = structure.tableOfmatches;
     Utility.addEvent(clickImage, 'cells');
-    gameStatus.tableOfmatches = structure.table;
   };
-
   Utility.addEvent(start, 'start');
 };
 
