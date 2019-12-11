@@ -1,6 +1,6 @@
 import Utility from './Utility';
 
-class Compare {
+export default class Compare {
   constructor() {
     this.counter = 0;
     this.bufferElement = 0;
@@ -50,5 +50,3 @@ class Compare {
     }
   }
 }
-
-export default Compare;

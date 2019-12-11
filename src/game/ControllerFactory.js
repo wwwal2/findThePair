@@ -1,6 +1,6 @@
 import Utility from './Utility';
 
-class ControllerFactory {
+export default class ControllerFactory {
   create(target, settings) {
     const controller = new ControllerFactory();
 
@@ -27,5 +27,3 @@ class ControllerFactory {
     return controller;
   }
 }
-
-export default ControllerFactory;

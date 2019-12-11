@@ -1,7 +1,7 @@
 import Button from './Buttion';
 import Utility from './Utility';
 
-class Structure {
+export default class Structure {
   constructor() {
     this.tableOfmatches = [];
     this.location = {};
@@ -54,4 +54,3 @@ class Structure {
     }
   }
 }
-export default Structure;

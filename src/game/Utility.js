@@ -1,4 +1,4 @@
-class Utility {
+export default class Utility {
   static createElement(tag, className) {
     const element = document.createElement(tag);
     element.className = className;
@@ -35,6 +35,3 @@ class Utility {
       });
   }
 }
-
-
-export default Utility;
