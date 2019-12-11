@@ -1,9 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -54,7 +51,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       { from: 'src/img', to: 'img' },
     ]),
@@ -70,30 +66,10 @@ module.exports = {
         hash: true,
       },
     }),
-    new UglifyJsPlugin({
-      test: /\.js(\?.*)?$/i,
-      exclude: /node_modules/,
-      cache: true,
-      sourceMap: true,
-      parallel: true,
-      uglifyOptions: {
-        output: {
-          comments: false,
-        },
-      },
-    }),
     new MiniCssExtractPlugin({
       filename: 'styles.[contenthash].css',
       sourceMap: true,
       ignoreOrder: false,
-    }),
-    new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: {
-        map: {
-          inline: false,
-          annotation: true,
-        },
-      },
     }),
   ],
   watch: true,
