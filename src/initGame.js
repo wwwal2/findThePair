@@ -1,8 +1,8 @@
-import ControllerFactory from './game/ControllerFactory';
 import Structure from './game/Structure';
 import Utility from './game/Utility';
 import Compare from './game/Compare';
 import Timer from './game/Timer';
+import Controllers from './game/Controllers';
 
 const initGame = (settings) => {
   const gameStatus = {
@@ -11,20 +11,19 @@ const initGame = (settings) => {
     gameoverTimeout: 'empty',
   };
 
+  const controllers = new Controllers();
+  controllers.add('height', 'height-controller', { standard: gameStatus.settings.height, max: 6, min: 3 });
+  controllers.add('width', 'width-controller', { standard: gameStatus.settings.height, max: 6, min: 3 });
+  controllers.add('preview', 'preview-controller', { standard: gameStatus.settings.height, max: 7, min: 1 });
+  controllers.add('gameOver', 'gameOver-controller', { standard: gameStatus.settings.height, max: 10, min: 1 });
+  controllers.validation('width', controllers.width.value.innerText);
+
   const structure = new Structure();
   const compare = new Compare();
-  const factory = new ControllerFactory();
   const timer = new Timer();
 
-  const controllers = {
-    height: factory.create('height-controller', { default: gameStatus.settings.height, max: 6, min: 3 }),
-    width: factory.create('width-controller', { default: gameStatus.settings.width, max: 6, min: 3 }),
-    preview: factory.create('preview-controller', { default: gameStatus.settings.preview, max: 7, min: 1 }),
-    gameOver: factory.create('gameOver-controller', { default: gameStatus.settings.gameOver, max: 10, min: 1 }),
-  };
-
   const clickImage = (event) => {
-    const num = gameStatus.tableOfmatches[event.target.dataset.x - 1][event.target.dataset.y - 1];
+    const num = gameStatus.tableOfmatches[event.target.dataset.x][event.target.dataset.y];
     compare.match(event, num);
   };
 
@@ -38,9 +37,9 @@ const initGame = (settings) => {
       preview: controllers.preview.value.innerText,
       gameOver: controllers.gameOver.value.innerText,
     };
-    timer.start(controllers.gameOver.value.innerText);
     structure.build(playerSettings);
     structure.preview(gameStatus.settings.preview);
+    timer.start(controllers.gameOver.value.innerText);
     gameStatus.tableOfmatches = structure.tableOfmatches;
     Utility.addEvent(clickImage, 'cells');
   };

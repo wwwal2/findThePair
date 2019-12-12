@@ -19,7 +19,7 @@ export default class Compare {
   }
 
   match(event, num) {
-    if (!this.bufferElement) {
+    if (this.bufferElement === 0) {
       this.insertImage(event, num);
       this.bufferElement = event.target;
       this.bufferElement.num = num;
@@ -31,6 +31,7 @@ export default class Compare {
       this.insertImage(event, num);
       this.bufferElement = 0;
       this.counter = 0;
+      return;
     }
 
     if (this.counter < 2) {

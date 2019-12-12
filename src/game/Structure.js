@@ -6,6 +6,8 @@ export default class Structure {
     this.tableOfmatches = [];
     this.location = {};
     this.randomValues = [];
+    this.allCells = [];
+    this.previewTimeout = 0;
   }
 
   build(settings) {
@@ -16,28 +18,27 @@ export default class Structure {
     this.randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
 
     [this.location] = Utility.selectElements('field-container');
-    for (let i = 1; i <= height; i += 1) {
+    for (let i = 0; i < height; i += 1) {
       const row = Utility.createElement('div', 'row');
       this.tableOfmatches.push([]);
-      for (let j = 1; j <= width; j += 1) {
-        if (odd && i === Number(height) && j === Number(width)) {
+      for (let j = 0; j < width; j += 1) {
+        if (odd && i === Number(height) - 1 && j === Number(width) - 1) {
           break;
         }
         const button = new Button.Create('cells', i, j);
         row.appendChild(button);
-        this.tableOfmatches[i - 1].push(this.randomValues.pop());
+        this.tableOfmatches[i].push(this.randomValues.pop());
       }
       this.location.appendChild(row);
     }
   }
 
   preview(duration) {
-    [this.cover] = Utility.selectElements('cover');
     this.allCells = Utility.selectElements('cells');
-    this.allCells.forEach((cell, index) => {
+    this.allCells.forEach((cell) => {
       cell.disabled = true;
       const image = Utility.createElement('img', 'image');
-      image.src = `./img/${this.randomValues[index]}.png`;
+      image.src = `./img/${this.tableOfmatches[cell.dataset.x][cell.dataset.y]}.png`;
       cell.appendChild(image);
     });
     this.previewTimeout = setTimeout(() => {
