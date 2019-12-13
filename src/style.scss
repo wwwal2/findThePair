@@ -1,25 +1,9 @@
-// %flex-container {
-//     display: flex;
-//     justify-content: center; 
-//     height: 100%;
-// }
-// %text-field {
-//     flex-grow: 2;
-//     flex-direction: column;
-// }
-
 img {
     width: 100%;
     height: 100%;
+    background-color: white;
 }
 
-
-// .display {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     flex-direction: column;
-// }
 .gameOver {
     background-color: red;
 }
@@ -76,16 +60,6 @@ img {
     flex-direction: column;
 }
 
-// .arrow {
-//     background-color: transparent;
-//     border: solid teal;
-//     border-width: 0 3px 3px 0;
-//     display: inline-block;
-//     padding: 3px;
-//     height: 16px;
-//     width: 16px;
-    
-// }
 .arrow {
     width: 0;
     height: 0;
@@ -113,12 +87,6 @@ img {
     border-top: 18px solid red;
 }
 
-
-// .down {
-//     transform: rotate(45deg);
-//     -webkit-transform: rotate(45deg);
-// }
-
 .blink {
     animation: blinker 2.5s linear infinite;
   }
@@ -129,8 +97,10 @@ img {
   }
 
 .field-container {
-    background-image: url('./img/bg2.png');
     display: block;
+    margin: auto;
+    width: max-content;
+    background-image: url('./img/bg2.png');
     margin-top: 10px;
 }
 .row {
@@ -141,20 +111,21 @@ img {
 .cells {
     width: 100px;
     height: 100px;
-    margin: 10px;
+    margin: 5px;
     border: 0;
     background-image: url('./img/question.jpg');
     background-size: cover;
 }
 
 .cells:hover {
-    filter: contrast(110%);
+    // filter: contrast(110%);
+    background-color: white;
 }
 @media all and (min-width: 600px) and (max-width: 1000px) {
 
 }
 
     
-// @media all and (max-width: 599px) {
+//TODO: @media all and (max-width: 599px) {
     
 // }

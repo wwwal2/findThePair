@@ -22,7 +22,7 @@ export default class Timer {
       if (this.totallTime === 0) {
         this.clear();
         const cells = Utility.selectElements('cells');
-        Utility.switchProperty('disabled', true, cells);
+        Utility.switchProperty('disabled', true, ...cells);
         this.timerValue.classList.add('gameOver');
       }
     }, 1000);

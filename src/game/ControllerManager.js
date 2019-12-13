@@ -1,6 +1,6 @@
 import Utility from './Utility';
 
-export default class Controllers {
+export default class ControllerManager {
   add(name, target, settings) {
     const { standard, max, min } = settings;
     [this[name]] = Utility.selectElements(target);

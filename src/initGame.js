@@ -2,7 +2,7 @@ import Structure from './game/Structure';
 import Utility from './game/Utility';
 import Compare from './game/Compare';
 import Timer from './game/Timer';
-import Controllers from './game/Controllers';
+import ControllerManager from './game/ControllerManager';
 
 const initGame = (settings) => {
   const gameStatus = {
@@ -13,7 +13,7 @@ const initGame = (settings) => {
 
   const [startDOMelement] = Utility.selectElements('start');
 
-  const controllers = new Controllers();
+  const controllers = new ControllerManager();
   controllers.add('height', 'height-controller', { standard: gameStatus.settings.height, max: 6, min: 2 });
   controllers.add('width', 'width-controller', { standard: gameStatus.settings.width, max: 6, min: 2 });
   controllers.add('preview', 'preview-controller', { standard: gameStatus.settings.preview, max: 7, min: 1 });
@@ -27,6 +27,7 @@ const initGame = (settings) => {
   const clickImage = (event) => {
     const num = gameStatus.tableOfmatches[event.target.dataset.x][event.target.dataset.y];
     compare.match(event, num);
+    structure.congratulations(timer.timerId);
   };
 
   const start = () => {
@@ -55,7 +56,6 @@ const initGame = (settings) => {
       timer.timerValue.classList.remove('gameOver');
       timer.timerValue.innerText = '';
     }
-
   };
 
   startDOMelement.onclick = start;

@@ -1,5 +1,6 @@
 import Button from './Buttion';
 import Utility from './Utility';
+import congratulations from '../img/congratulations.png';
 
 export default class Structure {
   constructor() {
@@ -8,6 +9,7 @@ export default class Structure {
     this.randomValues = [];
     this.allCells = [];
     this.previewTimeout = 0;
+    this.cellsLeft = [];
   }
 
   build(settings) {
@@ -52,6 +54,18 @@ export default class Structure {
   remove() {
     if (this.location.childNodes) {
       this.location.innerHTML = '';
+    }
+  }
+
+  congratulations(timerId) {
+    this.cellsLeft = this.allCells.filter((cell) => cell.childElementCount === 1);
+    if (this.cellsLeft.length === this.allCells.length) {
+      this.remove();
+      const img = Utility.createElement('img', 'congratulation');
+      img.src = congratulations;
+      img.style.backgroundColor = 'transparent';
+      this.location.appendChild(img);
+      clearTimeout(timerId);
     }
   }
 }
