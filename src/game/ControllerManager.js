@@ -14,7 +14,6 @@ export default class ControllerManager {
     this.direction = 1;
 
     this[name].value.innerText = standard;
-
     this[name].increase.onclick = () => {
       const number = Number(this[name].value.innerText);
       if (number < max) {
@@ -26,6 +25,9 @@ export default class ControllerManager {
 
     this[name].reduce.onclick = () => {
       const number = Number(this[name].value.innerText);
+      //TODO: if (number === min) {
+      //   this[name].reduce.style.borderBottomColor = 'grey';
+      // }
       if (number > min) {
         this.direction = -1;
         this[name].value.innerText = number + this.direction;
@@ -49,7 +51,14 @@ export default class ControllerManager {
     }
   }
 
-  display(position, { height, width, preview, gameOver }) {
+  display(position, controllers) {
+    const {
+      height,
+      width,
+      preview,
+      gameOver,
+    } = controllers;
+
     if (position === 'hide') {
       Utility.switchProperty('className', 'remove', height, width, preview, gameOver);
     } else {

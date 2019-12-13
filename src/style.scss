@@ -41,6 +41,11 @@ img {
     flex-direction: column;
 }
 
+.label {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .start-container {
     align-self: center;
 }
@@ -53,6 +58,9 @@ img {
 	color:#ffffff;
 	font-size:18px;
 	padding:8px 25px;
+}
+.start:hover {
+    background-color:rgb(41, 207, 26);
 }
 .timer {
     display: flex;
@@ -113,17 +121,18 @@ img {
     height: 100px;
     margin: 5px;
     border: 0;
+    padding: 0;
     background-image: url('./img/question.jpg');
     background-size: cover;
 }
 
 .cells:hover {
-    // filter: contrast(110%);
+    filter: contrast(110%);
     background-color: white;
 }
-@media all and (min-width: 600px) and (max-width: 1000px) {
+//TODO: @media all and (min-width: 600px) and (max-width: 1000px) {
 
-}
+// }
 
     
 //TODO: @media all and (max-width: 599px) {

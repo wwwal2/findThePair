@@ -43,7 +43,7 @@ const initGame = (settings) => {
         gameOver: controllers.gameOver.value.innerText,
       };
       structure.build(playerSettings);
-      structure.preview(gameStatus.settings.preview);
+      structure.preview(controllers.preview.value.innerText);
       timer.start(controllers.gameOver.value.innerText);
       gameStatus.tableOfmatches = structure.tableOfmatches;
       Utility.addEvent(clickImage, 'cells');
@@ -52,6 +52,7 @@ const initGame = (settings) => {
     } else {
       controllers.display('show', controllers);
       startDOMelement.innerText = 'start';
+      Utility.switchProperty('disabled', true, ...structure.allCells);
       timer.clear();
       timer.timerValue.classList.remove('gameOver');
       timer.timerValue.innerText = '';
