@@ -15,9 +15,9 @@ const initGame = (settings) => {
 
   const controllers = new Controllers();
   controllers.add('height', 'height-controller', { standard: gameStatus.settings.height, max: 6, min: 2 });
-  controllers.add('width', 'width-controller', { standard: gameStatus.settings.height, max: 6, min: 2 });
-  controllers.add('preview', 'preview-controller', { standard: gameStatus.settings.height, max: 7, min: 1 });
-  controllers.add('gameOver', 'gameOver-controller', { standard: gameStatus.settings.height, max: 10, min: 1 });
+  controllers.add('width', 'width-controller', { standard: gameStatus.settings.width, max: 6, min: 2 });
+  controllers.add('preview', 'preview-controller', { standard: gameStatus.settings.preview, max: 7, min: 1 });
+  controllers.add('gameOver', 'gameOver-controller', { standard: gameStatus.settings.gameOver, max: 10, min: 1 });
   controllers.validation('width', controllers.width.value.innerText);
 
   const structure = new Structure();
@@ -52,6 +52,8 @@ const initGame = (settings) => {
       controllers.display('show', controllers);
       startDOMelement.innerText = 'start';
       timer.clear();
+      timer.timerValue.classList.remove('gameOver');
+      timer.timerValue.innerText = '';
     }
 
   };

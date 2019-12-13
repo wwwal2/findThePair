@@ -38,7 +38,7 @@ export default class Structure {
     this.allCells.forEach((cell) => {
       cell.disabled = true;
       const image = Utility.createElement('img', 'image');
-      image.src = `./img/${this.tableOfmatches[cell.dataset.x][cell.dataset.y]}.png`;
+      image.src = `./img/cells/${this.tableOfmatches[cell.dataset.x][cell.dataset.y]}.png`;
       cell.appendChild(image);
     });
     this.previewTimeout = setTimeout(() => {

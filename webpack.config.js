@@ -28,6 +28,18 @@ module.exports = {
       //   loader: 'eslint-loader',
       // },
       {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[contenthash:5].[ext]',
+              outputPath: 'img',
+            },
+          },
+        ],
+      },
+      {
         test: /\.(sa|sc|c)ss$/,
         use: [
           {
@@ -56,7 +68,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
-      { from: 'src/img', to: 'img' },
+      { from: 'src/img/cells', to: 'img/cells' },
     ]),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -96,5 +108,4 @@ module.exports = {
       },
     }),
   ],
-  watch: true,
 };

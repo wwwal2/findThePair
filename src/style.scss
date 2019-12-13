@@ -8,10 +8,10 @@
 //     flex-direction: column;
 // }
 
-// img {
-//     width: 100%;
-//     height: 100%;
-// }
+img {
+    width: 100%;
+    height: 100%;
+}
 
 
 // .display {
@@ -20,7 +20,9 @@
 //     align-items: center;
 //     flex-direction: column;
 // }
-
+.gameOver {
+    background-color: red;
+}
 .remove {
     display: none;
 }
@@ -37,6 +39,7 @@
 
 // blocks maintainance
 .main-container {
+    background-image: url('./img/bg.jpg');
 }
 .menu-container {
     display: flex;
@@ -55,6 +58,21 @@
 .start-container {
     align-self: center;
 }
+.start {
+    background-color:red;
+	border-radius:8px;
+	border: 0;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:18px;
+	padding:8px 25px;
+}
+.timer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 
 .arrow {
     background-color: transparent;
@@ -70,6 +88,7 @@
     border:solid red;
     border-width: 0 3px 3px 0;
     animation: none;
+    cursor:pointer;
 }
 .up {
     transform: rotate(-135deg);
@@ -93,15 +112,26 @@
     display: block;
     margin: auto;
     width: 800px;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 .row {
     display: flex;
     justify-content: center;
 }
-// @media all and (min-width: 600px) and (max-width: 1000px) {
 
-// }
+.cells {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border: 0;
+}
+
+.cells:hover {
+    background-color: white;
+}
+@media all and (min-width: 600px) and (max-width: 1000px) {
+
+}
 
     
 // @media all and (max-width: 599px) {

@@ -39,6 +39,18 @@ module.exports = {
         ],
       },
       {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[contenthash:5].[ext]',
+              outputPath: 'img',
+            },
+          },
+        ],
+      },
+      {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
@@ -52,7 +64,7 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: 'src/img', to: 'img' },
+      { from: 'src/img/cells', to: 'img/cells' },
     ]),
     new HtmlWebpackPlugin({
       filename: 'index.html',

@@ -23,12 +23,12 @@ export default class Timer {
         this.clear();
         const cells = Utility.selectElements('cells');
         Utility.switchProperty('disabled', true, cells);
+        this.timerValue.classList.add('gameOver');
       }
     }, 1000);
   }
 
   clear() {
     clearTimeout(this.timerId);
-    this.timerValue.innerText = '';
   }
 }

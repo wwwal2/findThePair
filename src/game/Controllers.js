@@ -49,10 +49,7 @@ export default class Controllers {
     }
   }
 
-  display(position, {
-    height, width, preview, gameOver,
-  }
-  ) {
+  display(position, { height, width, preview, gameOver }) {
     if (position === 'hide') {
       Utility.switchProperty('className', 'remove', height, width, preview, gameOver);
     } else {

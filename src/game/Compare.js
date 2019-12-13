@@ -9,7 +9,7 @@ export default class Compare {
   insertImage(event, num) {
     event.target.disabled = true;
     this.image = Utility.createElement('img', 'image');
-    this.image.src = `./img/${num}.png`;
+    this.image.src = `./img/cells/${num}.png`;
     event.target.appendChild(this.image);
   }
 
