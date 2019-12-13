@@ -39,7 +39,9 @@ img {
 
 // blocks maintainance
 .main-container {
-    background-image: url('./img/bg.jpg');
+    display: block;
+    margin: auto;
+    width: 800px;
 }
 .menu-container {
     display: flex;
@@ -74,30 +76,48 @@ img {
     flex-direction: column;
 }
 
-.arrow {
-    background-color: transparent;
-    border: solid teal;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    height: 16px;
-    width: 16px;
+// .arrow {
+//     background-color: transparent;
+//     border: solid teal;
+//     border-width: 0 3px 3px 0;
+//     display: inline-block;
+//     padding: 3px;
+//     height: 16px;
+//     width: 16px;
     
+// }
+.arrow {
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
 }
 .arrow:hover {
-    border:solid red;
-    border-width: 0 3px 3px 0;
-    animation: none;
-    cursor:pointer;
+    cursor: pointer;
 }
+
 .up {
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
+    border-right-width: 14px;
+    border-left-width: 13px;
+    border-bottom: 18px solid teal;
 }
+.up:hover {
+    border-bottom: 18px solid red;
+}
+
 .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+    border-left-width: 14px;
+    border-right-width: 13px;
+    border-top: 18px solid teal;
 }
+.down:hover {
+    border-top: 18px solid red;
+}
+
+
+// .down {
+//     transform: rotate(45deg);
+//     -webkit-transform: rotate(45deg);
+// }
 
 .blink {
     animation: blinker 2.5s linear infinite;
@@ -109,9 +129,8 @@ img {
   }
 
 .field-container {
+    background-image: url('./img/bg2.png');
     display: block;
-    margin: auto;
-    width: 800px;
     margin-top: 10px;
 }
 .row {
@@ -124,10 +143,12 @@ img {
     height: 100px;
     margin: 10px;
     border: 0;
+    background-image: url('./img/question.jpg');
+    background-size: cover;
 }
 
 .cells:hover {
-    background-color: white;
+    filter: contrast(110%);
 }
 @media all and (min-width: 600px) and (max-width: 1000px) {
 
