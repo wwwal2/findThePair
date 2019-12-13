@@ -48,4 +48,15 @@ export default class Controllers {
       this[target].value.innerText = num - this.direction;
     }
   }
+
+  display(position, {
+    height, width, preview, gameOver,
+  }
+  ) {
+    if (position === 'hide') {
+      Utility.switchProperty('className', 'remove', height, width, preview, gameOver);
+    } else {
+      Utility.switchProperty('className', 'controller', height, width, preview, gameOver);
+    }
+  }
 }

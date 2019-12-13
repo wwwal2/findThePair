@@ -13,7 +13,7 @@ export default class Utility {
     );
   }
 
-  static switchProperty(propertyName, value, elements) {
+  static switchProperty(propertyName, value, ...elements) {
     return elements.forEach((obj) => {
       obj[propertyName] = value;
     });
@@ -34,17 +34,4 @@ export default class Utility {
         elem.onclick = event;
       });
   }
-
-  // static validation(limit) {
-  //   const height = this.height.value.innerText;
-  //   const width = Number(this.width.value.innerText);
-  //   const odd = (height * width) % 2;
-
-  //   if (odd && this.direction === 'increasing') {
-  //     this.width.value.innerText = width + 1;
-  //   }
-  //   if (odd && this.direction === 'reducing') {
-  //     this.width.value.innerText = width - 1;
-  //   }
-  // }
 }

@@ -14,9 +14,12 @@
 // }
 
 
-.display {
-    display: inline;
-}
+// .display {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     flex-direction: column;
+// }
 
 .remove {
     display: none;
@@ -61,6 +64,12 @@
     padding: 3px;
     height: 16px;
     width: 16px;
+    
+}
+.arrow:hover {
+    border:solid red;
+    border-width: 0 3px 3px 0;
+    animation: none;
 }
 .up {
     transform: rotate(-135deg);
@@ -72,11 +81,11 @@
 }
 
 .blink {
-    animation: blinker 1.5s linear infinite;
+    animation: blinker 2.5s linear infinite;
   }
   @keyframes blinker {
     50% {
-      opacity: 0;
+      opacity: 0.3;
     }
   }
 

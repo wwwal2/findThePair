@@ -11,9 +11,11 @@ const initGame = (settings) => {
     gameoverTimeout: 'empty',
   };
 
+  const [startDOMelement] = Utility.selectElements('start');
+
   const controllers = new Controllers();
-  controllers.add('height', 'height-controller', { standard: gameStatus.settings.height, max: 6, min: 3 });
-  controllers.add('width', 'width-controller', { standard: gameStatus.settings.height, max: 6, min: 3 });
+  controllers.add('height', 'height-controller', { standard: gameStatus.settings.height, max: 6, min: 2 });
+  controllers.add('width', 'width-controller', { standard: gameStatus.settings.height, max: 6, min: 2 });
   controllers.add('preview', 'preview-controller', { standard: gameStatus.settings.height, max: 7, min: 1 });
   controllers.add('gameOver', 'gameOver-controller', { standard: gameStatus.settings.height, max: 10, min: 1 });
   controllers.validation('width', controllers.width.value.innerText);
@@ -28,22 +30,33 @@ const initGame = (settings) => {
   };
 
   const start = () => {
-    timer.clear();
-    structure.remove();
+    if (startDOMelement.innerText === 'start') {
+      startDOMelement.innerText = 'play again';
+      timer.clear();
+      structure.remove();
 
-    const playerSettings = {
-      height: controllers.height.value.innerText,
-      width: controllers.width.value.innerText,
-      preview: controllers.preview.value.innerText,
-      gameOver: controllers.gameOver.value.innerText,
-    };
-    structure.build(playerSettings);
-    structure.preview(gameStatus.settings.preview);
-    timer.start(controllers.gameOver.value.innerText);
-    gameStatus.tableOfmatches = structure.tableOfmatches;
-    Utility.addEvent(clickImage, 'cells');
+      const playerSettings = {
+        height: controllers.height.value.innerText,
+        width: controllers.width.value.innerText,
+        preview: controllers.preview.value.innerText,
+        gameOver: controllers.gameOver.value.innerText,
+      };
+      structure.build(playerSettings);
+      structure.preview(gameStatus.settings.preview);
+      timer.start(controllers.gameOver.value.innerText);
+      gameStatus.tableOfmatches = structure.tableOfmatches;
+      Utility.addEvent(clickImage, 'cells');
+
+      controllers.display('hide', controllers);
+    } else {
+      controllers.display('show', controllers);
+      startDOMelement.innerText = 'start';
+      timer.clear();
+    }
+
   };
-  Utility.addEvent(start, 'start');
+
+  startDOMelement.onclick = start;
 };
 
 export default initGame;
