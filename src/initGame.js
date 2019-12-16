@@ -33,8 +33,10 @@ const initGame = (settings) => {
   const start = () => {
     if (startDOMelement.innerText === 'start') {
       startDOMelement.innerText = 'play again';
-      timer.clear();
+      timer.clear(structure.previewTimeout);
       structure.remove();
+      compare.bufferElement = 0;
+      compare.counter = 0;
 
       const playerSettings = {
         height: controllers.height.value.innerText,
@@ -42,8 +44,7 @@ const initGame = (settings) => {
         preview: controllers.preview.value.innerText,
         gameOver: controllers.gameOver.value.innerText,
       };
-      compare.bufferElement = 0;
-      compare.counter = 0;
+
       structure.build(playerSettings);
       structure.preview(controllers.preview.value.innerText, () => {
         timer.start(controllers.gameOver.value.innerText);
@@ -51,9 +52,9 @@ const initGame = (settings) => {
       gameStatus.tableOfmatches = structure.tableOfmatches;
       Utility.addEvent(clickImage, 'cells');
 
-      controllers.display('hide', controllers);
+      controllers.display('hide');
     } else {
-      controllers.display('show', controllers);
+      controllers.display('show');
       startDOMelement.innerText = 'start';
       Utility.switchProperty('disabled', true, ...structure.allCells);
       timer.clear();

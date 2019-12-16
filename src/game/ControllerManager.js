@@ -3,7 +3,19 @@ import Utility from './Utility';
 export default class ControllerManager {
   add(name, target, settings) {
     const { standard, max, min } = settings;
+
     [this[name]] = Utility.selectElements(target);
+    [this.informPannel] = Utility.selectElements('inform-pannel');
+
+    [this.options] = Utility.selectElements('options');
+
+    this[name].onmouseover = () => {
+      this.options.innerText = this[name].label.innerText;
+    };
+    this[name].onmouseout = () => {
+      this.options.innerText = 'OPTIONS';
+    }
+
     this[name].innerElements = Array.from(this[name].children);
     [
       this[name].label,
@@ -11,6 +23,7 @@ export default class ControllerManager {
       this[name].value,
       this[name].reduce,
     ] = this[name].innerElements;
+
     this.direction = 1;
 
     this[name].value.innerText = standard;
@@ -67,18 +80,11 @@ export default class ControllerManager {
     }
   }
 
-  display(position, controllers) {
-    const {
-      height,
-      width,
-      preview,
-      gameOver,
-    } = controllers;
-
+  display(position) {
     if (position === 'hide') {
-      Utility.switchProperty('className', 'remove', height, width, preview, gameOver);
+      Utility.switchProperty('className', 'remove', this.informPannel);
     } else {
-      Utility.switchProperty('className', 'controller', height, width, preview, gameOver);
+      Utility.switchProperty('className', 'inform-pannel', this.informPannel);
     }
   }
 }

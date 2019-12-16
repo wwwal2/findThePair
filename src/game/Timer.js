@@ -28,7 +28,8 @@ export default class Timer {
     }, 1000);
   }
 
-  clear() {
+  clear(previewTmerId) {
     clearTimeout(this.timerId);
+    clearTimeout(previewTmerId);
   }
 }
