@@ -80,19 +80,30 @@ img {
 .up {
     border-right-width: 14px;
     border-left-width: 13px;
-    border-bottom: 18px solid teal;
+    border-bottom: 18px;
+    border-bottom-style: solid;
+    border-bottom-color: teal;
 }
-.up:hover {
-    border-bottom: 18px solid red;
+// .up:hover {
+//     border-bottom: 18px solid red;
+// }
+
+.up-limit {
+    border-bottom-color: grey;
 }
 
 .down {
     border-left-width: 14px;
     border-right-width: 13px;
-    border-top: 18px solid teal;
+    border-top: 18px;
+    border-top-style: solid;
+    border-top-color: teal;
 }
-.down:hover {
-    border-top: 18px solid red;
+// .down:hover {
+//     border-top: 18px solid red;
+// }
+.down-limit {
+    border-top-color: grey;
 }
 
 .blink {

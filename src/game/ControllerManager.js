@@ -15,23 +15,35 @@ export default class ControllerManager {
 
     this[name].value.innerText = standard;
     this[name].increase.onclick = () => {
-      const number = Number(this[name].value.innerText);
+      let number = Number(this[name].value.innerText);
+
       if (number < max) {
         this.direction = 1;
         this[name].value.innerText = number + this.direction;
         this.validation(name, max - this[name].value.innerText);
+        number = this[name].value.innerText;
+      }
+
+      if (Number(this[name].value.innerText) === max) {
+        this[name].increase.classList.add('up-limit');
+      } else {
+        this[name].reduce.classList.remove('down-limit');
       }
     };
 
     this[name].reduce.onclick = () => {
       const number = Number(this[name].value.innerText);
-      //TODO: if (number === min) {
-      //   this[name].reduce.style.borderBottomColor = 'grey';
-      // }
+
       if (number > min) {
         this.direction = -1;
         this[name].value.innerText = number + this.direction;
         this.validation(name, this[name].value.innerText - min);
+      }
+
+      if (Number(this[name].value.innerText) === min) {
+        this[name].reduce.classList.add('down-limit');
+      } else {
+        this[name].increase.classList.remove('up-limit');
       }
     };
   }
