@@ -4,7 +4,7 @@
   "description": "test game",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.dev --open",
+    "start": "webpack-dev-server --config webpack.dev --open",
     "build": "webpack --config webpack.config --mode production"
   },
   "repository": {

@@ -35,7 +35,7 @@ export default class Structure {
     }
   }
 
-  preview(duration) {
+  preview(duration, callback) {
     this.allCells = Utility.selectElements('cells');
     this.allCells.forEach((cell) => {
       cell.disabled = true;
@@ -48,6 +48,7 @@ export default class Structure {
         cell.disabled = false;
         cell.childNodes.item(0).remove();
       });
+      callback();
     }, duration * 1000);
   }
 

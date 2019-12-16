@@ -25,9 +25,11 @@ export default class ControllerManager {
       }
 
       if (Number(this[name].value.innerText) === max) {
+        this[name].increase.classList.remove('up');
         this[name].increase.classList.add('up-limit');
       } else {
         this[name].reduce.classList.remove('down-limit');
+        this[name].reduce.classList.add('down');
       }
     };
 
@@ -42,8 +44,10 @@ export default class ControllerManager {
 
       if (Number(this[name].value.innerText) === min) {
         this[name].reduce.classList.add('down-limit');
+        this[name].reduce.classList.remove('down');
       } else {
         this[name].increase.classList.remove('up-limit');
+        this[name].increase.classList.add('up');
       }
     };
   }

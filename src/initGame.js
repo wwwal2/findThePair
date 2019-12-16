@@ -43,8 +43,9 @@ const initGame = (settings) => {
         gameOver: controllers.gameOver.value.innerText,
       };
       structure.build(playerSettings);
-      structure.preview(controllers.preview.value.innerText);
-      timer.start(controllers.gameOver.value.innerText);
+      structure.preview(controllers.preview.value.innerText, () => {
+        timer.start(controllers.gameOver.value.innerText);
+      });
       gameStatus.tableOfmatches = structure.tableOfmatches;
       Utility.addEvent(clickImage, 'cells');
 
