@@ -11,7 +11,7 @@ The game generates and hides a field of images. A player opens images by clickin
 Download the game and navigate your console inside the game folder (__/findThePair__ by default). Input in console:<br/>
 `npm install`<br/>
 Wait untill installation finished and then: <br/>
-`npm run dev-server`<br/>
+`npm start`<br/>
 The game starts at:<br/>
 [http://localhost:9000/](http://localhost:9000/)
 

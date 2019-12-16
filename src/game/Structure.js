@@ -14,6 +14,7 @@ export default class Structure {
 
   build(settings) {
     const { width, height } = settings;
+    [this.startBtn] = Utility.selectElements('start');
     this.tableOfmatches = [];
     const btnNum = height * width;
     const odd = btnNum % 2;
@@ -33,6 +34,8 @@ export default class Structure {
       }
       this.location.appendChild(row);
     }
+    this.startBtn.disabled = true;
+    this.startBtn.classList.add('disabled');
   }
 
   preview(duration, callback) {
@@ -49,6 +52,8 @@ export default class Structure {
         cell.childNodes.item(0).remove();
       });
       callback();
+      this.startBtn.disabled = false;
+      this.startBtn.classList.remove('disabled');
     }, duration * 1000);
   }
 

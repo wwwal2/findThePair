@@ -42,6 +42,8 @@ const initGame = (settings) => {
         preview: controllers.preview.value.innerText,
         gameOver: controllers.gameOver.value.innerText,
       };
+      compare.bufferElement = 0;
+      compare.counter = 0;
       structure.build(playerSettings);
       structure.preview(controllers.preview.value.innerText, () => {
         timer.start(controllers.gameOver.value.innerText);

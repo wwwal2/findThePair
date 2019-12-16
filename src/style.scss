@@ -7,6 +7,7 @@ img {
 .gameOver {
     background-color: red;
 }
+
 .remove {
     display: none;
 }
@@ -30,8 +31,7 @@ img {
 .menu-container {
     display: flex;
     justify-content: space-evenly;
-    width: 600px;
-    height: 100px;
+    flex-wrap: wrap;
     margin: auto;
 }
 .controller {
@@ -57,11 +57,20 @@ img {
 	cursor:pointer;
 	color:#ffffff;
 	font-size:18px;
-	padding:8px 25px;
+    padding:8px 25px;
+    &:hover {
+        background-color:rgb(41, 207, 26);
+    }
 }
-.start:hover {
-    background-color:rgb(41, 207, 26);
+
+.disabled {
+    background-color: grey;
+    cursor:auto;
+    &:hover {
+        background-color:grey;
+    }
 }
+
 .timer {
     display: flex;
     align-items: center;
@@ -72,8 +81,6 @@ img {
     width: 0;
     height: 0;
     border: 0 solid transparent;
-}
-.arrow:hover {
     cursor: pointer;
 }
 
@@ -81,31 +88,33 @@ img {
     border-right-width: 14px;
     border-left-width: 13px;
     border-bottom: 18px solid teal;
-}
-.up:hover {
-    border-bottom: 18px solid red;
+    &:hover {
+        border-bottom: 18px solid red;
+    }
 }
 
 .up-limit {
     border-right-width: 14px;
     border-left-width: 13px;
     border-bottom: 18px solid grey;
+    cursor: auto;
 }
 
 .down {
     border-left-width: 14px;
     border-right-width: 13px;
     border-top: 18px solid teal;
+    &:hover {
+        border-top: 18px solid red;
+    }
 }
-.down:hover {
-    border-top: 18px solid red;
-}
+
 .down-limit {
     border-left-width: 14px;
     border-right-width: 13px;
     border-top: 18px solid grey;
+    cursor: auto;
 }
-
 
 .blink {
     animation: blinker 2.5s linear infinite;
@@ -123,6 +132,7 @@ img {
     background-image: url('./img/bg2.png');
     margin-top: 10px;
 }
+
 .row {
     display: flex;
     justify-content: center;
@@ -136,17 +146,32 @@ img {
     padding: 0;
     background-image: url('./img/question.jpg');
     background-size: cover;
+    &:hover {
+        filter: contrast(110%);
+        background-color: white;
+    }
 }
 
-.cells:hover {
-    filter: contrast(110%);
-    background-color: white;
+ @media all and (min-width: 600px) and (max-width: 1000px) {
+    .main-container {
+        width: 600px;
+    }
+     .cells {
+        width: 80px;
+        height: 80px;
+        margin: 3px;
+     }
 }
-//TODO: @media all and (min-width: 600px) and (max-width: 1000px) {
-
-// }
 
     
-//TODO: @media all and (max-width: 599px) {
+ @media all and (max-width: 599px) {
+    .main-container {
+        width: 300px;
+    }
+     .cells {
+        width: 45px;
+        height: 45px;
+        margin: 1px;
+     }
+}
     
-// }
