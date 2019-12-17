@@ -2,7 +2,7 @@
 
 ## Description
 The game generates and hides a field of images. A player opens images by clicking them, if he finds 'twins' - the twin images will stay opened. When the whole field is opened, a player wins
-![](https://github.com/wwwal2/findThePair/blob/master/src/img/gamePreview.png)
+![](https://github.com/wwwal2/findThePair/blob/master/src/img/readme.png)
 
 ## Installation
 * A production version of the game located inside the __/dist__ folder. Download __/dist__, open index.html in your browser and the game starts
@@ -22,7 +22,7 @@ The app will generate a new __/dist__ folder with a changes done.
 * To change the pictures - just replace those are in __/img__ folder. Keep the name numeration of the images from __1__ __to__ __18__, otherwise the game crashes.
 
 ## Usage
-Set the time options in the menu, pick the difficulty (depends on a field size) and press __start__.<br/>
+Set the time options in the menu and press __start__.<br/>
 Press __play again__ to restart
 ### DEMO
 [Demo version of the game](https://wwwal2.github.io/findThePair/dist/)
