@@ -7,6 +7,7 @@ export default class Timer {
     this.minutes = 0;
     this.seconds = 0;
     this.timerValue = {};
+    this.timerLabel = {};
   }
 
   start(duration) {
@@ -28,8 +29,9 @@ export default class Timer {
     }, 1000);
   }
 
-  clear(previewTmerId) {
+  clear(previewTmerId, openImageId) {
     clearTimeout(this.timerId);
     clearTimeout(previewTmerId);
+    clearTimeout(openImageId);
   }
 }

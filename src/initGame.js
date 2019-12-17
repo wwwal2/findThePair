@@ -17,7 +17,7 @@ const initGame = (settings) => {
   controllers.add('height', 'height-controller', { standard: gameStatus.settings.height, max: 6, min: 2 });
   controllers.add('width', 'width-controller', { standard: gameStatus.settings.width, max: 6, min: 2 });
   controllers.add('preview', 'preview-controller', { standard: gameStatus.settings.preview, max: 7, min: 1 });
-  controllers.add('gameOver', 'gameOver-controller', { standard: gameStatus.settings.gameOver, max: 10, min: 1 });
+  controllers.add('gameOver', 'gameOver-controller', { standard: gameStatus.settings.gameOver, max: 15, min: 1 });
   controllers.validation('width', controllers.width.value.innerText);
 
   const structure = new Structure();
@@ -57,7 +57,7 @@ const initGame = (settings) => {
       controllers.display('show');
       startDOMelement.innerText = 'start';
       Utility.switchProperty('disabled', true, ...structure.allCells);
-      timer.clear();
+      timer.clear(structure.previewTimeout, compare.openImgTimeout);
       timer.timerValue.classList.remove('gameOver');
       timer.timerValue.innerText = '';
     }

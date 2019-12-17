@@ -27,6 +27,16 @@ export default class ControllerManager {
     this.direction = 1;
 
     this[name].value.innerText = standard;
+
+    if (standard === max) {
+      this[name].increase.classList.remove('up');
+      this[name].increase.classList.add('up-limit');
+    }
+    if (standard === min) {
+      this[name].reduce.classList.add('down-limit');
+      this[name].reduce.classList.remove('down');
+    }
+
     this[name].increase.onclick = () => {
       let number = Number(this[name].value.innerText);
 

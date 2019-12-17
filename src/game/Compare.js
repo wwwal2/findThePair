@@ -4,6 +4,7 @@ export default class Compare {
   constructor() {
     this.counter = 0;
     this.bufferElement = 0;
+    this.openImgTimeout = 0;
   }
 
   insertImage(event, num) {
@@ -37,17 +38,17 @@ export default class Compare {
     if (this.counter < 2) {
       this.insertImage(event, num);
       this.counter += 1;
-      setTimeout(() => {
+      this.openImgTimeout = setTimeout(() => {
         this.removeImage(this.bufferElement);
         this.removeImage(event.target);
         this.counter = 0;
         this.bufferElement = 0;
-      }, 2000);
+      }, 1000);
     } else {
       event.target.classList.add('apply-shake');
       setTimeout(() => {
         event.target.classList.remove('apply-shake');
-      }, 500);
+      }, 1000);
     }
   }
 }
