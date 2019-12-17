@@ -34,7 +34,7 @@ const initGame = (settings) => {
     if (startDOMelement.innerText === 'start') {
       startDOMelement.innerText = 'play again';
       timer.clear(structure.previewTimeout);
-      structure.remove();
+      structure.removeField();
       compare.bufferElement = 0;
       compare.counter = 0;
 
@@ -58,8 +58,15 @@ const initGame = (settings) => {
       startDOMelement.innerText = 'start';
       Utility.switchProperty('disabled', true, ...structure.allCells);
       timer.clear(structure.previewTimeout, compare.openImgTimeout);
-      timer.timerValue.classList.remove('gameOver');
       timer.timerValue.innerText = '';
+      if (structure.previewAbort) {
+        structure.removeAllImages();
+      }
+      compare.abort();
+      if (timer.timerValue.classList) {
+        timer.timerValue.classList.remove('gameOver');
+        timer.timerLabel.classList.add('hidden');
+      }
     }
   };
 

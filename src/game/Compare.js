@@ -3,8 +3,10 @@ import Utility from './Utility';
 export default class Compare {
   constructor() {
     this.counter = 0;
-    this.bufferElement = 0;
     this.openImgTimeout = 0;
+    this.bufferElement = {};
+    this.eventElement = {};
+    this.image = {};
   }
 
   insertImage(event, num) {
@@ -37,18 +39,30 @@ export default class Compare {
 
     if (this.counter < 2) {
       this.insertImage(event, num);
+      this.eventElement = event.target;
       this.counter += 1;
+
       this.openImgTimeout = setTimeout(() => {
         this.removeImage(this.bufferElement);
         this.removeImage(event.target);
         this.counter = 0;
         this.bufferElement = 0;
+        this.eventElement = 0;
       }, 1000);
     } else {
       event.target.classList.add('apply-shake');
       setTimeout(() => {
         event.target.classList.remove('apply-shake');
       }, 1000);
+    }
+  }
+
+  abort() {
+    if (this.bufferElement.children) {
+      this.bufferElement.children.item(0).remove();
+    }
+    if (this.eventElement.children) {
+      this.eventElement.children.item(0).remove();
     }
   }
 }

@@ -12,13 +12,17 @@ export default class Timer {
 
   start(duration) {
     [this.timerValue] = Utility.selectElements('timer-value');
+    [this.timerLabel] = Utility.selectElements('timer-label');
+    this.timerLabel.classList.remove('hidden');
+
     this.totallTime = Number(duration) * 60;
+    this.parseTime(this.totallTime);
+    this.timerValue.innerText = `${this.minutes}:${this.seconds}`;
 
     this.timerId = setInterval(() => {
       this.totallTime = this.totallTime - 1;
-      this.minutes = Math.floor(this.totallTime / 60);
-      this.seconds = this.totallTime % 60;
-      this.timerValue.innerText = `${this.minutes} : ${this.seconds}`;
+      this.parseTime(this.totallTime);
+      this.timerValue.innerText = `${this.minutes}:${this.seconds}`;
 
       if (this.totallTime === 0) {
         this.clear();
@@ -29,9 +33,16 @@ export default class Timer {
     }, 1000);
   }
 
-  clear(previewTmerId, openImageId) {
+  clear(previewTmerId, compareTimeoutId) {
     clearTimeout(this.timerId);
     clearTimeout(previewTmerId);
-    clearTimeout(openImageId);
+    clearTimeout(compareTimeoutId);
+  }
+
+  parseTime(totallTime) {
+    this.minutes = Math.floor(totallTime / 60);
+    this.seconds = totallTime % 60;
+    this.minutes = this.minutes < 10 ? `0${this.minutes}` : this.minutes;
+    this.seconds = this.seconds < 10 ? `0${this.seconds}` : this.seconds;
   }
 }

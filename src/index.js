@@ -2,9 +2,9 @@ import './style.scss';
 import initGame from './initGame';
 
 const defaultSettings = {
-  width: 3,
-  height: 3,
-  preview: 3,
+  width: 6,
+  height: 6,
+  preview: 1,
   gameOver: 1,
 };
 

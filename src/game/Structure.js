@@ -9,6 +9,7 @@ export default class Structure {
     this.randomValues = [];
     this.allCells = [];
     this.previewTimeout = 0;
+    this.previewAbort = true;
     this.cellsLeft = [];
   }
 
@@ -35,7 +36,8 @@ export default class Structure {
     }
   }
 
-  preview(duration, callback) {
+  preview(duration, startGameoverTimer) {
+    this.previewAbort = true;
     this.allCells = Utility.selectElements('cells');
     this.allCells.forEach((cell) => {
       cell.disabled = true;
@@ -44,15 +46,13 @@ export default class Structure {
       cell.appendChild(image);
     });
     this.previewTimeout = setTimeout(() => {
-      this.allCells.forEach((cell) => {
-        cell.disabled = false;
-        cell.childNodes.item(0).remove();
-      });
-      callback();
+      this.removeAllImages();
+      startGameoverTimer();
+      this.previewAbort = false;
     }, duration * 1000);
   }
 
-  remove() {
+  removeField() {
     if (this.location.childNodes) {
       this.location.innerHTML = '';
     }
@@ -68,5 +68,12 @@ export default class Structure {
       this.location.appendChild(img);
       clearTimeout(timerId);
     }
+  }
+
+  removeAllImages() {
+    this.allCells.forEach((cell) => {
+      cell.disabled = false;
+      cell.childNodes.item(0).remove();
+    });
   }
 }
