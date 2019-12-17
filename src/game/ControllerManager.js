@@ -1,12 +1,21 @@
 import Utility from './Utility';
 
 export default class ControllerManager {
+  constructor() {
+    this.settings = {
+      height: 0,
+      width: 0,
+      preview: 0,
+      gameover: 0,
+    };
+    this.direction = 0;
+  }
+
   add(name, target, settings) {
     const { standard, max, min } = settings;
 
     [this[name]] = Utility.selectElements(target);
     [this.informPannel] = Utility.selectElements('inform-pannel');
-
     [this.options] = Utility.selectElements('options');
 
     this[name].onmouseover = () => {
@@ -14,7 +23,7 @@ export default class ControllerManager {
     };
     this[name].onmouseout = () => {
       this.options.innerText = 'OPTIONS';
-    }
+    };
 
     this[name].innerElements = Array.from(this[name].children);
     [
@@ -24,70 +33,53 @@ export default class ControllerManager {
       this[name].reduce,
     ] = this[name].innerElements;
 
-    this.direction = 1;
+    this.settings[name] = standard;
+    this[name].value.innerText = this.settings[name];
 
-    this[name].value.innerText = standard;
-
-    if (standard === max) {
-      this[name].increase.classList.remove('up');
-      this[name].increase.classList.add('up-limit');
-    }
-    if (standard === min) {
-      this[name].reduce.classList.add('down-limit');
-      this[name].reduce.classList.remove('down');
-    }
+    if (standard === max) this.switchClasses(this[name].increase, 'up', 'up-limit');
+    if (standard === min) this.switchClasses(this[name].reduce, 'down', 'down-limit');
 
     this[name].increase.onclick = () => {
-      let number = Number(this[name].value.innerText);
-
-      if (number < max) {
-        this.direction = 1;
-        this[name].value.innerText = number + this.direction;
-        this.validation(name, max - this[name].value.innerText);
-        number = this[name].value.innerText;
+      this.direction = 1;
+      if (this.settings[name] < max) {
+        this.settings[name] = this.settings[name] + this.direction;
+        this.validation(name, max - this.settings[name]);
       }
 
-      if (Number(this[name].value.innerText) === max) {
-        this[name].increase.classList.remove('up');
-        this[name].increase.classList.add('up-limit');
+      if (this.settings[name] === max) {
+        this.switchClasses(this[name].increase, 'up', 'up-limit');
       } else {
-        this[name].reduce.classList.remove('down-limit');
-        this[name].reduce.classList.add('down');
+        this.switchClasses(this[name].reduce, 'down-limit', 'down');
       }
     };
 
     this[name].reduce.onclick = () => {
-      const number = Number(this[name].value.innerText);
-
-      if (number > min) {
-        this.direction = -1;
-        this[name].value.innerText = number + this.direction;
-        this.validation(name, this[name].value.innerText - min);
+      this.direction = -1;
+      if (this.settings[name] > min) {
+        this.settings[name] = this.settings[name] + this.direction;
+        this.validation(name, this.settings[name] - min);
       }
 
-      if (Number(this[name].value.innerText) === min) {
-        this[name].reduce.classList.add('down-limit');
-        this[name].reduce.classList.remove('down');
+      if (this.settings[name] === min) {
+        this.switchClasses(this[name].reduce, 'down', 'down-limit');
       } else {
-        this[name].increase.classList.remove('up-limit');
-        this[name].increase.classList.add('up');
+        this.switchClasses(this[name].increase, 'up-limit', 'up');
       }
     };
   }
 
   validation(target, distance) {
-    const height = this.height.value.innerText;
-    const width = this.width.value.innerText;
-    const num = Number(this[target].value.innerText);
-    const odd = (height * width) % 2;
+    const odd = (this.settings.height * this.settings.width) % 2;
     if (!odd) {
+      this[target].value.innerText = this.settings[target];
       return;
     }
     if (distance) {
-      this[target].value.innerText = num + this.direction;
+      this.settings[target] = this.settings[target] + this.direction;
     } else {
-      this[target].value.innerText = num - this.direction;
+      this.settings[target] = this.settings[target] - this.direction;
     }
+    this[target].value.innerText = this.settings[target];
   }
 
   display(position) {
@@ -96,5 +88,10 @@ export default class ControllerManager {
     } else {
       Utility.switchProperty('className', 'inform-pannel', this.informPannel);
     }
+  }
+
+  switchClasses(element, from, to) {
+    element.classList.remove(from);
+    element.classList.add(to);
   }
 }

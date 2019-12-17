@@ -2,7 +2,7 @@ import Button from './Buttion';
 import Utility from './Utility';
 import congratulations from '../img/congratulations.png';
 
-export default class Structure {
+export default class Field {
   constructor() {
     this.tableOfmatches = [];
     this.location = {};
@@ -17,7 +17,6 @@ export default class Structure {
     const { width, height } = settings;
     this.tableOfmatches = [];
     const btnNum = height * width;
-    const odd = btnNum % 2;
     this.randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
 
     [this.location] = Utility.selectElements('field-container');
@@ -25,9 +24,6 @@ export default class Structure {
       const row = Utility.createElement('div', 'row');
       this.tableOfmatches.push([]);
       for (let j = 0; j < width; j += 1) {
-        if (odd && i === Number(height) - 1 && j === Number(width) - 1) {
-          break;
-        }
         const button = new Button.Create('cells', i, j);
         row.appendChild(button);
         this.tableOfmatches[i].push(this.randomValues.pop());
@@ -61,7 +57,7 @@ export default class Structure {
   congratulations(timerId) {
     this.cellsLeft = this.allCells.filter((cell) => cell.childElementCount === 1);
     if (this.cellsLeft.length === this.allCells.length) {
-      this.remove();
+      this.removeField();
       const img = Utility.createElement('img', 'congratulation');
       img.src = congratulations;
       img.style.backgroundColor = 'transparent';

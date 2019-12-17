@@ -9,8 +9,14 @@ img {
 }
 
 .gameOver {
-    background-color: red;
+    animation: blinker 1.5s linear infinite;
+    color: red;
 }
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
 .hidden {
     opacity: 0;
@@ -19,6 +25,8 @@ img {
 .remove {
     display: none;
 }
+
+
 
 .apply-shake {
     animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both
@@ -137,7 +145,6 @@ img {
         margin: auto;
         width: max-content;
         background-image: url('./img/bg6.png');
-        margin-top: 10px;
         .row {
             display: flex;
             justify-content: center;
