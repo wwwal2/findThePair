@@ -54,6 +54,13 @@ export default class Field {
     }
   }
 
+  removeAllImages() {
+    this.allCells.forEach((cell) => {
+      cell.disabled = false;
+      cell.childNodes.item(0).remove();
+    });
+  }
+
   congratulations(timerId) {
     this.cellsLeft = this.allCells.filter((cell) => cell.childElementCount === 1);
     if (this.cellsLeft.length === this.allCells.length) {
@@ -66,10 +73,5 @@ export default class Field {
     }
   }
 
-  removeAllImages() {
-    this.allCells.forEach((cell) => {
-      cell.disabled = false;
-      cell.childNodes.item(0).remove();
-    });
-  }
+
 }

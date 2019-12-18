@@ -40,32 +40,39 @@ export default class ControllerManager {
     if (standard === min) this.switchClasses(this[name].reduce, 'down', 'down-limit');
 
     this[name].increase.onclick = () => {
-      this.direction = 1;
-      if (this.settings[name] < max) {
-        this.settings[name] = this.settings[name] + this.direction;
-        this.validation(name, max - this.settings[name]);
-      }
-
-      if (this.settings[name] === max) {
-        this.switchClasses(this[name].increase, 'up', 'up-limit');
-      } else {
-        this.switchClasses(this[name].reduce, 'down-limit', 'down');
-      }
+      this.controllerEvent(name, 1, max);
     };
 
     this[name].reduce.onclick = () => {
-      this.direction = -1;
-      if (this.settings[name] > min) {
-        this.settings[name] = this.settings[name] + this.direction;
-        this.validation(name, this.settings[name] - min);
-      }
-
-      if (this.settings[name] === min) {
-        this.switchClasses(this[name].reduce, 'down', 'down-limit');
-      } else {
-        this.switchClasses(this[name].increase, 'up-limit', 'up');
-      }
+      this.controllerEvent(name, -1, min);
     };
+  }
+
+  controllerEvent(target, direction, limit) {
+    this.direction = direction;
+    switch (direction) {
+      case 1:
+        if (this.settings[target] < limit) {
+          this.settings[target] += this.direction;
+          this.switchClasses(this[target].reduce, 'down-limit', 'down');
+          this.validation(target, limit - this.settings[target]);
+          if (this.settings[target] === limit) {
+            this.switchClasses(this[target].increase, 'up', 'up-limit');
+          }
+        }
+        break;
+      case -1:
+        if (this.settings[target] > limit) {
+          this.settings[target] += this.direction;
+          this.switchClasses(this[target].increase, 'up-limit', 'up');
+          this.validation(target, this.settings[target] - limit);
+          if (this.settings[target] === limit) {
+            this.switchClasses(this[target].reduce, 'down', 'down-limit');
+          }
+        }
+        break;
+      default:
+    }
   }
 
   validation(target, distance) {
