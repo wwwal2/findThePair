@@ -49,13 +49,12 @@ const initGame = (settings) => {
     } else {
       controllers.display('show');
       startDOMelement.innerText = 'start';
-      debugger
-      Utility.switchProperty('disabled', true, ...field.allCells);
       timer.clear(field.previewTimeout, compare.openImgTimeout);
       timer.timerValue.innerText = '';
       if (field.previewAbort) {
         field.removeAllImages();
       }
+      Utility.switchProperty('disabled', true, ...field.allCells);
       compare.abort();
       if (timer.timerValue.classList) {
         timer.timerValue.classList.remove('gameOver');
