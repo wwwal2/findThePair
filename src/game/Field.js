@@ -72,6 +72,4 @@ export default class Field {
       clearTimeout(timerId);
     }
   }
-
-
 }

@@ -8,7 +8,7 @@ export default class ControllerManager {
       preview: 0,
       gameover: 0,
     };
-    this.direction = 0;
+    this.direction = 1;
   }
 
   add(name, target, settings) {
@@ -46,6 +46,7 @@ export default class ControllerManager {
     this[name].reduce.onclick = () => {
       this.controllerEvent(name, -1, min);
     };
+    this.validation(name, max - standard);
   }
 
   controllerEvent(target, direction, limit) {

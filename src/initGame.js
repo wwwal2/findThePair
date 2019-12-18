@@ -18,7 +18,6 @@ const initGame = (settings) => {
   controllers.add('width', 'width-controller', { standard: gameStatus.settings.width, max: 6, min: 2 });
   controllers.add('preview', 'preview-controller', { standard: gameStatus.settings.preview, max: 7, min: 1 });
   controllers.add('gameOver', 'gameOver-controller', { standard: gameStatus.settings.gameOver, max: 15, min: 1 });
-  controllers.validation('width', controllers.width.value.innerText);
 
   const field = new Field();
   const compare = new Compare();
