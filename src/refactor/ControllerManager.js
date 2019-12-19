@@ -46,6 +46,13 @@ export default class ControllerManager {
         this.options.innerText = 'OPTIONS';
       };
 
+      this[name].current = this[name].current - this[name].max > 0
+        ? this.validate(name, this[name].max - this[name].current, this[name].max)
+        : this.validate(name, this[name].current - this[name].min, this[name].min);
+
+      if (this[name].current === this[name].max) this.highlightLimit('up', name);
+      if (this[name].current === this[name].min) this.highlightLimit('down', name);
+
       this[name].dom.value.innerText = this[name].current;
     });
   }
@@ -54,49 +61,49 @@ export default class ControllerManager {
     this.direction = direction;
     switch (direction) {
       case 1:
-        if (this[target].current < limit) {
-          this[target].current += this.direction;
-          this.switchClasses(this[target].dom.reduce, 'down-limit', 'down');
-
-          this.validate(target, limit - this[target].max);
-
-          if (this[target].current === limit) {
-            this.switchClasses(this[target].dom.increase, 'up', 'up-limit');
-          }
-          this[target].dom.value.innerText = this[target].current;
+        this[target].current = this.validate(target, limit - this[target].current, limit);
+        this[target].dom.value.innerText = this[target].current;
+        if (this[target].current === limit) {
+          this.highlightLimit('up', target);
         }
+        this.switchClasses(this[target].dom.reduce, 'down-limit', 'down');
         break;
       case -1:
-        if (this[target].current > limit) {
-          this[target].current += this.direction;
-          this.switchClasses(this[target].dom.increase, 'up-limit', 'up');
-
-          this.validate(target, this[target].current - limit);
-
-          if (this[target].current === limit) {
-            this.switchClasses(this[target].dom.reduce, 'down', 'down-limit');
-          }
-          this[target].dom.value.innerText = this[target].current;
+        this[target].current = this.validate(target, this[target].current - limit, limit);
+        this[target].dom.value.innerText = this[target].current;
+        if (this[target].current === limit) {
+          this.highlightLimit('down', target);
         }
+        this.switchClasses(this[target].dom.increase, 'up-limit', 'up');
         break;
       default:
     }
   }
 
+  highlightLimit(direction, target) {
+    if (direction === 'up') {
+      this.switchClasses(this[target].dom.increase, 'up', 'up-limit');
+    } else {
+      this.switchClasses(this[target].dom.reduce, 'down', 'down-limit');
+    }
+  }
+
+  validate(target, distance, limit) {
+    if (distance < 0) {
+      return limit;
+    }
+    const odd = (this.height.current * this.width.current) % 2;
+    if (odd && distance > 1) {
+      return this[target].current + this.direction + this.direction;
+    }
+    if (distance > 0) {
+      return this[target].current + this.direction;
+    }
+    return this[target].current;
+  }
+
   switchClasses(element, from, to) {
     element.classList.remove(from);
     element.classList.add(to);
-  }
-
-  validate(target, distance) {
-    const odd = (this.height.current * this.width.current) % 2;
-    if (!odd) {
-      return;
-    }
-    if (distance) {
-      this[target].current += this.direction;
-    } else {
-      this[target].current -= this.direction;
-    }
   }
 }
