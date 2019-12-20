@@ -6,8 +6,8 @@ import ControllerManager from './refactor/ControllerManager';
 
 class Game {
   constructor(settings = {
-    height: { default: 11, min: 2, max: 6 },
-    width: { default: 11, min: 2, max: 6 },
+    height: { default: 6, min: 2, max: 6 },
+    width: { default: 6, min: 2, max: 6 },
     preview: { default: 4, min: 1, max: 7 },
     gameover: { default: 3, min: 1, max: 15 },
   }) {
@@ -24,17 +24,41 @@ class Game {
 
   run() {
     this.controllers.addAll(this.settings);
-    console.log(this.controllers)
-    // [this.startBtn] = Utility.selectElementsByClasses(this.startClass);
-    // this.startBtn.dataset = 'firstPosition';
+    // console.log(this.controllers)
+    [this.startBtn] = Utility.selectElementsByClasses(this.startClass);
+    this.startBtn.dataset.phase = 'first';
+
     this.startBtn.onclick = () => {
       this.clickStart();
     };
   }
 
   clickStart() {
+    if (this.startBtn.dataset.phase === 'first') {
+      this.secondPhase();
+      this.field.removeField();
 
+      this.field.build(this.controllers.height.current, this.controllers.width.current);
+      // console.log(this.field.tableOfmatches);
+      // this.timer.start();
+    } else {
+      this.firstPhase();
 
+      // this.field.progress();
+      // this.timer.abort();
+    }
+  }
+
+  firstPhase() {
+    this.startBtn.dataset.phase = 'first';
+    this.startBtn.innerText = 'start';
+    this.controllers.display();
+  }
+
+  secondPhase() {
+    this.startBtn.dataset.phase = 'second';
+    this.startBtn.innerText = 'Play again';
+    this.controllers.display('none');
   }
 }
 

@@ -10,7 +10,8 @@ export default class ControllerManager {
   }
 
   addAll(settings) {
-    [this.options] = Utility.selectElementsByClasses('options');
+    [this.optionsBar] = Utility.selectElementsByClasses('options');
+    [this.informPannel] = Utility.selectElementsByClasses('inform-pannel');
 
     const controllersNames = Object.keys(settings);
 
@@ -40,19 +41,28 @@ export default class ControllerManager {
       };
 
       this[name].dom.onmouseover = () => {
-        this.options.innerText = this[name].dom.label.innerText;
+        this.optionsBar.innerText = this[name].dom.label.innerText;
       };
       this[name].dom.onmouseout = () => {
-        this.options.innerText = 'OPTIONS';
+        this.optionsBar.innerText = 'OPTIONS';
       };
+      this[name].current = this[name].default;
 
-      this[name].current = this[name].current - this[name].max > 0
-        ? this.validate(name, this[name].max - this[name].current, this[name].max)
-        : this.validate(name, this[name].current - this[name].min, this[name].min);
+      // validation
+      this.direction = 1;
+      this[name].current = this.validate(
+        name,
+        this[name].max - this[name].current,
+        this[name].max,
+      );
+      this.direction = -1;
+      this[name].current = this.validate(
+        name,
+        this[name].current - this[name].min,
+        this[name].min,
+      );
 
-      if (this[name].current === this[name].max) this.highlightLimit('up', name);
-      if (this[name].current === this[name].min) this.highlightLimit('down', name);
-
+      this.checkHighlightLimit(name);
       this[name].dom.value.innerText = this[name].current;
     });
   }
@@ -61,30 +71,31 @@ export default class ControllerManager {
     this.direction = direction;
     switch (direction) {
       case 1:
+        this[target].current += 1;
         this[target].current = this.validate(target, limit - this[target].current, limit);
         this[target].dom.value.innerText = this[target].current;
-        if (this[target].current === limit) {
-          this.highlightLimit('up', target);
-        }
-        this.switchClasses(this[target].dom.reduce, 'down-limit', 'down');
+        this.checkHighlightLimit(target);
         break;
       case -1:
+        this[target].current -= 1;
         this[target].current = this.validate(target, this[target].current - limit, limit);
         this[target].dom.value.innerText = this[target].current;
-        if (this[target].current === limit) {
-          this.highlightLimit('down', target);
-        }
-        this.switchClasses(this[target].dom.increase, 'up-limit', 'up');
+        this.checkHighlightLimit(target);
         break;
       default:
     }
   }
 
-  highlightLimit(direction, target) {
-    if (direction === 'up') {
+  checkHighlightLimit(target) {
+    if (this[target].current === this[target].max) {
       this.switchClasses(this[target].dom.increase, 'up', 'up-limit');
     } else {
+      this.switchClasses(this[target].dom.increase, 'up-limit', 'up');
+    }
+    if (this[target].current === this[target].min) {
       this.switchClasses(this[target].dom.reduce, 'down', 'down-limit');
+    } else {
+      this.switchClasses(this[target].dom.reduce, 'down-limit', 'down');
     }
   }
 
@@ -93,17 +104,25 @@ export default class ControllerManager {
       return limit;
     }
     const odd = (this.height.current * this.width.current) % 2;
-    if (odd && distance > 1) {
-      return this[target].current + this.direction + this.direction;
+    if (!odd) {
+      return this[target].current;
     }
-    if (distance > 0) {
+    if (distance) {
       return this[target].current + this.direction;
     }
-    return this[target].current;
+    return this[target].current - this.direction;
   }
 
   switchClasses(element, from, to) {
     element.classList.remove(from);
     element.classList.add(to);
+  }
+
+  display(position) {
+    if (position === 'none') {
+      Utility.switchProperty('className', 'remove', this.informPannel);
+    } else {
+      Utility.switchProperty('className', 'inform-pannel', this.informPannel);
+    }
   }
 }
