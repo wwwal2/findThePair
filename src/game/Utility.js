@@ -5,7 +5,7 @@ export default class Utility {
     return element;
   }
 
-  static selectElements(...classes) {
+  static selectElementsByClasses(...classes) {
     return classes.reduce(
       (acc, current) => acc.concat(
         Array.from(document.body.getElementsByClassName(current)),
@@ -25,13 +25,5 @@ export default class Utility {
       randomValues.push(i);
     }
     return randomValues.concat(randomValues).sort(() => Math.random() - 0.5);
-  }
-
-  static addEvent(event, target) {
-    Utility
-      .selectElements(target)
-      .forEach((elem) => {
-        elem.onclick = event;
-      });
   }
 }

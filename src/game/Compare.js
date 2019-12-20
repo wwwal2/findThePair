@@ -4,15 +4,50 @@ export default class Compare {
   constructor() {
     this.counter = 0;
     this.openImgTimeout = 0;
-    this.bufferElement = {};
-    this.eventElement = {};
-    this.image = {};
+    this.bufferCell = {};
+    this.nextBufferCell = {};
   }
 
-  insertImage(event, num) {
+  collect(event, imgSrc) {
+    switch (this.counter) {
+      case 0:
+        this.counter += 1;
+        this.insertImage(event, imgSrc);
+        this.bufferCell = event.target;
+        this.bufferCell.imgSrc = imgSrc;
+        break;
+      case 1:
+        this.counter += 1;
+        this.insertImage(event, imgSrc);
+        this.nextBufferCell = event.target;
+        this.nextBufferCell.imgSrc = imgSrc;
+        this.match();
+        break;
+      default:
+        event.target.classList.add('apply-shake');
+        setTimeout(() => {
+          event.target.classList.remove('apply-shake');
+        }, 1000);
+        break;
+    }
+  }
+
+  match() {
+    if (this.bufferCell.imgSrc === this.nextBufferCell.imgSrc) {
+      this.clear();
+    } else {
+      this.openImgTimeout = setTimeout(() => {
+        this.removeImage(this.bufferCell);
+        this.removeImage(this.nextBufferCell);
+        this.clear();
+      }, 1000);
+    }
+  }
+
+  insertImage(event, imgSrc) {
     event.target.disabled = true;
     this.image = Utility.createElement('img', 'image');
-    this.image.src = `./img/cells/${num}.png`;
+    this.image.src = `./img/cells/${imgSrc}.png`;
     event.target.appendChild(this.image);
   }
 
@@ -21,48 +56,20 @@ export default class Compare {
     target.children.item(0).remove();
   }
 
-  match(event, num) {
-    if (this.bufferElement === 0) {
-      this.insertImage(event, num);
-      this.bufferElement = event.target;
-      this.bufferElement.num = num;
-      this.counter += 1;
-      return;
-    }
-
-    if (this.bufferElement.num === num && this.counter < 2) {
-      this.insertImage(event, num);
-      this.bufferElement = 0;
-      this.counter = 0;
-      return;
-    }
-
-    if (this.counter < 2) {
-      this.insertImage(event, num);
-      this.eventElement = event.target;
-      this.counter += 1;
-
-      this.openImgTimeout = setTimeout(() => {
-        this.removeImage(this.bufferElement);
-        this.removeImage(event.target);
-        this.counter = 0;
-        this.bufferElement = 0;
-        this.eventElement = 0;
-      }, 1000);
-    } else {
-      event.target.classList.add('apply-shake');
-      setTimeout(() => {
-        event.target.classList.remove('apply-shake');
-      }, 1000);
-    }
+  clear() {
+    this.counter = 0;
+    this.nextBufferCell = 0;
+    this.bufferCell = 0;
   }
 
   abort() {
-    if (this.bufferElement.children) {
-      this.bufferElement.children.item(0).remove();
+    if (this.bufferCell.children) {
+      this.bufferCell.children.item(0).remove();
     }
-    if (this.eventElement.children) {
-      this.eventElement.children.item(0).remove();
+    if (this.nextBufferCell.children) {
+      this.nextBufferCell.children.item(0).remove();
     }
+    clearTimeout(this.openImgTimeout);
+    this.clear();
   }
 }

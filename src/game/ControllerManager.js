@@ -2,104 +2,127 @@ import Utility from './Utility';
 
 export default class ControllerManager {
   constructor() {
-    this.settings = {
-      height: 0,
-      width: 0,
-      preview: 0,
-      gameover: 0,
-    };
+    this.height = {};
+    this.width = {};
+    this.preview = {};
+    this.gameover = {};
     this.direction = 1;
   }
 
-  add(name, target, settings) {
-    const { standard, max, min } = settings;
+  addAll(settings) {
+    [this.optionsBar] = Utility.selectElementsByClasses('options');
+    [this.informPannel] = Utility.selectElementsByClasses('inform-pannel');
 
-    [this[name]] = Utility.selectElements(target);
-    [this.informPannel] = Utility.selectElements('inform-pannel');
-    [this.options] = Utility.selectElements('options');
+    const controllersNames = Object.keys(settings);
 
-    this[name].onmouseover = () => {
-      this.options.innerText = this[name].label.innerText;
-    };
-    this[name].onmouseout = () => {
-      this.options.innerText = 'OPTIONS';
-    };
+    controllersNames.forEach((name) => {
+      this[name] = {};
+      [this[name].dom] = Utility.selectElementsByClasses(name);
+      this[name].dom.innerElements = Array.from(this[name].dom.children);
+      [
+        this[name].dom.label,
+        this[name].dom.increase,
+        this[name].dom.value,
+        this[name].dom.reduce,
+      ] = this[name].dom.innerElements;
 
-    this[name].innerElements = Array.from(this[name].children);
-    [
-      this[name].label,
-      this[name].increase,
-      this[name].value,
-      this[name].reduce,
-    ] = this[name].innerElements;
+      [
+        this[name].default,
+        this[name].min,
+        this[name].max,
+      ] = Object.values(settings[name]);
+      this[name].current = this[name].default;
 
-    this.settings[name] = standard;
-    this[name].value.innerText = this.settings[name];
+      this[name].dom.increase.onclick = () => {
+        this.controllerHandler(name, 1, this[name].max);
+      };
+      this[name].dom.reduce.onclick = () => {
+        this.controllerHandler(name, -1, this[name].min);
+      };
 
-    if (standard === max) this.switchClasses(this[name].increase, 'up', 'up-limit');
-    if (standard === min) this.switchClasses(this[name].reduce, 'down', 'down-limit');
+      this[name].dom.onmouseover = () => {
+        this.optionsBar.innerText = this[name].dom.label.innerText;
+      };
+      this[name].dom.onmouseout = () => {
+        this.optionsBar.innerText = 'OPTIONS';
+      };
+      this[name].current = this[name].default;
 
-    this[name].increase.onclick = () => {
-      this.controllerEvent(name, 1, max);
-    };
+      // validation
+      this.direction = 1;
+      this[name].current = this.validate(
+        name,
+        this[name].max - this[name].current,
+        this[name].max,
+      );
+      this.direction = -1;
+      this[name].current = this.validate(
+        name,
+        this[name].current - this[name].min,
+        this[name].min,
+      );
 
-    this[name].reduce.onclick = () => {
-      this.controllerEvent(name, -1, min);
-    };
-    this.validation(name, max - standard);
+      this.checkHighlightLimit(name);
+      this[name].dom.value.innerText = this[name].current;
+    });
   }
 
-  controllerEvent(target, direction, limit) {
+  controllerHandler(target, direction, limit) {
     this.direction = direction;
     switch (direction) {
       case 1:
-        if (this.settings[target] < limit) {
-          this.settings[target] += this.direction;
-          this.switchClasses(this[target].reduce, 'down-limit', 'down');
-          this.validation(target, limit - this.settings[target]);
-          if (this.settings[target] === limit) {
-            this.switchClasses(this[target].increase, 'up', 'up-limit');
-          }
-        }
+        this[target].current += 1;
+        this[target].current = this.validate(target, limit - this[target].current, limit);
+        this[target].dom.value.innerText = this[target].current;
+        this.checkHighlightLimit(target);
         break;
       case -1:
-        if (this.settings[target] > limit) {
-          this.settings[target] += this.direction;
-          this.switchClasses(this[target].increase, 'up-limit', 'up');
-          this.validation(target, this.settings[target] - limit);
-          if (this.settings[target] === limit) {
-            this.switchClasses(this[target].reduce, 'down', 'down-limit');
-          }
-        }
+        this[target].current -= 1;
+        this[target].current = this.validate(target, this[target].current - limit, limit);
+        this[target].dom.value.innerText = this[target].current;
+        this.checkHighlightLimit(target);
         break;
       default:
     }
   }
 
-  validation(target, distance) {
-    const odd = (this.settings.height * this.settings.width) % 2;
-    if (!odd) {
-      this[target].value.innerText = this.settings[target];
-      return;
-    }
-    if (distance) {
-      this.settings[target] = this.settings[target] + this.direction;
+  checkHighlightLimit(target) {
+    if (this[target].current === this[target].max) {
+      this.switchClasses(this[target].dom.increase, 'up', 'up-limit');
     } else {
-      this.settings[target] = this.settings[target] - this.direction;
+      this.switchClasses(this[target].dom.increase, 'up-limit', 'up');
     }
-    this[target].value.innerText = this.settings[target];
+    if (this[target].current === this[target].min) {
+      this.switchClasses(this[target].dom.reduce, 'down', 'down-limit');
+    } else {
+      this.switchClasses(this[target].dom.reduce, 'down-limit', 'down');
+    }
   }
 
-  display(position) {
-    if (position === 'hide') {
-      Utility.switchProperty('className', 'remove', this.informPannel);
-    } else {
-      Utility.switchProperty('className', 'inform-pannel', this.informPannel);
+  validate(target, distance, limit) {
+    if (distance < 0) {
+      return limit;
     }
+    const odd = (this.height.current * this.width.current) % 2;
+    if (!odd) {
+      return this[target].current;
+    }
+    if (distance) {
+      return this[target].current + this.direction;
+    }
+    return this[target].current - this.direction;
   }
 
   switchClasses(element, from, to) {
     element.classList.remove(from);
     element.classList.add(to);
+  }
+
+  display(position) {
+    if (position === 'none') {
+      Utility.switchProperty('className', 'remove', this.informPannel);
+    } else {
+      Utility.switchProperty('className', 'inform-pannel', this.informPannel);
+    }
   }
 }

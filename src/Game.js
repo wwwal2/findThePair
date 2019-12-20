@@ -1,8 +1,8 @@
-import Field from './refactor/Field';
-import Utility from './refactor/Utility';
-import Compare from './refactor/Compare';
-import Timer from './refactor/Timer';
-import ControllerManager from './refactor/ControllerManager';
+import Field from './game/Field';
+import Utility from './game/Utility';
+import Timer from './game/Timer';
+import ControllerManager from './game/ControllerManager';
+import congratulations from './img/congratulations.png';
 
 class Game {
   constructor(settings = {
@@ -15,11 +15,12 @@ class Game {
     this.startClass = 'start';
 
     this.controllers = new ControllerManager();
-    this.field = new Field();
-    this.compare = new Compare();
+
+    this.field = new Field(() => this.winCheck());
     this.timer = new Timer();
 
     this.startBtn = {};
+    this.cellsLeft = [];
   }
 
   run() {
@@ -47,9 +48,8 @@ class Game {
       );
     } else {
       this.firstPhase();
-
-      // this.field.progress();
-      // this.timer.abort();
+      this.field.compare.abort();
+      this.timer.clear();
     }
   }
 
@@ -64,68 +64,19 @@ class Game {
     this.startBtn.innerText = 'Play again';
     this.controllers.display('none');
   }
+
+  winCheck() {
+    this.cellsLeft = this.timer.allCells.filter((cell) => cell.childElementCount === 1);
+    if (this.cellsLeft.length === this.timer.allCells.length) {
+      this.timer.clear();
+      this.field.removeField();
+
+      const img = Utility.createElement('img', 'congratulation');
+      img.src = congratulations;
+      img.style.backgroundColor = 'transparent';
+      this.field.domLocation.appendChild(img);
+    }
+  }
 }
-
-
-
-//   const gameStatus = {
-//     settings,
-//     tableOfmatches: 'empty',
-//     gameoverTimeout: 'empty',
-//   };
-
-//   const [startDOMelement] = Utility.selectElements('start');
-
-//   const controllers = new ControllerManager();
-//   controllers.add('height', 'height-controller', { standard: gameStatus.settings.height, max: 6, min: 2 });
-//   controllers.add('width', 'width-controller', { standard: gameStatus.settings.width, max: 6, min: 2 });
-//   controllers.add('preview', 'preview-controller', { standard: gameStatus.settings.preview, max: 7, min: 1 });
-//   controllers.add('gameOver', 'gameOver-controller', { standard: gameStatus.settings.gameOver, max: 15, min: 1 });
-
-//   const field = new Field();
-//   const compare = new Compare();
-//   const timer = new Timer();
-
-//   const clickImage = (event) => {
-//     const num = gameStatus.tableOfmatches[event.target.dataset.x][event.target.dataset.y];
-//     compare.match(event, num);
-//     field.congratulations(timer.timerId);
-//   };
-
-//   const start = () => {
-//     if (startDOMelement.innerText === 'start') {
-//       startDOMelement.innerText = 'play again';
-//       timer.clear(field.previewTimeout);
-//       field.removeField();
-//       compare.bufferElement = 0;
-//       compare.counter = 0;
-
-//       field.build(controllers.settings);
-//       field.preview(controllers.preview.value.innerText, () => {
-//         timer.start(controllers.gameOver.value.innerText);
-//       });
-//       gameStatus.tableOfmatches = field.tableOfmatches;
-//       Utility.addEvent(clickImage, 'cells');
-
-//       controllers.display('hide');
-//     } else {
-//       controllers.display('show');
-//       startDOMelement.innerText = 'start';
-//       timer.clear(field.previewTimeout, compare.openImgTimeout);
-//       timer.timerValue.innerText = '';
-//       if (field.previewAbort) {
-//         field.removeAllImages();
-//       }
-//       Utility.switchProperty('disabled', true, ...field.allCells);
-//       compare.abort();
-//       if (timer.timerValue.classList) {
-//         timer.timerValue.classList.remove('gameOver');
-//         timer.timerLabel.classList.add('hidden');
-//       }
-//     }
-//   };
-
-//   startDOMelement.onclick = start;
-// };
 
 export default Game;

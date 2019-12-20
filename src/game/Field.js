@@ -1,75 +1,44 @@
-import Button from './Buttion';
 import Utility from './Utility';
-import congratulations from '../img/congratulations.png';
+import Button from './Button';
+import Compare from './Compare';
 
 export default class Field {
-  constructor() {
+  constructor(winCheck) {
     this.tableOfmatches = [];
-    this.location = {};
-    this.randomValues = [];
-    this.allCells = [];
-    this.previewTimeout = 0;
-    this.previewAbort = true;
-    this.cellsLeft = [];
+    this.domLocation = {};
+    this.compare = new Compare();
+    this.winCheck = winCheck;
   }
 
-  build(settings) {
-    const { width, height } = settings;
+  build(width, height) {
     this.tableOfmatches = [];
     const btnNum = height * width;
     this.randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
+    [this.domLocation] = Utility.selectElementsByClasses('field-container');
 
-    [this.location] = Utility.selectElements('field-container');
     for (let i = 0; i < height; i += 1) {
       const row = Utility.createElement('div', 'row');
       this.tableOfmatches.push([]);
       for (let j = 0; j < width; j += 1) {
         const button = new Button.Create('cells', i, j);
+        button.addEventListener('click', (e) => this.clickCell(e));
+        button.disabled = true;
         row.appendChild(button);
         this.tableOfmatches[i].push(this.randomValues.pop());
       }
-      this.location.appendChild(row);
+      this.domLocation.appendChild(row);
     }
   }
 
-  preview(duration, startGameoverTimer) {
-    this.previewAbort = true;
-    this.allCells = Utility.selectElements('cells');
-    this.allCells.forEach((cell) => {
-      cell.disabled = true;
-      const image = Utility.createElement('img', 'image');
-      image.src = `./img/cells/${this.tableOfmatches[cell.dataset.x][cell.dataset.y]}.png`;
-      cell.appendChild(image);
-    });
-    this.previewTimeout = setTimeout(() => {
-      this.removeAllImages();
-      startGameoverTimer();
-      this.previewAbort = false;
-    }, duration * 1000);
+  clickCell(event) {
+    const imgSrc = this.tableOfmatches[event.target.dataset.x][event.target.dataset.y];
+    this.compare.collect(event, imgSrc);
+    this.winCheck();
   }
 
   removeField() {
-    if (this.location.childNodes) {
-      this.location.innerHTML = '';
-    }
-  }
-
-  removeAllImages() {
-    this.allCells.forEach((cell) => {
-      cell.disabled = false;
-      cell.childNodes.item(0).remove();
-    });
-  }
-
-  congratulations(timerId) {
-    this.cellsLeft = this.allCells.filter((cell) => cell.childElementCount === 1);
-    if (this.cellsLeft.length === this.allCells.length) {
-      this.removeField();
-      const img = Utility.createElement('img', 'congratulation');
-      img.src = congratulations;
-      img.style.backgroundColor = 'transparent';
-      this.location.appendChild(img);
-      clearTimeout(timerId);
+    if (this.domLocation.childNodes) {
+      this.domLocation.innerHTML = '';
     }
   }
 }
