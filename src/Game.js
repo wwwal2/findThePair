@@ -24,7 +24,7 @@ class Game {
 
   run() {
     this.controllers.addAll(this.settings);
-    // console.log(this.controllers)
+
     [this.startBtn] = Utility.selectElementsByClasses(this.startClass);
     this.startBtn.dataset.phase = 'first';
 
@@ -39,8 +39,12 @@ class Game {
       this.field.removeField();
 
       this.field.build(this.controllers.height.current, this.controllers.width.current);
-      // console.log(this.field.tableOfmatches);
-      // this.timer.start();
+
+      this.timer.preview(
+        this.controllers.preview.current,
+        this.field.tableOfmatches,
+        () => this.timer.start(this.controllers.gameover.current),
+      );
     } else {
       this.firstPhase();
 
