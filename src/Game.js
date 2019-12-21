@@ -17,7 +17,11 @@ class Game {
     this.controllers = new ControllerManager();
 
     this.field = new Field(() => this.winCheck());
-    this.timer = new Timer();
+    this.timer = new Timer(
+      () => this.field.showAll(),
+      () => this.field.hideAll(),
+      this.field.allCells,
+    );
 
     this.startBtn = {};
     this.cellsLeft = [];
@@ -53,10 +57,9 @@ class Game {
 
     this.field.build(this.controllers.height.current, this.controllers.width.current);
 
-    this.timer.preview(
+    this.timer.begin(
       this.controllers.preview.current,
-      this.field.tableOfmatches,
-      () => this.timer.start(this.controllers.gameover.current),
+      this.controllers.gameover.current,
     );
   }
 
@@ -70,8 +73,8 @@ class Game {
   }
 
   winCheck() {
-    this.cellsLeft = this.timer.allCells.filter((cell) => cell.childElementCount === 1);
-    if (this.cellsLeft.length === this.timer.allCells.length) {
+    this.cellsLeft = this.field.allCells.filter((cell) => cell.childElementCount === 1);
+    if (this.cellsLeft.length === this.field.allCells.length) {
       this.timer.clear();
       this.field.removeField();
 

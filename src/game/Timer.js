@@ -1,14 +1,17 @@
 import Utility from './Utility';
 
 export default class Timer {
-  constructor() {
+  constructor(showAll, hideAll, allCells) {
+    this.showAll = showAll;
+    this.hideAll = hideAll;
+    this.allCells = allCells;
+
     this.totallTime = 0;
     this.minutes = 0;
     this.seconds = 0;
     this.timerValue = {};
     this.timerLabel = {};
 
-    this.allCells = [];
     this.previewTimeout = 0;
     this.gameoverTimeout = 0;
   }
@@ -35,20 +38,12 @@ export default class Timer {
     }, 1000);
   }
 
-  preview(duration, tableOfmatches, onPreviewEnd) {
-    this.allCells = Utility.selectElementsByClasses('cells');
-    this.allCells.forEach((cell) => {
-      const image = Utility.createElement('img', 'image');
-      image.src = `./img/cells/${tableOfmatches[cell.dataset.x][cell.dataset.y]}.png`;
-      cell.appendChild(image);
-    });
+  begin(previewTime, gameoverTime) {
+    this.showAll();
     this.previewTimeout = setTimeout(() => {
-      this.allCells.forEach((cell) => {
-        cell.disabled = false;
-        cell.childNodes.item(0).remove();
-      });
-      onPreviewEnd();
-    }, duration * 1000);
+      this.hideAll();
+      this.start(gameoverTime);
+    }, previewTime * 1000);
   }
 
   clear() {
