@@ -125,11 +125,11 @@ export default class ControllerManager {
     element.classList.add(to);
   }
 
-  display(position) {
-    if (position === 'none') {
-      Utility.switchProperty('className', 'remove', this.informPannel);
-    } else {
-      Utility.switchProperty('className', 'inform-pannel', this.informPannel);
-    }
+  show() {
+    Utility.switchProperty('className', 'inform-pannel', this.informPannel);
+  }
+
+  hide() {
+    Utility.switchProperty('className', 'remove', this.informPannel);
   }
 }

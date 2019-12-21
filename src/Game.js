@@ -48,7 +48,7 @@ class Game {
     this.saveCookies();
     this.startBtn.dataset.phase = 'stop';
     this.startBtn.innerText = 'Play again';
-    this.controllers.display('none');
+    this.controllers.hide();
     this.field.removeField();
 
     this.field.build(this.controllers.height.current, this.controllers.width.current);
@@ -63,7 +63,7 @@ class Game {
   stop() {
     this.startBtn.dataset.phase = 'start';
     this.startBtn.innerText = 'start';
-    this.controllers.display();
+    this.controllers.show();
 
     this.field.compare.abort();
     this.timer.clear();
