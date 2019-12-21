@@ -24,10 +24,12 @@ class Game {
   }
 
   run() {
+    if (document.cookie) this.readCookies();
+
     this.controllers.addAll(this.settings);
 
     [this.startBtn] = Utility.selectElementsByClasses(this.startClass);
-    this.startBtn.dataset.phase = 'first';
+    this.startBtn.dataset.phase = 'start';
 
     this.startBtn.onclick = () => {
       this.clickStart();
@@ -35,34 +37,36 @@ class Game {
   }
 
   clickStart() {
-    if (this.startBtn.dataset.phase === 'first') {
-      this.secondPhase();
-      this.field.removeField();
-
-      this.field.build(this.controllers.height.current, this.controllers.width.current);
-
-      this.timer.preview(
-        this.controllers.preview.current,
-        this.field.tableOfmatches,
-        () => this.timer.start(this.controllers.gameover.current),
-      );
+    if (this.startBtn.dataset.phase === 'start') {
+      this.start();
     } else {
-      this.firstPhase();
-      this.field.compare.abort();
-      this.timer.clear();
+      this.stop();
     }
   }
 
-  firstPhase() {
-    this.startBtn.dataset.phase = 'first';
-    this.startBtn.innerText = 'start';
-    this.controllers.display();
-  }
-
-  secondPhase() {
-    this.startBtn.dataset.phase = 'second';
+  start() {
+    this.saveCookies();
+    this.startBtn.dataset.phase = 'stop';
     this.startBtn.innerText = 'Play again';
     this.controllers.display('none');
+    this.field.removeField();
+
+    this.field.build(this.controllers.height.current, this.controllers.width.current);
+
+    this.timer.preview(
+      this.controllers.preview.current,
+      this.field.tableOfmatches,
+      () => this.timer.start(this.controllers.gameover.current),
+    );
+  }
+
+  stop() {
+    this.startBtn.dataset.phase = 'start';
+    this.startBtn.innerText = 'start';
+    this.controllers.display();
+
+    this.field.compare.abort();
+    this.timer.clear();
   }
 
   winCheck() {
@@ -76,6 +80,24 @@ class Game {
       img.style.backgroundColor = 'transparent';
       this.field.domLocation.appendChild(img);
     }
+  }
+
+  saveCookies() {
+    document.cookie = JSON.stringify({
+      name: 'FIND THE PAIR',
+      height: this.controllers.height.current,
+      width: this.controllers.width.current,
+      preview: this.controllers.preview.current,
+      gameover: this.controllers.gameover.current,
+    });
+  }
+
+  readCookies() {
+    const cookies = (JSON.parse(document.cookie));
+    this.settings.height.default = cookies.height;
+    this.settings.width.default = cookies.width;
+    this.settings.preview.default = cookies.preview;
+    this.settings.gameover.default = cookies.gameover;
   }
 }
 

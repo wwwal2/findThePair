@@ -17,53 +17,29 @@ export default class ControllerManager {
 
     controllersNames.forEach((name) => {
       this[name] = {};
-      [this[name].dom] = Utility.selectElementsByClasses(name);
-      this[name].dom.innerElements = Array.from(this[name].dom.children);
+      const newController = this[name];
+      [newController.dom] = Utility.selectElementsByClasses(name);
+      newController.dom.innerElements = Array.from(newController.dom.children);
       [
-        this[name].dom.label,
-        this[name].dom.increase,
-        this[name].dom.value,
-        this[name].dom.reduce,
-      ] = this[name].dom.innerElements;
+        newController.dom.label,
+        newController.dom.increase,
+        newController.dom.value,
+        newController.dom.reduce,
+      ] = newController.dom.innerElements;
 
       [
-        this[name].default,
-        this[name].min,
-        this[name].max,
+        newController.default,
+        newController.min,
+        newController.max,
       ] = Object.values(settings[name]);
-      this[name].current = this[name].default;
 
-      this[name].dom.increase.onclick = () => {
-        this.controllerHandler(name, 1, this[name].max);
-      };
-      this[name].dom.reduce.onclick = () => {
-        this.controllerHandler(name, -1, this[name].min);
-      };
+      this.addMouseEvents(name);
 
-      this[name].dom.onmouseover = () => {
-        this.optionsBar.innerText = this[name].dom.label.innerText;
-      };
-      this[name].dom.onmouseout = () => {
-        this.optionsBar.innerText = 'OPTIONS';
-      };
-      this[name].current = this[name].default;
+      newController.current = newController.default;
 
-      // validation
-      this.direction = 1;
-      this[name].current = this.validate(
-        name,
-        this[name].max - this[name].current,
-        this[name].max,
-      );
-      this.direction = -1;
-      this[name].current = this.validate(
-        name,
-        this[name].current - this[name].min,
-        this[name].min,
-      );
-
+      this.initialValidation(name);
       this.checkHighlightLimit(name);
-      this[name].dom.value.innerText = this[name].current;
+      newController.dom.value.innerText = newController.current;
     });
   }
 
@@ -111,6 +87,37 @@ export default class ControllerManager {
       return this[target].current + this.direction;
     }
     return this[target].current - this.direction;
+  }
+
+  initialValidation(name) {
+    this.direction = 1;
+    this[name].current = this.validate(
+      name,
+      this[name].max - this[name].current,
+      this[name].max,
+    );
+    this.direction = -1;
+    this[name].current = this.validate(
+      name,
+      this[name].current - this[name].min,
+      this[name].min,
+    );
+  }
+
+  addMouseEvents(name) {
+    this[name].dom.increase.onclick = () => {
+      this.controllerHandler(name, 1, this[name].max);
+    };
+    this[name].dom.reduce.onclick = () => {
+      this.controllerHandler(name, -1, this[name].min);
+    };
+
+    this[name].dom.onmouseover = () => {
+      this.optionsBar.innerText = this[name].dom.label.innerText;
+    };
+    this[name].dom.onmouseout = () => {
+      this.optionsBar.innerText = 'OPTIONS';
+    };
   }
 
   switchClasses(element, from, to) {

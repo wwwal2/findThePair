@@ -29,7 +29,7 @@ export default class Timer {
 
       if (this.totallTime === 0) {
         this.clear();
-        Utility.switchProperty('disabled', true, ...this.allCells);
+        this.timerValue.innerText = `${this.minutes}:${this.seconds}`; Utility.switchProperty('disabled', true, ...this.allCells);
         this.timerValue.classList.add('gameOver');
       }
     }, 1000);
@@ -56,6 +56,7 @@ export default class Timer {
     clearTimeout(this.previewTimeout);
 
     this.timerLabel.classList.add('hidden');
+    this.timerValue.classList.remove('gameOver');
     this.timerValue.innerText = '';
 
     Utility.switchProperty('disabled', true, ...this.allCells);
