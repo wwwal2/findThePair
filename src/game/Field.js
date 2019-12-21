@@ -2,8 +2,9 @@ import Utility from './Utility';
 import Button from './Button';
 import Compare from './Compare';
 
-export default class Field {
+export default class Field extends Button {
   constructor(winCheck) {
+    super();
     this.tableOfmatches = [];
     this.domLocation = {};
     this.allCells = [];
@@ -21,7 +22,7 @@ export default class Field {
       const row = Utility.createElement('div', 'row');
       this.tableOfmatches.push([]);
       for (let j = 0; j < width; j += 1) {
-        const button = new Button.Create('cells', i, j);
+        const button = this.createBtn('cells', i, j);
         button.addEventListener('click', (e) => this.clickCell(e));
         button.disabled = true;
         this.allCells.push(button);

@@ -12,7 +12,6 @@ class Game {
     gameover: { default: 3, min: 1, max: 15 },
   }) {
     this.settings = settings;
-    this.startClass = 'start';
 
     this.controllers = new ControllerManager();
 
@@ -23,6 +22,7 @@ class Game {
       this.field.allCells,
     );
 
+    this.startClass = 'start';
     this.startBtn = {};
     this.cellsLeft = [];
   }

@@ -16,7 +16,15 @@ export default class Timer {
     this.gameoverTimeout = 0;
   }
 
-  start(duration) {
+  begin(previewTime, gameoverTime) {
+    this.showAll();
+    this.previewTimeout = setTimeout(() => {
+      this.hideAll();
+      this.startTimer(gameoverTime);
+    }, previewTime * 1000);
+  }
+
+  startTimer(duration) {
     [this.timerValue] = Utility.selectElementsByClasses('timer-value');
     [this.timerLabel] = Utility.selectElementsByClasses('timer-label');
     this.timerLabel.classList.remove('hidden');
@@ -36,14 +44,6 @@ export default class Timer {
         this.timerValue.classList.add('gameOver');
       }
     }, 1000);
-  }
-
-  begin(previewTime, gameoverTime) {
-    this.showAll();
-    this.previewTimeout = setTimeout(() => {
-      this.hideAll();
-      this.start(gameoverTime);
-    }, previewTime * 1000);
   }
 
   clear() {

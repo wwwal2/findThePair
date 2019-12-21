@@ -161,12 +161,13 @@ img {
                 background-color: white;
             }
         }
-        
     }
 
 }
 
- @media all and (min-width: 600px) and (max-width: 1000px) {
+ @media 
+ all and (min-width: 600px) and (max-width: 1000px), 
+ all and (max-height: 601px)  {
     .main-container {
         width: 600px;
         .field-container {
