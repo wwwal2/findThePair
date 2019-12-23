@@ -18,6 +18,8 @@ export default class Timer {
 
   begin(previewTime, gameoverTime) {
     this.showAll();
+    [this.timerValue] = Utility.selectElementsByClasses('timer-value');
+    [this.timerLabel] = Utility.selectElementsByClasses('timer-label');
     this.previewTimeout = setTimeout(() => {
       this.hideAll();
       this.startTimer(gameoverTime);
@@ -25,8 +27,6 @@ export default class Timer {
   }
 
   startTimer(duration) {
-    [this.timerValue] = Utility.selectElementsByClasses('timer-value');
-    [this.timerLabel] = Utility.selectElementsByClasses('timer-label');
     this.timerLabel.classList.remove('hidden');
 
     this.totallTime = Number(duration) * 60;
