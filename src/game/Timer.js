@@ -34,7 +34,7 @@ export default class Timer {
     this.timerValue.innerText = `${this.minutes}:${this.seconds}`;
 
     this.gameoverTimeout = setInterval(() => {
-      this.totallTime = this.totallTime - 1;
+      this.totallTime -= 1;
       this.parseTime(this.totallTime);
       this.timerValue.innerText = `${this.minutes}:${this.seconds}`;
 
