@@ -16,11 +16,7 @@ class Game {
     this.controllers = new ControllerManager();
 
     this.field = new Field(() => this.winCheck());
-    this.timer = new Timer(
-      () => this.field.showAll(),
-      () => this.field.hideAll(),
-      () => this.field.disableAll(),
-    );
+    this.timer = new Timer();
 
     this.startClass = 'start';
     this.startBtn = {};
@@ -59,10 +55,15 @@ class Game {
 
     this.field.build(this.controllers.height.current, this.controllers.width.current);
 
-    this.timer.begin(
-      this.controllers.preview.current,
-      this.controllers.gameover.current,
-    );
+    this.field.showAll();
+
+    this.timer.preview(this.controllers.preview.current)
+      .then(() => {
+        this.field.hideAll();
+        return this.timer.start(this.controllers.gameover.current);
+      }).then(() => {
+        this.field.disableAll();
+      });
   }
 
   stop() {
