@@ -19,7 +19,7 @@ class Game {
     this.timer = new Timer(
       () => this.field.showAll(),
       () => this.field.hideAll(),
-      this.field.allCells,
+      () => this.field.disableAll(),
     );
 
     this.startClass = 'start';
@@ -28,7 +28,9 @@ class Game {
   }
 
   run() {
-    if (document.cookie) this.readCookies();
+    if (document.cookie) {
+      this.readCookies();
+    }
 
     this.controllers.addAll(this.settings);
 
@@ -67,7 +69,6 @@ class Game {
     this.startBtn.dataset.phase = 'start';
     this.startBtn.innerText = 'start';
     this.controllers.show();
-
     this.field.compare.abort();
     this.timer.clear();
   }

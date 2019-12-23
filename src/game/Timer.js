@@ -1,10 +1,10 @@
 import Utility from './Utility';
 
 export default class Timer {
-  constructor(showAll, hideAll, allCells) {
+  constructor(showAll, hideAll, disableAll) {
     this.showAll = showAll;
     this.hideAll = hideAll;
-    this.allCells = allCells;
+    this.disableAll = disableAll;
 
     this.totallTime = 0;
     this.minutes = 0;
@@ -40,7 +40,8 @@ export default class Timer {
 
       if (this.totallTime === 0) {
         this.clear();
-        this.timerValue.innerText = `${this.minutes}:${this.seconds}`; Utility.switchProperty('disabled', true, ...this.allCells);
+        this.timerValue.innerText = `${this.minutes}:${this.seconds}`;
+        this.disableAll();
         this.timerValue.classList.add('gameOver');
       }
     }, 1000);
@@ -49,12 +50,15 @@ export default class Timer {
   clear() {
     clearTimeout(this.gameoverTimeout);
     clearTimeout(this.previewTimeout);
-
-    this.timerLabel.classList.add('hidden');
-    this.timerValue.classList.remove('gameOver');
-    this.timerValue.innerText = '';
-
-    Utility.switchProperty('disabled', true, ...this.allCells);
+    if (this.timerValue.innerText !== '') {
+      this.timerLabel.classList.add('hidden');
+      this.timerValue.classList.remove('gameOver');
+      this.timerValue.innerText = '';
+      this.disableAll();
+    } else {
+      this.hideAll();
+      this.disableAll();
+    }
   }
 
   parseTime(totallTime) {

@@ -48,6 +48,12 @@ export default class Field extends Button {
     });
   }
 
+  disableAll() {
+    this.allCells.forEach((cell) => {
+      cell.disabled = true;
+    });
+  }
+
   clickCell(event) {
     const imgSrc = this.tableOfmatches[event.target.dataset.x][event.target.dataset.y];
     this.compare.collect(event, imgSrc);
