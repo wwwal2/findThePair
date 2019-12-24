@@ -27,7 +27,7 @@ export default class Timer {
   }
 
   startTimer(duration) {
-    this.timerLabel.classList.remove('hidden');
+    this.timerLabel.classList.remove('remove');
 
     this.totallTime = Number(duration) * 60;
     this.parseTime(this.totallTime);
@@ -51,20 +51,26 @@ export default class Timer {
     clearTimeout(this.gameoverTimeout);
     clearTimeout(this.previewTimeout);
     if (this.timerValue.innerText !== '') {
-      this.timerLabel.classList.add('hidden');
+      this.timerLabel.classList.add('remove');
       this.timerValue.classList.remove('gameOver');
       this.timerValue.innerText = '';
-      this.disableAll();
     } else {
       this.hideAll();
-      this.disableAll();
     }
+    this.disableAll();
   }
 
   parseTime(totallTime) {
     this.minutes = Math.floor(totallTime / 60);
     this.seconds = totallTime % 60;
-    this.minutes = this.minutes < 10 ? `0${this.minutes}` : this.minutes;
-    this.seconds = this.seconds < 10 ? `0${this.seconds}` : this.seconds;
+    this.minutes = this.addZero(this.minutes);
+    this.seconds = this.addZero(this.seconds);
+  }
+
+  addZero(num) {
+    if (num < 10) {
+      return `0${num}`;
+    }
+    return num;
   }
 }

@@ -4,13 +4,11 @@ import Timer from './game/Timer';
 import ControllerManager from './game/ControllerManager';
 import congratulations from './img/congratulations.png';
 
+const START = 'start';
+const STOP = 'Play again';
+
 class Game {
-  constructor(settings = {
-    height: { default: 6, min: 2, max: 6 },
-    width: { default: 6, min: 2, max: 6 },
-    preview: { default: 4, min: 1, max: 7 },
-    gameover: { default: 3, min: 1, max: 15 },
-  }) {
+  constructor(settings) {
     this.settings = settings;
 
     this.controllers = new ControllerManager();
@@ -22,7 +20,7 @@ class Game {
       () => this.field.disableAll(),
     );
 
-    this.startClass = 'start';
+    this.startClass = START;
     this.startBtn = {};
     this.cellsLeft = [];
   }
@@ -35,7 +33,7 @@ class Game {
     this.controllers.addAll(this.settings);
 
     [this.startBtn] = Utility.selectElementsByClasses(this.startClass);
-    this.startBtn.dataset.phase = 'start';
+    this.startBtn.dataset.phase = START;
 
     this.startBtn.onclick = () => {
       this.clickStart();
@@ -43,7 +41,7 @@ class Game {
   }
 
   clickStart() {
-    if (this.startBtn.dataset.phase === 'start') {
+    if (this.startBtn.dataset.phase === START) {
       this.start();
     } else {
       this.stop();
@@ -52,8 +50,8 @@ class Game {
 
   start() {
     this.saveCookies();
-    this.startBtn.dataset.phase = 'stop';
-    this.startBtn.innerText = 'Play again';
+    this.startBtn.dataset.phase = STOP;
+    this.startBtn.innerText = STOP;
     this.controllers.hide();
     this.field.removeField();
 
@@ -66,8 +64,8 @@ class Game {
   }
 
   stop() {
-    this.startBtn.dataset.phase = 'start';
-    this.startBtn.innerText = 'start';
+    this.startBtn.dataset.phase = START;
+    this.startBtn.innerText = START;
     this.controllers.show();
     this.field.compare.abort();
     this.timer.clear();
@@ -80,9 +78,9 @@ class Game {
       this.field.removeField();
 
       const img = Utility.createElement('img', 'congratulation');
+      const [location] = Utility.selectElementsByClasses('congratulation');
       img.src = congratulations;
-      img.style.backgroundColor = 'transparent';
-      this.field.domLocation.appendChild(img);
+      location.appendChild(img);
     }
   }
 
