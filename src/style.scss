@@ -162,6 +162,15 @@ img {
             }
         }
     }
+
+    .congratulation {
+        display: flex;
+        justify-content: center;
+        img {
+            width: 50%;
+            height: 50%;
+        }
+    }
 }
 
  @media all and (max-width: 599px) {
@@ -188,6 +197,4 @@ img {
              }
         }
     }
-     
 }
-    
