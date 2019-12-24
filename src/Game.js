@@ -23,6 +23,7 @@ class Game {
     this.startClass = START;
     this.startBtn = {};
     this.cellsLeft = [];
+    this.congratulation = {};
   }
 
   run() {
@@ -78,28 +79,28 @@ class Game {
       this.field.removeField();
 
       const img = Utility.createElement('img', 'congratulation');
-      const [location] = Utility.selectElementsByClasses('congratulation');
+      [this.congratulation] = Utility.selectElementsByClasses('congratulation');
       img.src = congratulations;
-      location.appendChild(img);
+      this.congratulation.appendChild(img);
     }
   }
 
   saveCookies() {
-    document.cookie = JSON.stringify({
-      name: 'FIND THE PAIR',
+    document.cookie = `Find the pair =${JSON.stringify({
       height: this.controllers.height.current,
       width: this.controllers.width.current,
       preview: this.controllers.preview.current,
       gameover: this.controllers.gameover.current,
-    });
+    })}`;
   }
 
   readCookies() {
-    const cookies = (JSON.parse(document.cookie));
-    this.settings.height.default = cookies.height;
-    this.settings.width.default = cookies.width;
-    this.settings.preview.default = cookies.preview;
-    this.settings.gameover.default = cookies.gameover;
+    const cleanCookies = document.cookie.replace('Find the pair=', '');
+    const object = (JSON.parse(cleanCookies));
+    this.settings.height.default = object.height;
+    this.settings.width.default = object.width;
+    this.settings.preview.default = object.preview;
+    this.settings.gameover.default = object.gameover;
   }
 }
 
