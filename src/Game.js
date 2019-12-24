@@ -2,7 +2,7 @@ import Field from './game/Field';
 import Utility from './game/Utility';
 import Timer from './game/Timer';
 import ControllerManager from './game/ControllerManager';
-import congratulations from './img/congratulations.png';
+import congratulationsImg from './img/congratulations.png';
 
 const START = 'start';
 const STOP = 'Play again';
@@ -70,6 +70,7 @@ class Game {
     this.controllers.show();
     this.field.compare.abort();
     this.timer.clear();
+    this.congratulationRemove();
   }
 
   winCheck() {
@@ -78,10 +79,16 @@ class Game {
       this.timer.clear();
       this.field.removeField();
 
-      const img = Utility.createElement('img', 'congratulation');
       [this.congratulation] = Utility.selectElementsByClasses('congratulation');
-      img.src = congratulations;
+      const img = Utility.createElement('img', 'winImage');
+      img.src = congratulationsImg;
       this.congratulation.appendChild(img);
+    }
+  }
+
+  congratulationRemove() {
+    if (this.congratulation.children) {
+      this.congratulation.children.item(0).remove();
     }
   }
 
