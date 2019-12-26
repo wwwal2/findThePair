@@ -151,11 +151,6 @@ img {
         .cells {
             width: 15vh;
             height: 15vh;
-            margin: 1px;
-            border: 0;
-            padding: 0;
-            background-image: url('./img/question.jpg');
-            background-size: cover;
             &:hover {
                 filter: contrast(110%);
                 background-color: white;
@@ -190,11 +185,14 @@ img {
             }
         }
         .field-container {
-            .cells {
-                width: 15vw;
-                height: 15vw;
-                margin: 1px;
-             }
+            .row {
+                .cells {
+                    width: 15vw;
+                    height: 15vw;
+                    margin: 1px;
+                }
+            }
+            
         }
     }
 }

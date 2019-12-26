@@ -1,13 +1,14 @@
 import Utility from './Utility';
 import Compare from './Compare';
+import question from '../img/question.jpg';
 
 export default class Field {
-  constructor(winCheck) {
+  constructor() {
     this.tableOfmatches = [];
     this.domLocation = {};
     this.allCells = [];
     this.compare = new Compare();
-    this.winCheck = winCheck;
+    // this.winCheck = winCheck;
   }
 
   build(width, height) {
@@ -20,11 +21,11 @@ export default class Field {
       const row = Utility.createElement('div', 'row');
       this.tableOfmatches.push([]);
       for (let j = 0; j < width; j += 1) {
-        const button = Utility.createBtn('cells', i, j);
-        button.addEventListener('click', (e) => this.clickCell(e));
-        button.disabled = true;
-        this.allCells.push(button);
-        row.appendChild(button);
+        const image = Utility.createImg('cells', i, j);
+        image.src = question;
+        image.onclick = (e) => this.clickCell(e);
+        this.allCells.push(image);
+        row.appendChild(image);
         this.tableOfmatches[i].push(this.randomValues.pop());
       }
       this.domLocation.appendChild(row);
@@ -54,8 +55,8 @@ export default class Field {
 
   clickCell(event) {
     const imgSrc = this.tableOfmatches[event.target.dataset.x][event.target.dataset.y];
-    this.compare.collect(event, imgSrc);
-    this.winCheck();
+    this.compare.init(event, imgSrc);
+    // this.winCheck();
   }
 
   removeField() {

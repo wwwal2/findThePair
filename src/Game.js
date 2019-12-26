@@ -2,7 +2,7 @@ import Field from './game/Field';
 import Utility from './game/Utility';
 import Timer from './game/Timer';
 import ControllerManager from './game/ControllerManager';
-import congratulationsImg from './img/congratulations.png';
+// import congratulationsImg from './img/congratulations.png';
 
 const START = 'start';
 const STOP = 'Play again';
@@ -13,7 +13,7 @@ class Game {
 
     this.controllers = new ControllerManager();
 
-    this.field = new Field(() => this.winCheck());
+    this.field = new Field();
     this.timer = new Timer(
       () => this.field.showAll(),
       () => this.field.hideAll(),
@@ -73,18 +73,18 @@ class Game {
     this.congratulationRemove();
   }
 
-  winCheck() {
-    this.cellsLeft = this.field.allCells.filter((cell) => cell.childElementCount === 1);
-    if (this.cellsLeft.length === this.field.allCells.length) {
-      this.timer.clear();
-      this.field.removeField();
+  // winCheck() {
+  //   this.cellsLeft = this.field.allCells.filter((cell) => cell.childElementCount === 1);
+  //   if (this.cellsLeft.length === this.field.allCells.length) {
+  //     this.timer.clear();
+  //     this.field.removeField();
 
-      [this.congratulation] = Utility.selectElementsByClasses('congratulation');
-      const img = Utility.createElement('img', 'winImage');
-      img.src = congratulationsImg;
-      this.congratulation.appendChild(img);
-    }
-  }
+  //     [this.congratulation] = Utility.selectElementsByClasses('congratulation');
+  //     const img = Utility.createElement('img', 'winImage');
+  //     img.src = congratulationsImg;
+  //     this.congratulation.appendChild(img);
+  //   }
+  // }
 
   congratulationRemove() {
     if (this.congratulation.children) {

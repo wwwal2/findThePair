@@ -1,4 +1,4 @@
-import Utility from './Utility';
+import cover from '../img/question.jpg';
 
 export default class Compare {
   constructor() {
@@ -8,22 +8,30 @@ export default class Compare {
     this.nextBufferCell = {};
   }
 
+  init(event, imgSrc) {
+    if (event.target.dataset.click !== 'clicked') {
+      event.target.dataset.click = 'clicked';
+      this.collect(event, imgSrc);
+    }
+  }
+
   collect(event, imgSrc) {
     switch (this.counter) {
       case 0:
         this.counter += 1;
-        this.insertImage(event, imgSrc);
+        this.swapImage(event, imgSrc);
         this.bufferCell = event.target;
         this.bufferCell.imgSrc = imgSrc;
         break;
       case 1:
         this.counter += 1;
-        this.insertImage(event, imgSrc);
+        this.swapImage(event, imgSrc);
         this.nextBufferCell = event.target;
         this.nextBufferCell.imgSrc = imgSrc;
         this.match();
         break;
       default:
+        event.target.dataset.click = '';
         event.target.classList.add('apply-shake');
         setTimeout(() => {
           event.target.classList.remove('apply-shake');
@@ -37,23 +45,20 @@ export default class Compare {
       this.clear();
     } else {
       this.openImgTimeout = setTimeout(() => {
-        this.removeImage(this.bufferCell);
-        this.removeImage(this.nextBufferCell);
+        this.swapBack(this.bufferCell);
+        this.swapBack(this.nextBufferCell);
         this.clear();
       }, 1000);
     }
   }
 
-  insertImage(event, imgSrc) {
-    event.target.disabled = true;
-    this.image = Utility.createElement('img', 'image');
-    this.image.src = `./img/cells/${imgSrc}.png`;
-    event.target.appendChild(this.image);
+  swapImage(event, imgSrc) {
+    event.target.src = `img/cells/${imgSrc}.png`;
   }
 
-  removeImage(target) {
-    target.disabled = false;
-    target.children.item(0).remove();
+  swapBack(target) {
+    target.dataset.click = '';
+    target.src = cover;
   }
 
   clear() {
