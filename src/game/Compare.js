@@ -1,6 +1,9 @@
 import cover from '../img/question.jpg';
 
-export default class Compare {
+const FROZEN = 'frozen';
+const ACTIVE = 'active';
+
+class Compare {
   constructor() {
     this.counter = 0;
     this.openImgTimeout = 0;
@@ -9,8 +12,8 @@ export default class Compare {
   }
 
   init(event, imgSrc) {
-    if (event.target.dataset.click !== 'clicked') {
-      event.target.dataset.click = 'clicked';
+    if (event.target.dataset.state !== FROZEN) {
+      event.target.dataset.state = FROZEN;
       this.collect(event, imgSrc);
     }
   }
@@ -31,7 +34,7 @@ export default class Compare {
         this.match();
         break;
       default:
-        event.target.dataset.click = '';
+        event.target.dataset.state = ACTIVE;
         event.target.classList.add('apply-shake');
         setTimeout(() => {
           event.target.classList.remove('apply-shake');
@@ -57,7 +60,7 @@ export default class Compare {
   }
 
   swapBack(target) {
-    target.dataset.click = '';
+    target.dataset.state = ACTIVE;
     target.src = cover;
   }
 
@@ -78,3 +81,5 @@ export default class Compare {
     this.clear();
   }
 }
+
+export default Compare;

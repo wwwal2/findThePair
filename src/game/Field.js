@@ -3,12 +3,12 @@ import Compare from './Compare';
 import question from '../img/question.jpg';
 
 export default class Field {
-  constructor() {
+  constructor(winCheck) {
     this.tableOfmatches = [];
     this.domLocation = {};
     this.allCells = [];
     this.compare = new Compare();
-    // this.winCheck = winCheck;
+    this.winCheck = winCheck;
   }
 
   build(width, height) {
@@ -56,7 +56,7 @@ export default class Field {
   clickCell(event) {
     const imgSrc = this.tableOfmatches[event.target.dataset.x][event.target.dataset.y];
     this.compare.init(event, imgSrc);
-    // this.winCheck();
+    this.winCheck();
   }
 
   removeField() {
