@@ -1,6 +1,7 @@
 import Utility from './Utility';
 import Compare from './Compare';
 import question from '../img/question.jpg';
+import { FROZEN, ACTIVE } from './constants';
 
 export default class Field {
   constructor(winCheck) {
@@ -24,6 +25,7 @@ export default class Field {
         const image = Utility.createImg('cells', i, j);
         image.src = question;
         image.onclick = (e) => this.clickCell(e);
+        image.dataset.state = FROZEN;
         this.allCells.push(image);
         row.appendChild(image);
         this.tableOfmatches[i].push(this.randomValues.pop());
@@ -34,22 +36,20 @@ export default class Field {
 
   showAll() {
     this.allCells.forEach((cell) => {
-      const image = Utility.createElement('img', 'image');
-      image.src = `./img/cells/${this.tableOfmatches[cell.dataset.x][cell.dataset.y]}.png`;
-      cell.appendChild(image);
+      cell.src = `./img/cells/${this.tableOfmatches[cell.dataset.x][cell.dataset.y]}.png`;
     });
   }
 
   hideAll() {
     this.allCells.forEach((cell) => {
-      cell.disabled = false;
-      cell.childNodes.item(0).remove();
+      cell.src = question;
+      cell.dataset.state = ACTIVE;
     });
   }
 
   disableAll() {
     this.allCells.forEach((cell) => {
-      cell.disabled = true;
+      cell.dataset.state = FROZEN;
     });
   }
 

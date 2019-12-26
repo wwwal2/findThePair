@@ -3,10 +3,7 @@ import Utility from './game/Utility';
 import Timer from './game/Timer';
 import ControllerManager from './game/ControllerManager';
 import congratulationsImg from './img/congratulations.png';
-
-const START = 'start';
-const STOP = 'Play again';
-const FROZEN = 'frozen';
+import { START, STOP, OPENED } from './game/constants';
 
 class Game {
   constructor(settings) {
@@ -19,6 +16,7 @@ class Game {
       () => this.field.showAll(),
       () => this.field.hideAll(),
       () => this.field.disableAll(),
+      () => this.field.compare.abort(),
     );
 
     this.startClass = START;
@@ -75,9 +73,9 @@ class Game {
   }
 
   winCheck() {
-    this.cellsLeft = this.field.allCells.filter((cell) => cell.dataset.state === FROZEN);
+    this.cellsLeft = this.field.allCells.filter((cell) => cell.dataset.state === OPENED);
     if (this.cellsLeft.length === this.field.allCells.length) {
-      this.timer.clear();
+      this.timer.clear(this.cellsLeft);
       this.field.removeField();
 
       [this.congratulation] = Utility.selectElementsByClasses('congratulation');
@@ -88,13 +86,13 @@ class Game {
   }
 
   congratulationRemove() {
-    if (this.congratulation.children) {
+    if (this.congratulation.children.item(0)) {
       this.congratulation.children.item(0).remove();
     }
   }
 
   saveCookies() {
-    document.cookie = `Find the pair =${JSON.stringify({
+    document.cookie = `Find the pair=${JSON.stringify({
       height: this.controllers.height.current,
       width: this.controllers.width.current,
       preview: this.controllers.preview.current,

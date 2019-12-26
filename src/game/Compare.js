@@ -1,7 +1,5 @@
 import cover from '../img/question.jpg';
-
-const FROZEN = 'frozen';
-const ACTIVE = 'active';
+import { FROZEN, ACTIVE, OPENED } from './constants';
 
 class Compare {
   constructor() {
@@ -45,6 +43,8 @@ class Compare {
 
   match() {
     if (this.bufferCell.imgSrc === this.nextBufferCell.imgSrc) {
+      this.bufferCell.dataset.state = OPENED;
+      this.nextBufferCell.dataset.state = OPENED;
       this.clear();
     } else {
       this.openImgTimeout = setTimeout(() => {
@@ -71,11 +71,11 @@ class Compare {
   }
 
   abort() {
-    if (this.bufferCell.children) {
-      this.bufferCell.children.item(0).remove();
+    if (this.bufferCell) {
+      this.bufferCell.src = cover;
     }
-    if (this.nextBufferCell.children) {
-      this.nextBufferCell.children.item(0).remove();
+    if (this.nextBufferCell) {
+      this.nextBufferCell.src = cover;
     }
     clearTimeout(this.openImgTimeout);
     this.clear();

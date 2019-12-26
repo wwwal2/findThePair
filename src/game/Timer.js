@@ -1,10 +1,11 @@
 import Utility from './Utility';
 
 export default class Timer {
-  constructor(showAll, hideAll, disableAll) {
+  constructor(showAll, hideAll, disableAll, abortCompare) {
     this.showAll = showAll;
     this.hideAll = hideAll;
     this.disableAll = disableAll;
+    this.abortCompare = abortCompare;
 
     this.totallTime = 0;
     this.minutes = 0;
@@ -54,6 +55,7 @@ export default class Timer {
       this.timerLabel.classList.add('remove');
       this.timerValue.classList.remove('gameOver');
       this.timerValue.innerText = '';
+      this.abortCompare();
     } else {
       this.hideAll();
     }
