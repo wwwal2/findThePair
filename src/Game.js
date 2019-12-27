@@ -86,7 +86,7 @@ class Game {
   }
 
   congratulationRemove() {
-    if (this.congratulation.children.item(0)) {
+    if (this.congratulation.children) {
       this.congratulation.children.item(0).remove();
     }
   }

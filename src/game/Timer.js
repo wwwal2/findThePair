@@ -28,7 +28,7 @@ export default class Timer {
   }
 
   startTimer(duration) {
-    this.timerLabel.classList.remove('remove');
+    this.timerLabel.classList.remove('hidden');
 
     this.totallTime = Number(duration) * 60;
     this.parseTime(this.totallTime);
@@ -52,7 +52,7 @@ export default class Timer {
     clearTimeout(this.gameoverTimeout);
     clearTimeout(this.previewTimeout);
     if (this.timerValue.innerText !== '') {
-      this.timerLabel.classList.add('remove');
+      this.timerLabel.classList.add('hidden');
       this.timerValue.classList.remove('gameOver');
       this.timerValue.innerText = '';
       this.abortCompare();
