@@ -19,7 +19,6 @@ export default class Field {
     [this.domLocation] = Utility.selectElementsByClasses('field-container');
 
     for (let i = 0; i < height; i += 1) {
-      const row = Utility.createElement('div', 'row');
       this.tableOfmatches.push([]);
       for (let j = 0; j < width; j += 1) {
         const image = Utility.createImg('cells', i, j);
@@ -27,10 +26,10 @@ export default class Field {
         image.onclick = (e) => this.clickCell(e);
         image.dataset.state = FROZEN;
         this.allCells.push(image);
-        row.appendChild(image);
+        this.domLocation.appendChild(image);
         this.tableOfmatches[i].push(this.randomValues.pop());
       }
-      this.domLocation.appendChild(row);
+      this.domLocation.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
     }
   }
 
