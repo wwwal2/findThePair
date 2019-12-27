@@ -27,6 +27,13 @@ export default class Utility {
     return randomValues.concat(randomValues).sort(() => Math.random() - 0.5);
   }
 
+  static addZero(num) {
+    if (num < 10) {
+      return `0${num}`;
+    }
+    return num;
+  }
+
   static createImg(className, x, y) {
     const image = Utility.createElement('img', className);
     image.disabled = true;

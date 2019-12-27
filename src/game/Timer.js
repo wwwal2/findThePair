@@ -19,6 +19,7 @@ export default class Timer {
 
   begin(previewTime, gameoverTime) {
     this.showAll();
+    [this.timerContainer] = Utility.selectElementsByClasses('timer-container');
     [this.timerValue] = Utility.selectElementsByClasses('timer-value');
     [this.timerLabel] = Utility.selectElementsByClasses('timer-label');
     this.previewTimeout = setTimeout(() => {
@@ -28,7 +29,7 @@ export default class Timer {
   }
 
   startTimer(duration) {
-    this.timerLabel.classList.remove('hidden');
+    this.timerContainer.classList.remove('remove');
 
     this.totallTime = Number(duration) * 60;
     this.parseTime(this.totallTime);
@@ -52,7 +53,7 @@ export default class Timer {
     clearTimeout(this.gameoverTimeout);
     clearTimeout(this.previewTimeout);
     if (this.timerValue.innerText !== '') {
-      this.timerLabel.classList.add('hidden');
+      this.timerContainer.classList.add('remove');
       this.timerValue.classList.remove('gameOver');
       this.timerValue.innerText = '';
       this.abortCompare();
@@ -65,14 +66,7 @@ export default class Timer {
   parseTime(totallTime) {
     this.minutes = Math.floor(totallTime / 60);
     this.seconds = totallTime % 60;
-    this.minutes = this.addZero(this.minutes);
-    this.seconds = this.addZero(this.seconds);
-  }
-
-  addZero(num) {
-    if (num < 10) {
-      return `0${num}`;
-    }
-    return num;
+    this.minutes = Utility.addZero(this.minutes);
+    this.seconds = Utility.addZero(this.seconds);
   }
 }
