@@ -9,9 +9,10 @@ class Game {
   constructor(settings) {
     this.settings = settings;
 
-    this.controllers = new ControllerManager();
+    this.controllers = new ControllerManager(() => this.saveSettings());
 
     this.field = new Field(() => this.winCheck());
+
     this.timer = new Timer(
       () => this.field.showAll(),
       () => this.field.hideAll(),
@@ -26,8 +27,8 @@ class Game {
   }
 
   run() {
-    if (document.cookie) {
-      this.readCookies();
+    if (localStorage.getItem('FindThePair')) {
+      this.readSettings();
     }
 
     this.controllers.addAll(this.settings);
@@ -49,7 +50,6 @@ class Game {
   }
 
   start() {
-    this.saveCookies();
     this.startBtn.dataset.phase = STOP;
     this.startBtn.innerText = STOP;
     this.controllers.hide();
@@ -80,6 +80,7 @@ class Game {
       this.timer.clear();
       this.timer.hide();
       this.field.removeField();
+      this.field.domLocation.classList.add('hidden');
 
       [this.congratulation] = Utility.selectElementsByClasses('congratulation');
       const img = Utility.createElement('img', 'winImage');
@@ -89,23 +90,23 @@ class Game {
   }
 
   congratulationRemove() {
-    if (this.congratulation.children) {
+    if (this.congratulation.children && this.congratulation.children.item(0)) {
       this.congratulation.children.item(0).remove();
     }
   }
 
-  saveCookies() {
-    document.cookie = `Find the pair=${JSON.stringify({
+  saveSettings() {
+    localStorage.setItem('FindThePair', JSON.stringify({
       height: this.controllers.height.current,
       width: this.controllers.width.current,
       preview: this.controllers.preview.current,
       gameover: this.controllers.gameover.current,
-    })}`;
+    }));
   }
 
-  readCookies() {
-    const cleanCookies = document.cookie.replace('Find the pair=', '');
-    const object = (JSON.parse(cleanCookies));
+  readSettings() {
+    const storageData = localStorage.getItem('FindThePair');
+    const object = JSON.parse(storageData);
     this.settings.height.default = object.height;
     this.settings.width.default = object.width;
     this.settings.preview.default = object.preview;

@@ -30,6 +30,7 @@ export default class Field {
         this.tableOfmatches[i].push(this.randomValues.pop());
       }
       this.domLocation.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
+      this.domLocation.classList.remove('hidden');
     }
   }
 

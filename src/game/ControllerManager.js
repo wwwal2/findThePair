@@ -1,7 +1,8 @@
 import Utility from './Utility';
 
 export default class ControllerManager {
-  constructor() {
+  constructor(saveSettings) {
+    this.saveSettings = saveSettings;
     this.height = {};
     this.width = {};
     this.preview = {};
@@ -107,9 +108,11 @@ export default class ControllerManager {
   addMouseEvents(name) {
     this[name].dom.increase.onclick = () => {
       this.controllerHandler(name, 1, this[name].max);
+      this.saveSettings();
     };
     this[name].dom.reduce.onclick = () => {
       this.controllerHandler(name, -1, this[name].min);
+      this.saveSettings();
     };
 
     this[name].dom.onmouseover = () => {
