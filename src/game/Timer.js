@@ -53,6 +53,8 @@ export default class Timer {
     if (this.timerValue.innerText !== '') {
       this.timerValue.classList.add('gameOver');
       this.abortCompare();
+    } else {
+      this.hideAll();
     }
     this.freezeAll();
   }
@@ -61,7 +63,6 @@ export default class Timer {
     this.timerValue.innerText = '';
     this.timerValue.classList.remove('gameOver');
     this.timerContainer.classList.add('remove');
-    this.hideAll();
   }
 
   parseTime(totallTime) {
