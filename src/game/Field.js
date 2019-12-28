@@ -12,15 +12,15 @@ export default class Field {
     this.winCheck = winCheck;
   }
 
-  build(width, height) {
+  build(fraction) {
     this.tableOfmatches = [];
-    const btnNum = height * width;
+    const btnNum = fraction * fraction;
     this.randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
     [this.domLocation] = Utility.selectElementsByClasses('field-container');
 
-    for (let i = 0; i < height; i += 1) {
+    for (let i = 0; i < fraction; i += 1) {
       this.tableOfmatches.push([]);
-      for (let j = 0; j < width; j += 1) {
+      for (let j = 0; j < fraction; j += 1) {
         const image = Utility.createImg('cells', i, j);
         image.src = question;
         image.onclick = (e) => this.clickCell(e);
@@ -29,7 +29,7 @@ export default class Field {
         this.domLocation.appendChild(image);
         this.tableOfmatches[i].push(this.randomValues.pop());
       }
-      this.domLocation.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
+      this.domLocation.style.gridTemplateColumns = `repeat(${fraction}, 1fr)`;
       this.domLocation.classList.remove('hidden');
     }
   }

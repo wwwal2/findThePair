@@ -55,7 +55,7 @@ class Game {
     this.controllers.hide();
     this.field.removeField();
 
-    this.field.build(this.controllers.height.current, this.controllers.width.current);
+    this.field.build(this.controllers.fraction.current);
 
     this.timer.begin(
       this.controllers.preview.current,
@@ -97,8 +97,7 @@ class Game {
 
   saveSettings() {
     localStorage.setItem('FindThePair', JSON.stringify({
-      height: this.controllers.height.current,
-      width: this.controllers.width.current,
+      fraction: this.controllers.fraction.current,
       preview: this.controllers.preview.current,
       gameover: this.controllers.gameover.current,
     }));
@@ -107,8 +106,7 @@ class Game {
   readSettings() {
     const storageData = localStorage.getItem('FindThePair');
     const object = JSON.parse(storageData);
-    this.settings.height.default = object.height;
-    this.settings.width.default = object.width;
+    this.settings.fraction.default = object.fraction;
     this.settings.preview.default = object.preview;
     this.settings.gameover.default = object.gameover;
   }

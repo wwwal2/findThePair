@@ -3,8 +3,7 @@ import Utility from './Utility';
 export default class ControllerManager {
   constructor(saveSettings) {
     this.saveSettings = saveSettings;
-    this.height = {};
-    this.width = {};
+    this.fraction = {};
     this.preview = {};
     this.gameover = {};
     this.direction = 1;
@@ -37,7 +36,6 @@ export default class ControllerManager {
       this.addMouseEvents(name);
 
       newController.current = newController.default;
-
       this.initialValidation(name);
       this.checkHighlightLimit(name);
       newController.dom.value.innerText = newController.current;
@@ -80,7 +78,7 @@ export default class ControllerManager {
     if (distance < 0) {
       return limit;
     }
-    const odd = (this.height.current * this.width.current) % 2;
+    const odd = this.fraction.current % 2;
     if (!odd) {
       return this[target].current;
     }
