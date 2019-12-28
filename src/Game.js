@@ -3,21 +3,25 @@ import Utility from './game/Utility';
 import Timer from './game/Timer';
 import ControllerManager from './game/ControllerManager';
 import congratulationsImg from './img/congratulations.png';
-
-const START = 'start';
-const STOP = 'Play again';
+import { START, STOP, OPENED } from './game/constants';
 
 class Game {
   constructor(settings) {
     this.settings = settings;
 
-    this.controllers = new ControllerManager();
-
     this.field = new Field(() => this.winCheck());
+
+    this.controllers = new ControllerManager(
+      () => this.saveSettings(),
+      (fraction) => this.field.build(fraction),
+      () => this.field.removeField(),
+    );
+
     this.timer = new Timer(
       () => this.field.showAll(),
       () => this.field.hideAll(),
-      () => this.field.disableAll(),
+      () => this.field.freezeAll(),
+      () => this.field.compare.abort(),
     );
 
     this.startClass = START;
@@ -27,11 +31,12 @@ class Game {
   }
 
   run() {
-    if (document.cookie) {
-      this.readCookies();
+    if (localStorage.getItem('FindThePairGrid')) {
+      this.readSettings();
     }
 
     this.controllers.addAll(this.settings);
+    this.field.build(this.controllers.fraction.current);
 
     [this.startBtn] = Utility.selectElementsByClasses(this.startClass);
     this.startBtn.dataset.phase = START;
@@ -50,13 +55,9 @@ class Game {
   }
 
   start() {
-    this.saveCookies();
     this.startBtn.dataset.phase = STOP;
     this.startBtn.innerText = STOP;
     this.controllers.hide();
-    this.field.removeField();
-
-    this.field.build(this.controllers.height.current, this.controllers.width.current);
 
     this.timer.begin(
       this.controllers.preview.current,
@@ -70,14 +71,18 @@ class Game {
     this.controllers.show();
     this.field.compare.abort();
     this.timer.clear();
+    this.timer.hide();
+    this.field.freezeAll();
     this.congratulationRemove();
   }
 
   winCheck() {
-    this.cellsLeft = this.field.allCells.filter((cell) => cell.childElementCount === 1);
+    this.cellsLeft = this.field.allCells.filter((cell) => cell.dataset.state === OPENED);
     if (this.cellsLeft.length === this.field.allCells.length) {
       this.timer.clear();
+      this.timer.hide();
       this.field.removeField();
+      this.field.domLocation.classList.add('hidden');
 
       [this.congratulation] = Utility.selectElementsByClasses('congratulation');
       const img = Utility.createElement('img', 'winImage');
@@ -87,25 +92,24 @@ class Game {
   }
 
   congratulationRemove() {
-    if (this.congratulation.children) {
+    if (this.congratulation.children && this.congratulation.children.item(0)) {
       this.congratulation.children.item(0).remove();
+      this.field.build(this.controllers.fraction.current);
     }
   }
 
-  saveCookies() {
-    document.cookie = `Find the pair =${JSON.stringify({
-      height: this.controllers.height.current,
-      width: this.controllers.width.current,
+  saveSettings() {
+    localStorage.setItem('FindThePairGrid', JSON.stringify({
+      fraction: this.controllers.fraction.current,
       preview: this.controllers.preview.current,
       gameover: this.controllers.gameover.current,
-    })}`;
+    }));
   }
 
-  readCookies() {
-    const cleanCookies = document.cookie.replace('Find the pair=', '');
-    const object = (JSON.parse(cleanCookies));
-    this.settings.height.default = object.height;
-    this.settings.width.default = object.width;
+  readSettings() {
+    const storageData = localStorage.getItem('FindThePairGrid');
+    const object = JSON.parse(storageData);
+    this.settings.fraction.default = object.fraction;
     this.settings.preview.default = object.preview;
     this.settings.gameover.default = object.gameover;
   }

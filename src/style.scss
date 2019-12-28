@@ -1,200 +1,217 @@
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 img {
-    width: 100%;
-    height: 100%;
-    background-color: white;
+  background-color: white;
 }
 
 .gameOver {
-    animation: blinker 1.5s linear infinite;
-    color: red;
+  animation: blinker 1.5s linear infinite;
+  color: red;
 }
 @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
+  50% {
+    opacity: 0;
   }
+}
 
 .hidden {
-    opacity: 0;
+  opacity: 0;
 }
 
 .remove {
-    display: none;
+  display: none;
 }
-
 
 .apply-shake {
-    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
+
 @keyframes shake {
-    10%, 90% { transform: translate3d(-1px, 0, 0); }
-    20%, 80% { transform: translate3d(2px, 0, 0); }
-    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-    40%, 60% { transform: translate3d(4px, 0, 0); }
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes fadein {
+  0% {
+    transform: scale(0);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 // blocks maintainance
 .main-container {
-    display: block;
-    margin: auto;
+  display: block;
+  margin: auto;
+  width: 45vw;
+  height: 75vh;
 
-    .menu-container {
-        display: flex;
-        justify-content: center;
+  .menu-container {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0 5px 0;
 
-        .start-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+    .start-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-            .start {
-                background-color:red;
-                border-radius:8px;
-                border: 0;
-                cursor: pointer;
-                color:#ffffff;
-                font-size: 18px;
-                padding: 8px 25px;
-                margin: 10px;
-                &:hover {
-                    background-color:rgb(41, 207, 26);
-                }
-            }
+      .start {
+        background-color: red;
+        border-radius: 8px;
+        border: 0;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 18px;
+        padding: 8px 25px;
+        margin: 10px;
+        &:hover {
+          background-color: rgb(41, 207, 26);
         }
-
-        .inform-pannel {
-            display: block;
-            justify-content: center;
-
-            .options {
-                display: flex;
-                justify-content: center;
-                font-family: -apple-system, Ubuntu;
-            }
-
-            .all-controllers {
-                display: flex;
-
-                .controller {
-                    display: flex;
-                    align-items: center;
-                    flex-direction: column;
-                    margin: 0 15px 0 15px;
-
-                    .label {
-                        display: none;
-                    }
-
-                    .arrow {
-                        width: 0;
-                        height: 0;
-                        border: 0 solid transparent;
-                        cursor: pointer;
-                    }
-                    
-                    .up {
-                        border-right-width: 14px;
-                        border-left-width: 13px;
-                        border-bottom: 18px solid teal;
-                        &:hover {
-                            border-bottom: 18px solid red;
-                        }
-                    }
-                    
-                    .up-limit {
-                        border-right-width: 14px;
-                        border-left-width: 13px;
-                        border-bottom: 18px solid grey;
-                        cursor: auto;
-                    }
-                    
-                    .down {
-                        border-left-width: 14px;
-                        border-right-width: 13px;
-                        border-top: 18px solid teal;
-                        &:hover {
-                            border-top: 18px solid red;
-                        }
-                    }
-                    
-                    .down-limit {
-                        border-left-width: 14px;
-                        border-right-width: 13px;
-                        border-top: 18px solid grey;
-                        cursor: auto;
-                    }     
-                }
-            }
-        }
-
-        .timer {
-            margin: 10px;
-            display: block;
-            text-align: center;
-        }      
+      }
     }
 
-    .field-container {
-        display: block;
-        margin: auto;
-        width: max-content;
-        background-image: url('./img/bg6.png');
-        .row {
-            display: flex;
-            justify-content: center;
-        }
-        .cells {
-            width: 15vh;
-            height: 15vh;
-            margin: 1px;
-            border: 0;
-            padding: 0;
-            background-image: url('./img/question.jpg');
-            background-size: cover;
+    .inform-pannel {
+      display: block;
+      justify-content: center;
+
+      .options {
+        display: flex;
+        justify-content: center;
+        font-family: -apple-system, Ubuntu;
+      }
+
+      .all-controllers {
+        display: flex;
+
+        .controller {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          margin: 0 15px 0 15px;
+
+          .label {
+            display: none;
+          }
+
+          .arrow {
+            width: 0;
+            height: 0;
+            border: 0 solid transparent;
+            cursor: pointer;
+          }
+
+          .up {
+            border-right-width: 14px;
+            border-left-width: 13px;
+            border-bottom: 18px solid teal;
             &:hover {
-                filter: contrast(110%);
-                background-color: white;
+              border-bottom: 18px solid red;
             }
+          }
+
+          .up-limit {
+            border-right-width: 14px;
+            border-left-width: 13px;
+            border-bottom: 18px solid grey;
+            cursor: auto;
+          }
+
+          .down {
+            border-left-width: 14px;
+            border-right-width: 13px;
+            border-top: 18px solid teal;
+            &:hover {
+              border-top: 18px solid red;
+            }
+          }
+
+          .down-limit {
+            border-left-width: 14px;
+            border-right-width: 13px;
+            border-top: 18px solid grey;
+            cursor: auto;
+          }
         }
+      }
     }
 
-    .congratulation {
-        display: flex;
-        justify-content: center;
-        img {
-            width: 50%;
-            height: 50%;
-        }
+    .timer-container {
+      margin: 10px;
+      text-align: center;
     }
+  }
+
+  .field-container {
+    display: grid;
+    grid-template-areas:
+      "a b"
+      "c d";
+    gap: 3px;
+
+    margin: auto;
+    height: 100%;
+    background-color: #eee3e3;
+    .cells {
+      width: 100%;
+      height: 100%;
+      animation: fadein 0.5s ease-out normal backwards;
+      &:hover {
+        filter: contrast(110%);
+        background-color: white;
+      }
+    }
+  }
+
+  .congratulation {
+    display: flex;
+    justify-content: center;
+    .winImage {
+      width: 90vw;
+      height: 60vh;
+    }
+  }
 }
 
- @media all and (max-width: 599px) {
-    .main-container {
-        .menu-container {
-            .start-container {
-                .start {
-                    padding:8px 8px;
-                }
-            }
-            .inform-pannel {
-                .all-controllers {
-                    .controller {
-                        margin: 0 10px 0 10px;
-                    }
-                }
-            }
+@media all and (max-width: 800px) {
+  .main-container {
+    width: 100vw;
+    height: 90vh;
+    .menu-container {
+      .start-container {
+        .start {
+          padding: 8px 15px;
         }
-        .field-container {
-            .cells {
-                width: 15vw;
-                height: 15vw;
-                margin: 1px;
-             }
+      }
+      .inform-pannel {
+        .all-controllers {
+          .controller {
+            margin: 0 10px 0 10px;
+          }
         }
+      }
     }
+  }
 }

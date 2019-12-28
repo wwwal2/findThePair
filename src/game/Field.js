@@ -1,5 +1,7 @@
 import Utility from './Utility';
 import Compare from './Compare';
+import question from '../img/question.jpg';
+import { FROZEN, ACTIVE } from './constants';
 
 export default class Field {
   constructor(winCheck) {
@@ -10,51 +12,50 @@ export default class Field {
     this.winCheck = winCheck;
   }
 
-  build(width, height) {
+  build(fraction) {
     this.tableOfmatches = [];
-    const btnNum = height * width;
+    const btnNum = fraction * fraction;
     this.randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
     [this.domLocation] = Utility.selectElementsByClasses('field-container');
 
-    for (let i = 0; i < height; i += 1) {
-      const row = Utility.createElement('div', 'row');
+    for (let i = 0; i < fraction; i += 1) {
       this.tableOfmatches.push([]);
-      for (let j = 0; j < width; j += 1) {
-        const button = Utility.createBtn('cells', i, j);
-        button.addEventListener('click', (e) => this.clickCell(e));
-        button.disabled = true;
-        this.allCells.push(button);
-        row.appendChild(button);
+      for (let j = 0; j < fraction; j += 1) {
+        const image = Utility.createImg('cells', i, j);
+        image.src = question;
+        image.onclick = (e) => this.clickCell(e);
+        image.dataset.state = FROZEN;
+        this.allCells.push(image);
+        this.domLocation.appendChild(image);
         this.tableOfmatches[i].push(this.randomValues.pop());
       }
-      this.domLocation.appendChild(row);
+      this.domLocation.style.gridTemplateColumns = `repeat(${fraction}, 1fr)`;
+      this.domLocation.classList.remove('hidden');
     }
   }
 
   showAll() {
     this.allCells.forEach((cell) => {
-      const image = Utility.createElement('img', 'image');
-      image.src = `./img/cells/${this.tableOfmatches[cell.dataset.x][cell.dataset.y]}.png`;
-      cell.appendChild(image);
+      cell.src = `./img/cells/${this.tableOfmatches[cell.dataset.x][cell.dataset.y]}.png`;
     });
   }
 
   hideAll() {
     this.allCells.forEach((cell) => {
-      cell.disabled = false;
-      cell.childNodes.item(0).remove();
+      cell.src = question;
+      cell.dataset.state = ACTIVE;
     });
   }
 
-  disableAll() {
+  freezeAll() {
     this.allCells.forEach((cell) => {
-      cell.disabled = true;
+      cell.dataset.state = FROZEN;
     });
   }
 
   clickCell(event) {
     const imgSrc = this.tableOfmatches[event.target.dataset.x][event.target.dataset.y];
-    this.compare.collect(event, imgSrc);
+    this.compare.init(event, imgSrc);
     this.winCheck();
   }
 
