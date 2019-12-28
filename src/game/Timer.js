@@ -1,10 +1,10 @@
 import Utility from './Utility';
 
 export default class Timer {
-  constructor(showAll, hideAll, disableAll, abortCompare) {
+  constructor(showAll, hideAll, freezeAll, abortCompare) {
     this.showAll = showAll;
     this.hideAll = hideAll;
-    this.disableAll = disableAll;
+    this.freezeAll = freezeAll;
     this.abortCompare = abortCompare;
 
     this.totallTime = 0;
@@ -41,10 +41,8 @@ export default class Timer {
       this.timerValue.innerText = `${this.minutes}:${this.seconds}`;
 
       if (this.totallTime === 0) {
+        this.freezeAll();
         this.clear();
-        this.timerValue.innerText = `${this.minutes}:${this.seconds}`;
-        this.disableAll();
-        this.timerValue.classList.add('gameOver');
       }
     }, 1000);
   }
@@ -53,14 +51,17 @@ export default class Timer {
     clearTimeout(this.gameoverTimeout);
     clearTimeout(this.previewTimeout);
     if (this.timerValue.innerText !== '') {
-      this.timerContainer.classList.add('remove');
-      this.timerValue.classList.remove('gameOver');
-      this.timerValue.innerText = '';
+      this.timerValue.classList.add('gameOver');
       this.abortCompare();
-    } else {
-      this.hideAll();
     }
-    this.disableAll();
+    this.freezeAll();
+  }
+
+  hide() {
+    this.timerValue.innerText = '';
+    this.timerValue.classList.remove('gameOver');
+    this.timerContainer.classList.add('remove');
+    this.hideAll();
   }
 
   parseTime(totallTime) {

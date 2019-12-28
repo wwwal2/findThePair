@@ -15,7 +15,7 @@ class Game {
     this.timer = new Timer(
       () => this.field.showAll(),
       () => this.field.hideAll(),
-      () => this.field.disableAll(),
+      () => this.field.freezeAll(),
       () => this.field.compare.abort(),
     );
 
@@ -69,13 +69,16 @@ class Game {
     this.controllers.show();
     this.field.compare.abort();
     this.timer.clear();
+    this.timer.hide();
+    this.field.freezeAll();
     this.congratulationRemove();
   }
 
   winCheck() {
     this.cellsLeft = this.field.allCells.filter((cell) => cell.dataset.state === OPENED);
     if (this.cellsLeft.length === this.field.allCells.length) {
-      this.timer.clear(this.cellsLeft);
+      this.timer.clear();
+      this.timer.hide();
       this.field.removeField();
 
       [this.congratulation] = Utility.selectElementsByClasses('congratulation');

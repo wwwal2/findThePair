@@ -46,7 +46,7 @@ export default class Field {
     });
   }
 
-  disableAll() {
+  freezeAll() {
     this.allCells.forEach((cell) => {
       cell.dataset.state = FROZEN;
     });
