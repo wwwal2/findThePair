@@ -9,9 +9,13 @@ class Game {
   constructor(settings) {
     this.settings = settings;
 
-    this.controllers = new ControllerManager(() => this.saveSettings());
-
     this.field = new Field(() => this.winCheck());
+
+    this.controllers = new ControllerManager(
+      () => this.saveSettings(),
+      (fraction) => this.field.build(fraction),
+      () => this.field.removeField(),
+    );
 
     this.timer = new Timer(
       () => this.field.showAll(),
@@ -32,6 +36,7 @@ class Game {
     }
 
     this.controllers.addAll(this.settings);
+    this.field.build(this.controllers.fraction.current);
 
     [this.startBtn] = Utility.selectElementsByClasses(this.startClass);
     this.startBtn.dataset.phase = START;
@@ -53,9 +58,6 @@ class Game {
     this.startBtn.dataset.phase = STOP;
     this.startBtn.innerText = STOP;
     this.controllers.hide();
-    this.field.removeField();
-
-    this.field.build(this.controllers.fraction.current);
 
     this.timer.begin(
       this.controllers.preview.current,
@@ -92,6 +94,7 @@ class Game {
   congratulationRemove() {
     if (this.congratulation.children && this.congratulation.children.item(0)) {
       this.congratulation.children.item(0).remove();
+      this.field.build(this.controllers.fraction.current);
     }
   }
 

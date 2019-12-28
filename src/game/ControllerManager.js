@@ -1,8 +1,10 @@
 import Utility from './Utility';
 
 export default class ControllerManager {
-  constructor(saveSettings) {
+  constructor(saveSettings, buildField, removeField) {
     this.saveSettings = saveSettings;
+    this.buildFied = buildField;
+    this.removeField = removeField;
     this.fraction = {};
     this.preview = {};
     this.gameover = {};
@@ -105,12 +107,20 @@ export default class ControllerManager {
 
   addMouseEvents(name) {
     this[name].dom.increase.onclick = () => {
-      this.controllerHandler(name, 1, this[name].max);
       this.saveSettings();
+      if (name === 'fraction' && this.fraction.current !== this.fraction.max) {
+        this.removeField();
+        this.buildFied(this.fraction.current + 2);
+      }
+      this.controllerHandler(name, 1, this[name].max);
     };
     this[name].dom.reduce.onclick = () => {
-      this.controllerHandler(name, -1, this[name].min);
       this.saveSettings();
+      if (name === 'fraction' && this.fraction.current !== this.fraction.min) {
+        this.removeField();
+        this.buildFied(this.fraction.current - 2);
+      }
+      this.controllerHandler(name, -1, this[name].min);
     };
 
     this[name].dom.onmouseover = () => {
