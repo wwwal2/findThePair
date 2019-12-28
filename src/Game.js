@@ -27,7 +27,7 @@ class Game {
   }
 
   run() {
-    if (localStorage.getItem('FindThePair')) {
+    if (localStorage.getItem('FindThePairGrid')) {
       this.readSettings();
     }
 
@@ -96,7 +96,7 @@ class Game {
   }
 
   saveSettings() {
-    localStorage.setItem('FindThePair', JSON.stringify({
+    localStorage.setItem('FindThePairGrid', JSON.stringify({
       fraction: this.controllers.fraction.current,
       preview: this.controllers.preview.current,
       gameover: this.controllers.gameover.current,
@@ -104,7 +104,7 @@ class Game {
   }
 
   readSettings() {
-    const storageData = localStorage.getItem('FindThePair');
+    const storageData = localStorage.getItem('FindThePairGrid');
     const object = JSON.parse(storageData);
     this.settings.fraction.default = object.fraction;
     this.settings.preview.default = object.preview;
