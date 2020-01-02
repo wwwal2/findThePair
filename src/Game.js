@@ -59,6 +59,9 @@ class Game {
     this.startBtn.innerText = STOP;
     this.controllers.hide();
 
+    this.field.removeField();
+    this.field.build(this.controllers.fraction.current);
+
     this.timer.begin(
       this.controllers.preview.current,
       this.controllers.gameover.current,

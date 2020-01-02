@@ -33,6 +33,7 @@ class Compare {
         break;
       default:
         event.target.dataset.state = ACTIVE;
+        event.target.classList.remove('apply-fadeIn');
         event.target.classList.add('apply-shake');
         setTimeout(() => {
           event.target.classList.remove('apply-shake');

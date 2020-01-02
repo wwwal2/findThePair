@@ -21,7 +21,7 @@ export default class Field {
     for (let i = 0; i < fraction; i += 1) {
       this.tableOfmatches.push([]);
       for (let j = 0; j < fraction; j += 1) {
-        const image = Utility.createImg('cells', i, j);
+        const image = Utility.createImg('cells apply-fadeIn', i, j);
         image.src = question;
         image.onclick = (e) => this.clickCell(e);
         image.dataset.state = FROZEN;
