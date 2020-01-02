@@ -3,13 +3,13 @@ import Utility from './game/Utility';
 import Timer from './game/Timer';
 import ControllerManager from './game/ControllerManager';
 import congratulationsImg from './img/congratulations.png';
-import { START, STOP, OPENED } from './game/constants';
+import { START, STOP } from './game/constants';
 
 class Game {
   constructor(settings) {
     this.settings = settings;
 
-    this.field = new Field(() => this.winCheck());
+    this.field = new Field();
 
     this.controllers = new ControllerManager(
       () => this.saveSettings(),
@@ -31,7 +31,8 @@ class Game {
     }
 
     this.controllers.addAll(this.settings);
-    this.field.build(this.controllers.fraction.current);
+    this.field.build(this.controllers.fraction.current)
+      .then(() => this.win());
 
     [this.startBtn] = Utility.selectElementsByClasses(this.startClass);
     this.startBtn.dataset.phase = START;
@@ -55,14 +56,15 @@ class Game {
     this.controllers.hide();
 
     this.field.removeField();
-    this.field.build(this.controllers.fraction.current);
+    this.field.build(this.controllers.fraction.current).then(() => this.win());
     this.field.showAll();
 
     this.timer.preview(this.controllers.preview.current)
       .then(() => {
         this.field.hideAll();
         return this.timer.gameover(this.controllers.gameover.current);
-      }).then(() => {
+      })
+      .then(() => {
         this.field.freezeAll();
       });
   }
@@ -78,25 +80,22 @@ class Game {
     this.congratulationRemove();
   }
 
-  winCheck() {
-    this.cellsLeft = this.field.allCells.filter((cell) => cell.dataset.state === OPENED);
-    if (this.cellsLeft.length === this.field.allCells.length) {
-      this.timer.clear();
-      this.timer.hide();
-      this.field.removeField();
-      this.field.domLocation.classList.add('hidden');
+  win() {
+    this.timer.clear();
+    this.timer.hide();
+    this.field.removeField();
+    this.field.domLocation.classList.add('hidden');
 
-      [this.congratulation] = Utility.selectElementsByClasses('congratulation');
-      const img = Utility.createElement('img', 'winImage');
-      img.src = congratulationsImg;
-      this.congratulation.appendChild(img);
-    }
+    [this.congratulation] = Utility.selectElementsByClasses('congratulation');
+    const img = Utility.createElement('img', 'winImage');
+    img.src = congratulationsImg;
+    this.congratulation.appendChild(img);
   }
 
   congratulationRemove() {
     if (this.congratulation.children && this.congratulation.children.item(0)) {
       this.congratulation.children.item(0).remove();
-      this.field.build(this.controllers.fraction.current);
+      this.field.build(this.controllers.fraction.current).then(() => this.win());
     }
   }
 

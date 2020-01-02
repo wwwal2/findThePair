@@ -44,6 +44,45 @@ export default class ControllerManager {
     });
   }
 
+  addMouseEvents(name) {
+    this[name].dom.increase.onclick = () => {
+      if (name === 'fraction' && this.fraction.current !== this.fraction.max) {
+        this.removeField();
+        this.buildFied(this.fraction.current + 2);
+      }
+      this.controllerHandler(name, 1, this[name].max);
+    };
+    this[name].dom.reduce.onclick = () => {
+      if (name === 'fraction' && this.fraction.current !== this.fraction.min) {
+        this.removeField();
+        this.buildFied(this.fraction.current - 2);
+      }
+      this.controllerHandler(name, -1, this[name].min);
+    };
+
+    this[name].dom.onmouseover = () => {
+      this.optionsBar.innerText = this[name].dom.label.innerText;
+    };
+    this[name].dom.onmouseout = () => {
+      this.optionsBar.innerText = 'OPTIONS';
+    };
+  }
+
+  initialValidation(name) {
+    this.direction = 1;
+    this[name].current = this.validate(
+      name,
+      this[name].max - this[name].current,
+      this[name].max,
+    );
+    this.direction = -1;
+    this[name].current = this.validate(
+      name,
+      this[name].current - this[name].min,
+      this[name].min,
+    );
+  }
+
   controllerHandler(target, direction, limit) {
     this.direction = direction;
     switch (direction) {
@@ -89,45 +128,6 @@ export default class ControllerManager {
       return this[target].current + this.direction;
     }
     return this[target].current - this.direction;
-  }
-
-  initialValidation(name) {
-    this.direction = 1;
-    this[name].current = this.validate(
-      name,
-      this[name].max - this[name].current,
-      this[name].max,
-    );
-    this.direction = -1;
-    this[name].current = this.validate(
-      name,
-      this[name].current - this[name].min,
-      this[name].min,
-    );
-  }
-
-  addMouseEvents(name) {
-    this[name].dom.increase.onclick = () => {
-      if (name === 'fraction' && this.fraction.current !== this.fraction.max) {
-        this.removeField();
-        this.buildFied(this.fraction.current + 2);
-      }
-      this.controllerHandler(name, 1, this[name].max);
-    };
-    this[name].dom.reduce.onclick = () => {
-      if (name === 'fraction' && this.fraction.current !== this.fraction.min) {
-        this.removeField();
-        this.buildFied(this.fraction.current - 2);
-      }
-      this.controllerHandler(name, -1, this[name].min);
-    };
-
-    this[name].dom.onmouseover = () => {
-      this.optionsBar.innerText = this[name].dom.label.innerText;
-    };
-    this[name].dom.onmouseout = () => {
-      this.optionsBar.innerText = 'OPTIONS';
-    };
   }
 
   switchClasses(element, from, to) {

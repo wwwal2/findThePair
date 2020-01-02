@@ -1,7 +1,7 @@
 import Utility from './Utility';
 import Compare from './Compare';
 import question from '../img/question.jpg';
-import { FROZEN, ACTIVE } from './constants';
+import { FROZEN, ACTIVE, OPENED } from './constants';
 
 export default class Field {
   constructor(winCheck) {
@@ -17,21 +17,29 @@ export default class Field {
     const btnNum = fraction * fraction;
     this.randomValues = Utility.generateRandomValues(Math.floor(btnNum / 2));
     [this.domLocation] = Utility.selectElementsByClasses('field-container');
+    this.domLocation.style.gridTemplateColumns = `repeat(${fraction}, 1fr)`;
+    this.domLocation.classList.remove('hidden');
 
-    for (let i = 0; i < fraction; i += 1) {
-      this.tableOfmatches.push([]);
-      for (let j = 0; j < fraction; j += 1) {
-        const image = Utility.createImg('cells apply-fadeIn', i, j);
-        image.src = question;
-        image.onclick = (e) => this.clickCell(e);
-        image.dataset.state = FROZEN;
-        this.allCells.push(image);
-        this.domLocation.appendChild(image);
-        this.tableOfmatches[i].push(this.randomValues.pop());
+    return new Promise((resolve) => {
+      for (let i = 0; i < fraction; i += 1) {
+        this.tableOfmatches.push([]);
+        for (let j = 0; j < fraction; j += 1) {
+          const image = Utility.createImg('cells apply-fadeIn', i, j);
+          image.src = question;
+          image.dataset.state = FROZEN;
+          this.allCells.push(image);
+          this.domLocation.appendChild(image);
+          this.tableOfmatches[i].push(this.randomValues.pop());
+          image.onclick = (e) => {
+            this.clickCell(e);
+            this.cellsLeft = this.allCells.filter((cell) => cell.dataset.state === OPENED);
+            if (this.cellsLeft.length === this.allCells.length) {
+              resolve();
+            }
+          };
+        }
       }
-      this.domLocation.style.gridTemplateColumns = `repeat(${fraction}, 1fr)`;
-      this.domLocation.classList.remove('hidden');
-    }
+    });
   }
 
   showAll() {
@@ -56,7 +64,6 @@ export default class Field {
   clickCell(event) {
     const imgSrc = this.tableOfmatches[event.target.dataset.x][event.target.dataset.y];
     this.compare.init(event, imgSrc);
-    this.winCheck();
   }
 
   removeField() {
