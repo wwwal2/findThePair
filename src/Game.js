@@ -17,12 +17,7 @@ class Game {
       () => this.field.removeField(),
     );
 
-    this.timer = new Timer(
-      () => this.field.showAll(),
-      () => this.field.hideAll(),
-      () => this.field.freezeAll(),
-      () => this.field.compare.abort(),
-    );
+    this.timer = new Timer();
 
     this.startClass = START;
     this.startBtn = {};
@@ -61,11 +56,15 @@ class Game {
 
     this.field.removeField();
     this.field.build(this.controllers.fraction.current);
+    this.field.showAll();
 
-    this.timer.begin(
-      this.controllers.preview.current,
-      this.controllers.gameover.current,
-    );
+    this.timer.preview(this.controllers.preview.current)
+      .then(() => {
+        this.field.hideAll();
+        return this.timer.gameover(this.controllers.gameover.current);
+      }).then(() => {
+        this.field.freezeAll();
+      });
   }
 
   stop() {
