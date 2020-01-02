@@ -61,6 +61,7 @@ export default class ControllerManager {
         break;
       default:
     }
+    this.saveSettings();
   }
 
   checkHighlightLimit(target) {
@@ -107,7 +108,6 @@ export default class ControllerManager {
 
   addMouseEvents(name) {
     this[name].dom.increase.onclick = () => {
-      this.saveSettings();
       if (name === 'fraction' && this.fraction.current !== this.fraction.max) {
         this.removeField();
         this.buildFied(this.fraction.current + 2);
@@ -115,7 +115,6 @@ export default class ControllerManager {
       this.controllerHandler(name, 1, this[name].max);
     };
     this[name].dom.reduce.onclick = () => {
-      this.saveSettings();
       if (name === 'fraction' && this.fraction.current !== this.fraction.min) {
         this.removeField();
         this.buildFied(this.fraction.current - 2);
