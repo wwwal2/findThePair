@@ -4,12 +4,11 @@ import question from '../img/question.jpg';
 import { FROZEN, ACTIVE, OPENED } from './constants';
 
 export default class Field {
-  constructor(winCheck) {
+  constructor() {
     this.tableOfmatches = [];
     this.domLocation = {};
     this.allCells = [];
     this.compare = new Compare();
-    this.winCheck = winCheck;
   }
 
   build(fraction) {
