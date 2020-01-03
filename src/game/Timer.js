@@ -2,7 +2,7 @@ import Utility from './Utility';
 
 export default class Timer {
   constructor() {
-    this.totallTime = 0;
+    this.totalTime = 0;
     this.minutes = 0;
     this.seconds = 0;
     this.timerValue = {};
@@ -26,17 +26,17 @@ export default class Timer {
   gameover(duration) {
     this.timerContainer.classList.remove('remove');
 
-    this.totallTime = Number(duration) * 60;
-    this.parseTime(this.totallTime);
+    this.totalTime = Number(duration) * 60;
+    this.parseTime(this.totalTime);
     this.timerValue.innerText = `${this.minutes}:${this.seconds}`;
 
     return new Promise((resolve) => {
       this.gameoverTimeout = setInterval(() => {
-        this.totallTime -= 1;
-        this.parseTime(this.totallTime);
+        this.totalTime -= 1;
+        this.parseTime(this.totalTime);
         this.timerValue.innerText = `${this.minutes}:${this.seconds}`;
 
-        if (this.totallTime <= 0) {
+        if (this.totalTime <= 0) {
           this.clear();
           resolve();
         }
@@ -58,9 +58,9 @@ export default class Timer {
     this.timerContainer.classList.add('remove');
   }
 
-  parseTime(totallTime) {
-    this.minutes = Math.floor(totallTime / 60);
-    this.seconds = totallTime % 60;
+  parseTime(totalTime) {
+    this.minutes = Math.floor(totalTime / 60);
+    this.seconds = totalTime % 60;
     this.minutes = Utility.addZero(this.minutes);
     this.seconds = Utility.addZero(this.seconds);
   }
