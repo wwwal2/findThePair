@@ -68,8 +68,8 @@ img {
 .main-container {
   display: block;
   margin: auto;
-  width: 45vw;
-  height: 75vh;
+  width: 90vh;
+  height: 90vh;
 
   .menu-container {
     display: flex;
@@ -101,10 +101,15 @@ img {
       display: block;
       justify-content: center;
 
-      .options {
+      .options-container {
         display: flex;
         justify-content: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         font-family: -apple-system, Ubuntu;
+        .options {
+          font-size: medium;
+        }
       }
 
       .all-controllers {
@@ -201,7 +206,7 @@ img {
 @media all and (max-width: 800px) {
   .main-container {
     width: 100vw;
-    height: 90vh;
+    height: 90vw;
     .menu-container {
       .start-container {
         .start {
@@ -209,6 +214,11 @@ img {
         }
       }
       .inform-pannel {
+        .options-container {
+          .options {
+            font-size: smaller;
+          }
+        }
         .all-controllers {
           .controller {
             margin: 0 10px 0 10px;

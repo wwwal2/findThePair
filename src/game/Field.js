@@ -1,6 +1,6 @@
 import Utility from './Utility';
 import Compare from './Compare';
-import question from '../img/question.jpg';
+import cardBack from '../img/cardBack.jpg';
 import { FROZEN, ACTIVE, OPENED } from './constants';
 
 export default class Field {
@@ -24,7 +24,7 @@ export default class Field {
         this.tableOfmatches.push([]);
         for (let j = 0; j < fraction; j += 1) {
           const image = Utility.createImg('cells apply-fadeIn', i, j);
-          image.src = question;
+          image.src = cardBack;
           image.dataset.state = FROZEN;
           this.allCells.push(image);
           this.domLocation.appendChild(image);
@@ -49,7 +49,7 @@ export default class Field {
 
   hideAll() {
     this.allCells.forEach((cell) => {
-      cell.src = question;
+      cell.src = cardBack;
       cell.dataset.state = ACTIVE;
     });
   }

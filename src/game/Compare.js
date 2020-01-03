@@ -1,4 +1,4 @@
-import cover from '../img/question.jpg';
+import cardBack from '../img/cardBack.jpg';
 import { FROZEN, ACTIVE, OPENED } from './constants';
 
 class Compare {
@@ -62,7 +62,7 @@ class Compare {
 
   swapBack(target) {
     target.dataset.state = ACTIVE;
-    target.src = cover;
+    target.src = cardBack;
   }
 
   clear() {
@@ -73,10 +73,10 @@ class Compare {
 
   abort() {
     if (this.bufferCell) {
-      this.bufferCell.src = cover;
+      this.bufferCell.src = cardBack;
     }
     if (this.nextBufferCell) {
-      this.nextBufferCell.src = cover;
+      this.nextBufferCell.src = cardBack;
     }
     clearTimeout(this.openImgTimeout);
     this.clear();
