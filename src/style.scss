@@ -97,7 +97,7 @@ img {
       }
     }
 
-    .inform-pannel {
+    .inform-panel {
       display: block;
       justify-content: center;
 
@@ -203,7 +203,10 @@ img {
   }
 }
 
-@media all and (max-width: 800px) {
+@media 
+all and (max-width: 800px),
+all and (min-height: 1000px) 
+{
   .main-container {
     width: 100vw;
     height: 90vw;
@@ -213,7 +216,7 @@ img {
           padding: 8px 15px;
         }
       }
-      .inform-pannel {
+      .inform-panel {
         .options-container {
           .options {
             font-size: smaller;
