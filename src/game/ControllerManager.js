@@ -3,7 +3,7 @@ import Utility from './Utility';
 export default class ControllerManager {
   constructor(saveSettings, buildField, removeField) {
     this.saveSettings = saveSettings;
-    this.buildFied = buildField;
+    this.buildField = buildField;
     this.removeField = removeField;
     this.fraction = {};
     this.preview = {};
@@ -13,7 +13,7 @@ export default class ControllerManager {
 
   addAll(settings) {
     [this.optionsBar] = Utility.selectElementsByClasses('options');
-    [this.informPannel] = Utility.selectElementsByClasses('inform-pannel');
+    [this.informPanel] = Utility.selectElementsByClasses('inform-panel');
 
     const controllersNames = Object.keys(settings);
 
@@ -48,14 +48,14 @@ export default class ControllerManager {
     this[name].dom.increase.onclick = () => {
       if (name === 'fraction' && this.fraction.current !== this.fraction.max) {
         this.removeField();
-        this.buildFied(this.fraction.current + 2);
+        this.buildField(this.fraction.current + 2);
       }
       this.controllerHandler(name, 1, this[name].max);
     };
     this[name].dom.reduce.onclick = () => {
       if (name === 'fraction' && this.fraction.current !== this.fraction.min) {
         this.removeField();
-        this.buildFied(this.fraction.current - 2);
+        this.buildField(this.fraction.current - 2);
       }
       this.controllerHandler(name, -1, this[name].min);
     };
@@ -136,10 +136,10 @@ export default class ControllerManager {
   }
 
   show() {
-    Utility.switchProperty('className', 'inform-pannel', this.informPannel);
+    Utility.switchProperty('className', 'inform-panel', this.informPanel);
   }
 
   hide() {
-    Utility.switchProperty('className', 'remove', this.informPannel);
+    Utility.switchProperty('className', 'remove', this.informPanel);
   }
 }
