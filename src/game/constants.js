@@ -3,6 +3,7 @@ const ACTIVE = 'active';
 const OPENED = 'opened';
 const START = 'start';
 const STOP = 'Play again';
+const GOING = 'going';
 
 export {
   FROZEN,
@@ -10,4 +11,5 @@ export {
   OPENED,
   START,
   STOP,
+  GOING,
 };

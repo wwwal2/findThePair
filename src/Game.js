@@ -3,7 +3,7 @@ import Utility from './game/Utility';
 import Timer from './game/Timer';
 import ControllerManager from './game/ControllerManager';
 import congratulationsImg from './img/congratulations.png';
-import { START, STOP } from './game/constants';
+import { START, STOP, GOING } from './game/constants';
 
 class Game {
   constructor(settings) {
@@ -74,6 +74,9 @@ class Game {
     this.startBtn.innerText = START;
     this.controllers.show();
     this.field.compare.abort();
+    if (this.timer.previewStatus === GOING) {
+      this.field.hideAll();
+    }
     this.timer.clear();
     this.timer.hide();
     this.field.freezeAll();

@@ -10,7 +10,7 @@ class Compare {
   }
 
   init(event, imgSrc) {
-    if (event.target.dataset.state !== FROZEN) {
+    if (event.target.dataset.state !== FROZEN && event.target.dataset.state !== OPENED) {
       event.target.dataset.state = FROZEN;
       this.collect(event, imgSrc);
     }

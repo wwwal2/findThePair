@@ -1,4 +1,5 @@
 import Utility from './Utility';
+import { FROZEN, GOING } from './constants';
 
 export default class Timer {
   constructor() {
@@ -10,14 +11,17 @@ export default class Timer {
 
     this.previewTimeout = 0;
     this.gameoverTimeout = 0;
+    this.previewStatus = FROZEN;
   }
 
   preview(previewTime) {
     [this.timerContainer] = Utility.selectElementsByClasses('timer-container');
     [this.timerValue] = Utility.selectElementsByClasses('timer-value');
     [this.timerLabel] = Utility.selectElementsByClasses('timer-label');
+    this.previewStatus = GOING;
     return new Promise((resolve) => {
       this.previewTimeout = setTimeout(() => {
+        this.previewStatus = FROZEN;
         resolve();
       }, previewTime * 1000);
     });
@@ -47,6 +51,7 @@ export default class Timer {
   clear() {
     clearTimeout(this.gameoverTimeout);
     clearTimeout(this.previewTimeout);
+    this.previewStatus = FROZEN;
     if (this.timerValue.innerText !== '') {
       this.timerValue.classList.add('gameOver');
     }
