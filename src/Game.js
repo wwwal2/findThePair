@@ -62,6 +62,7 @@ class Game {
     this.timer.preview(this.controllers.preview.current)
       .then(() => {
         this.field.hideAll();
+        this.field.addCursorPointer();
         return this.timer.gameover(this.controllers.gameover.current);
       })
       .then(() => {
