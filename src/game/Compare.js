@@ -20,15 +20,11 @@ class Compare {
     switch (this.counter) {
       case 0:
         this.counter += 1;
-        this.swapImage(event, imgSrc);
-        this.bufferCell = event.target;
-        this.bufferCell.imgSrc = imgSrc;
+        this.swapImage(event, imgSrc, 'bufferCell');
         break;
       case 1:
         this.counter += 1;
-        this.swapImage(event, imgSrc);
-        this.nextBufferCell = event.target;
-        this.nextBufferCell.imgSrc = imgSrc;
+        this.swapImage(event, imgSrc, 'nextBufferCell');
         this.match();
         break;
       default:
@@ -56,13 +52,17 @@ class Compare {
     }
   }
 
-  swapImage(event, imgSrc) {
+  swapImage(event, imgSrc, bufferElementName) {
     event.target.src = `img/cells/${imgSrc}.png`;
+    this[bufferElementName] = event.target;
+    this[bufferElementName].imgSrc = imgSrc;
+    this[bufferElementName].classList.remove('cursor-pointer');
   }
 
   swapBack(target) {
     target.dataset.state = ACTIVE;
     target.src = cardBack;
+    target.classList.add('cursor-pointer');
   }
 
   clear() {

@@ -57,6 +57,13 @@ export default class Field {
   freezeAll() {
     this.allCells.forEach((cell) => {
       cell.dataset.state = FROZEN;
+      cell.classList.remove('cursor-pointer');
+    });
+  }
+
+  addCursorPointer() {
+    this.allCells.forEach((cell) => {
+      cell.classList.add('cursor-pointer');
     });
   }
 
