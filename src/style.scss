@@ -73,11 +73,17 @@ img {
   display: block;
   margin: auto;
   width: 90vh;
-  height: 90vh;
+  height: 85vh;
+  max-width: 1000px;
+  max-height: 1000px;
+  font-family: Ubuntu;
+  font-size: 3vh;
 
   .menu-container {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: auto;
+    height: 15%;
     margin: 5px 0 5px 0;
 
     .start-container {
@@ -92,8 +98,8 @@ img {
         border: 0;
         cursor: pointer;
         color: rgb(255, 255, 255);
-        font-size: 18px;
-        padding: 8px 25px;
+        font-size: inherit;
+        padding: 1vh 2vh;
         margin: 10px;
         &:hover {
           background-color: rgb(41, 207, 26);
@@ -108,17 +114,11 @@ img {
       .options-container {
         display: flex;
         justify-content: center;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        font-family: Ubuntu;
-        .options {
-          font-size: medium;
-        }
       }
 
       .all-controllers {
         display: flex;
-
+        justify-content: center;
         .controller {
           display: flex;
           align-items: center;
@@ -137,34 +137,34 @@ img {
           }
 
           .up {
-            border-right-width: 14px;
-            border-left-width: 13px;
-            border-bottom: 18px solid rgb(0, 128, 128);
+            border-right-width: 2vh;
+            border-left-width: 2vh;
+            border-bottom: 2vh solid rgb(0, 128, 128);
             &:hover {
-              border-bottom: 18px solid rgb(250, 0, 0);
+              border-bottom: 2vh solid rgb(250, 0, 0);
             }
           }
 
           .up-limit {
-            border-right-width: 14px;
-            border-left-width: 13px;
-            border-bottom: 18px solid rgb(124, 122, 122);
+            border-right-width: 2vh;
+            border-left-width: 2vh;
+            border-bottom: 2vh solid rgb(124, 122, 122);
             cursor: auto;
           }
 
           .down {
-            border-left-width: 14px;
-            border-right-width: 13px;
-            border-top: 18px solid rgb(0, 128, 128);
+            border-left-width: 2vh;
+            border-right-width: 2vh;
+            border-top: 2vh solid rgb(0, 128, 128);
             &:hover {
-              border-top: 18px solid rgb(255, 0, 0);
+              border-top: 2vh solid rgb(255, 0, 0);
             }
           }
 
           .down-limit {
-            border-left-width: 14px;
-            border-right-width: 13px;
-            border-top: 18px solid rgb(160, 157, 157);
+            border-left-width: 2vh;
+            border-right-width: 2vh;
+            border-top: 2vh solid rgb(160, 157, 157);
             cursor: auto;
           }
         }
@@ -172,9 +172,9 @@ img {
     }
 
     .timer-container {
-      margin: 10px;
       text-align: center;
-      font-family: Ubuntu;
+      font-size: inherit;
+      margin: auto;
     }
   }
 
@@ -205,31 +205,77 @@ img {
   }
 }
 
-@media 
-all and (max-width: 800px),
-all and (min-height: 1000px) 
-{
+@media all and (min-height: 1000px) {
   .main-container {
-    width: auto;
-    height: 90vw;
+    font-size: 30px;
     .menu-container {
       .start-container {
         .start {
-          padding: 8px 15px;
+          padding: 10px 20px;
         }
       }
       .inform-panel {
-        .options-container {
-          .options {
-            font-size: smaller;
-          }
-        }
         .all-controllers {
           .controller {
-            margin: 0 10px 0 10px;
+            .up {
+              border-right-width: 20px;
+              border-left-width: 20px;
+              border-bottom: 20px solid rgb(0, 128, 128);
+              &:hover {
+                border-bottom: 20px solid rgb(250, 0, 0);
+              }
+            }
+            .up-limit {
+              border-right-width: 20px;
+              border-left-width: 20px;
+              border-bottom: 20px solid rgb(124, 122, 122);
+              cursor: auto;
+            }
+
+            .down {
+              border-left-width: 20px;
+              border-right-width: 20px;
+              border-top: 20px solid rgb(0, 128, 128);
+              &:hover {
+                border-top: 20px solid rgb(255, 0, 0);
+              }
+            }
+
+            .down-limit {
+              border-left-width: 20px;
+              border-right-width: 20px;
+              border-top: 20px solid rgb(160, 157, 157);
+              cursor: auto;
+            }
           }
         }
       }
     }
   }
 }
+
+// @media all and (max-width: 800px), all and (min-height: 1000px) {
+//   .main-container {
+//     width: auto;
+//     height: 90vw;
+//     .menu-container {
+//       .start-container {
+//         .start {
+//           padding: 8px 15px;
+//         }
+//       }
+//       .inform-panel {
+//         .options-container {
+//           .options {
+//             font-size: smaller;
+//           }
+//         }
+//         .all-controllers {
+//           .controller {
+//             margin: 0 10px 0 10px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
