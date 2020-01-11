@@ -72,12 +72,13 @@ img {
 .main-container {
   display: block;
   margin: auto;
-  width: 90vh;
+  width: 85vh;
   height: 85vh;
   max-width: 1000px;
   max-height: 1000px;
   font-family: Ubuntu;
   font-size: 3vh;
+  white-space: nowrap;
 
   .menu-container {
     display: grid;
@@ -114,6 +115,7 @@ img {
       .options-container {
         display: flex;
         justify-content: center;
+        text-overflow: clip;
       }
 
       .all-controllers {
@@ -229,9 +231,7 @@ img {
               border-right-width: 20px;
               border-left-width: 20px;
               border-bottom: 20px solid rgb(124, 122, 122);
-              cursor: auto;
             }
-
             .down {
               border-left-width: 20px;
               border-right-width: 20px;
@@ -240,12 +240,10 @@ img {
                 border-top: 20px solid rgb(255, 0, 0);
               }
             }
-
             .down-limit {
               border-left-width: 20px;
               border-right-width: 20px;
               border-top: 20px solid rgb(160, 157, 157);
-              cursor: auto;
             }
           }
         }
@@ -254,3 +252,62 @@ img {
   }
 }
 
+@media all and (max-height: 600px), all and (max-width: 600px) {
+  .main-container {
+    font-size: 20px;
+    width: 65vh;
+    height: 65vh;
+    .menu-container {
+      margin: 3em 0 3em 0;
+      .start-container {
+        .start {
+          padding: 10px 20px;
+        }
+      }
+      .inform-panel {
+        .options-container {
+          .options {
+            font-size: 16px;
+          }
+        }
+        .all-controllers {
+          .controller {
+            .up {
+              border-right-width: 16px;
+              border-left-width: 16px;
+              border-bottom: 16px solid rgb(0, 128, 128);
+              &:hover {
+                border-bottom: 16px solid rgb(250, 0, 0);
+              }
+            }
+            .up-limit {
+              border-right-width: 16px;
+              border-left-width: 16px;
+              border-bottom: 16px solid rgb(124, 122, 122);
+            }
+            .down {
+              border-left-width: 16px;
+              border-right-width: 16px;
+              border-top: 16px solid rgb(0, 128, 128);
+              &:hover {
+                border-top: 16px solid rgb(255, 0, 0);
+              }
+            }
+            .down-limit {
+              border-left-width: 16px;
+              border-right-width: 16px;
+              border-top: 16px solid rgb(160, 157, 157);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 320px), all and (max-height: 490px) {
+  .main-container {
+    min-width: 320px;
+    min-height: 320px;
+  }
+}
