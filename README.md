@@ -1,4 +1,5 @@
 # Find the Pair Game
+[Click to start the game](https://wwwal2.github.io/findThePair/dist/)
 
 ## Description
 The game generates and hides a field of images. A player opens images by clicking them, if he finds 'twins' - the twin images will stay opened. When the whole field is opened, a player wins
